@@ -2,6 +2,11 @@
 
 
 
+@media print {
+  button {
+    display: none;
+  }
+}
 
 /* @theme {
   --font-sans: var(--font-geist-sans);
