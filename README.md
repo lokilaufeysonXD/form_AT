@@ -1,7 +1,7 @@
 
 <!-- notas -->
-<!-- crear dos entras con barias obciones en la cual se pueda crear obciones y abregarlas al codigo  -->
-<!-- que se pueda imprimir  -->
+<!-- ✅ crear dos entras con barias obciones en la cual se pueda crear obciones y abregarlas al codigo  -->
+<!-- ✅ que se pueda imprimir  -->
 <!-- modelar la arta de entrega -->
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).

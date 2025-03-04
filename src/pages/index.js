@@ -1,6 +1,6 @@
 // import Image from "next/image";
 // import { Geist, Geist_Mono } from "next/font/google";
-import { useState } from "react";
+
 
 export default function Home() {
   const onPrint = () => {
@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div>
-      <form action=""> 
+      <form action="">
         <label htmlFor="">nombre:</label>
         <br />
         <p>fecha dia:{day} mes:{monthName} año:{year}</p>
