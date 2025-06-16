@@ -1,4 +1,4 @@
-// import Image from "next/image";
+import Image from "next/image";
 // import { Geist, Geist_Mono } from "next/font/google";
 import TodayDate from "@/components/TodayDate";
 import Print from "@/components/Print";
@@ -8,6 +8,18 @@ export default function Home() {
 
   return (
     <div>
+      <diiv>
+        <Image
+          src="/img/atecno.png"
+          alt="atecno"
+          width={450}
+          height={160}
+        />  
+      </diiv>
+      <div>
+        <h1>ACCI TECNOLOGY S.A.  DE CV</h1>
+      </div>
+      
       <form action="">
         <label htmlFor="">nombre:</label>
         <br />
