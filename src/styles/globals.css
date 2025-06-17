@@ -1,12 +1,122 @@
 /* @import "tailwindcss"; */ 
 
 
-
+/* estilos para la mediaquery de impresión  */
 @media print {
+  
+  .header-text h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  border-bottom: 2px solid #000;
+  text-align: center;
+  }
+
+  .header-text h1 {
+  padding-top: 20%;
+  margin: 0;
+  font-family: 'Roboto, sans-serif';
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.header-text p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
   button {
     display: none;
   }
 }
+
+
+/* Estilos para el encabezado */
+
+.header-divider {
+  display: grid;
+  place-items: center; /* Centrado en ambos ejes */
+  width: 100%;
+}
+
+.dividing-line {
+  height: 6px;
+  width: 75%;
+  background: black;
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+
+.header{
+  padding-top: 37px;
+  padding-bottom: 8%;
+  /* border-bottom:6px solid #000; */
+}
+
+.logo-container{
+  padding-left: 95px;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+.header-text {
+  position: absolute; 
+  left: 52%; 
+  transform: translateX(-50%); 
+  width: 67%; 
+  text-align: center; 
+}
+
+.header-text h1 {
+  padding-bottom: 5px;
+  padding-top: 10%;
+  margin: 0;
+  font-family: 'Roboto, sans-serif';
+  text-decoration: underline;
+  font-weight: bold;
+  white-space: nowrap; 
+}
+.header-text h1 strong{
+  margin-left: 55%;
+}
+.header-info {
+  text-align: center; 
+}
+.header-text p {
+  font-family: 'Roboto, sans-serif';
+  margin: 5px 0;
+  font-size: 25px;
+  position: relative; 
+}
+/* .header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+/* .TextNameCompany{
+  padding-left: 60%;
+  font-family: 'Roboto, sans-serif';
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+.logo{
+  } */
 
 /* @theme {
   --font-sans: var(--font-geist-sans);
