@@ -2,6 +2,7 @@ import Image from "next/image";
 // import { Geist, Geist_Mono } from "next/font/google";
 import TodayDate from "@/components/TodayDate";
 import Print from "@/components/Print";
+import FormNameClient from "@/components/FormNameClient";
 
 export default function Home() {
   
@@ -32,24 +33,34 @@ export default function Home() {
       <div className="header-divider">
         <button className="dividing-line"></button>
       </div>
-
-      <form action="">
-        <label htmlFor="">nombre:</label>
-        <br />
-        <TodayDate  />
-        <select name="selct" id="" >
-          <option value="value1" >selecciona el cliente</option>
-          <option value="value2" >SHN</option>
-          <option value="value3" >Hidro Servicios</option>
-          <option value="value4" >Hidro Barear</option>
-        </select>
-        {/* <input type="text" name="nombre" className="" placeholder="ingresa el cliente que quieres agregar" value={inputVAlue} onChange={(e)  => setInputValue(e.target.value)} /> */}
-        {/* <button title="submit" onClick={addObtion} >enviar</button> */}
-        <br />
-        <input type="text" name="OC" className="" />
-        <br />
-        <textarea name="" id="" className=""></textarea>
-      </form>
+      <body>
+        <div>
+          <div className="date-container">
+            <p>
+              <TodayDate  />
+            </p>
+          </div>
+          <div>
+            <h2 className="title">ACTA DE ENTREGA</h2>
+          </div>
+          <div className="container-align-left">
+            <FormNameClient/>
+          </div>
+          <div className="container-align-left">
+            <p>Se hace entrega del siguiente material:</p>
+          </div>
+          <div className="container-align-left">
+            <form action="">
+              {/* <label htmlFor="">OC:</label> */}
+              <input type="text" name="name" id="name" placeholder="coloca la OC:" />
+              <input type="submit" value="enviar"/>
+            </form>
+          </div>
+          <div className="container-align-left">
+            <p>OC:</p>
+          </div>
+        </div>  
+      </body>
       <br />
         <Print  />
     </div>
