@@ -8,7 +8,7 @@ const Print = () =>{
 
 
     return (
-        <button onClick={onPrint} className="print:hidden ">imprimir</button>
+        <button onClick={onPrint} className="print:hidden " id="print-button"></button>
     );
 };
 

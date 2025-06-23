@@ -3,35 +3,123 @@
 
 /* estilos para la mediaquery de impresión  */
 @media print {
-  
-  .header-text h1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  border-bottom: 2px solid #000;
-  text-align: center;
+  img{
+    margin: 0 !important;
+    padding: 0 !important;  
+    width: 50%;
+    height: 50%;
+  }
+
+  select{
+    display: none !important;
+  }
+
+  input{
+    display: none !important;
+  }
+
+  textarea{
+    display: none;
+  }
+
+  button {
+    display: none !important;
+  }
+
+  main {
+    position: relative;
+    min-height: 75vh; /* Ocupa toda la altura */
+    /* padding-bottom: 150px; */
+  }
+
+  p{
+    font-size: 15px !important;
+    font-family: 'Roboto, sans-serif';
+  }
+
+  h2{
+    font-size: 15px !important;
+    font-family: 'Arial, sans-serif';
+  }
+
+  .header-divider {
+    display: flex;
+    display: block !important;
+    place-items: center !important;
+    width: 100% !important;
+  }
+  .hr-dividing-line {
+    margin-top: -10px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: black !important;
+    border: 0 !important;
+    height: 2px !important;
+    width: 75% !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+
+  .logo-container{
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    /* padding: 20px; */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
   }
 
   .header-text h1 {
-  padding-top: 20%;
-  margin: 0;
-  font-family: 'Roboto, sans-serif';
-  text-decoration: underline;
-  font-weight: bold;
-  font-size: 24px;
+    padding-top: 9% !important;
+    padding-right: 10% !important; 
+    font-family: 'Roboto, sans-serif';
+    text-decoration: underline;
+    font-weight: bold;
+    white-space: nowrap; 
+    font-size: 15px;
   }
 
   .header-text p {
+    font-size: 15px !important;
+    padding-left: 1% !important;
     margin: 5px 0;
     font-size: 20px;
   }
 
-  button {
+  .firm-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
+
+  .date-text {
+    margin-top: -4px !important;
+  }
+
+  .container-align-left p {
+    margin-top: -10px !important;
+  }
+
+  .no-print {
     display: none;
   }
+
+
+
 }
+
+
 
 
 /* Estilos para el encabezado */
@@ -49,6 +137,27 @@ h2{
   text-decoration: underline;
 }
 
+textarea {
+  width: 84%;
+  height: 100px;
+  padding: 10px;
+  font-family: 'Roboto, sans-serif';
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.firm-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.description-oc{
+margin-left: 5%;
+}
+
 .container-align-left {
   display: flex;
   justify-content: start;
@@ -59,6 +168,10 @@ h2{
 
 .text-bold {
   font-weight: bold;
+}
+.oc-display p{
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .date-container p{
@@ -140,42 +253,17 @@ h2{
   position: relative; 
 }
 
-/* .header-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
-/* .TextNameCompany{
-  padding-left: 60%;
-  font-family: 'Roboto, sans-serif';
-  text-decoration: underline;
-  font-weight: bold;
-  margin-top: 0%;
-  margin-bottom: 0%;
+#print-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-image: url('/img/printer.png');
+  width: 64px; /* Ancho del contenedor */
+  height: 64px; /* Alto del contenedor */
+  background-size: cover; /* Ajusta la imagen al contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
 }
-.logo{
-  } */
-
-/* @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */

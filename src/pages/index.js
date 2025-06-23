@@ -3,6 +3,8 @@ import Image from "next/image";
 import TodayDate from "@/components/TodayDate";
 import Print from "@/components/Print";
 import FormNameClient from "@/components/FormNameClient";
+import FormOc from "@/components/FormOc";
+import DescriptionOc from "@/components/DescriptionOc";
 
 export default function Home() {
   
@@ -31,12 +33,13 @@ export default function Home() {
         </div>
       </header>
       <div className="header-divider">
-        <button className="dividing-line"></button>
+        <button className="dividing-line" aria-hidden="true"></button>
+        <hr className="hr-dividing-line" />
       </div>
-      <body>
+      <main>
         <div>
           <div className="date-container">
-            <p>
+            <p className="date-text">
               <TodayDate  />
             </p>
           </div>
@@ -50,17 +53,24 @@ export default function Home() {
             <p>Se hace entrega del siguiente material:</p>
           </div>
           <div className="container-align-left">
-            <form action="">
-              {/* <label htmlFor="">OC:</label> */}
-              <input type="text" name="name" id="name" placeholder="coloca la OC:" />
-              <input type="submit" value="enviar"/>
-            </form>
+            <FormOc />
           </div>
-          <div className="container-align-left">
-            <p>OC:</p>
+          <div className="container-textarea">
+            <DescriptionOc />
+          </div>
+          <div className="firm-container">
+            <div className="container-align-left">
+              <p>RECIBE CONFORME: _____________________________________________________________</p> 
+              <p className="no-print"></p>
+            </div>
+            <br />
+            <div className="container-align-left">
+              <p>ENTREGA: ______________________________________________________________________</p>
+              <p className="no-print"></p>
+            </div>
           </div>
         </div>  
-      </body>
+      </main>
       <br />
         <Print  />
     </div>
