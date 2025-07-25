@@ -5,23 +5,44 @@ function DescriptionOc() {
     { id: 1, text: '', input: '' }
   ]);
 
-  const MAX_DESCRIPTIONS = 3; // Límite de textareas
+  const [descriptionsSerie, setDescriptionsSerie] = useState([
+    { id: 1, text: '', input: '' }
+  ]);
+
+  const MAX_DESCRIPTIONS = 4; // Límite de textareas
 
   const handleButtonClick = (id) => {
-    setDescriptions(descriptions.map(desc => 
+    setDescriptions(descriptions.map(desc =>
       desc.id === id ? { ...desc, text: desc.input, input: '' } : desc
     ));
   };
 
+  const handleButtonClickSerie = (id) => {
+    setDescriptionsSerie(descriptionsSerie.map(descSerie =>
+      descSerie.id === id ? { ...descSerie, text: descSerie.input, input: '' } : descSerie
+    ));
+  };
+
   const handleInputChange = (id, value) => {
-    setDescriptions(descriptions.map(desc => 
+    setDescriptions(descriptions.map(desc =>
       desc.id === id ? { ...desc, input: value } : desc
+    ));
+  };
+
+  const handleInputChangeSerie = (id, value) => {
+    setDescriptionsSerie(descriptionsSerie.map(descSerie =>
+      descSerie.id === id ? { ...descSerie, input: value } : descSerie
     ));
   };
 
   const addNewDescriptionField = () => {
     const newId = descriptions.length + 1;
     setDescriptions([...descriptions, { id: newId, text: '', input: '' }]);
+  };
+
+  const addNewDescriptionFieldSerie = () => {
+    const newId = descriptionsSerie.length + 1;
+    setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
   };
 
   return (
@@ -37,7 +58,7 @@ function DescriptionOc() {
               rows={4}
               className="description-textarea"
             />
-            <button 
+            <button
               type="button"
               onClick={() => handleButtonClick(desc.id)}
             >
@@ -51,10 +72,39 @@ function DescriptionOc() {
           </div>
         </div>
       ))}
+       {/* en contruccion */}
+
+          <div>
+            {descriptionsSerie.map((descSerie) => (
+            <div className="container-align-left">
+              <textarea
+                name={`description-${descSerie.id}`}
+                placeholder="hola mundo"
+                value={descSerie.input}
+                onChange={(e) => handleInputChangeSerie(descSerie.id, e.target.value)}
+                rows={4}
+                className="description-textarea"
+              />
+              <button
+                type="button"
+                onClick={() => handleButtonClickSerie(descSerie.id)}
+              > 
+                Enviar
+              </button>
+              <div className="container-align-left">
+                <p className="description-oc">
+                  {descSerie.id}- &nbsp;&nbsp; #PRODUCCION: {descSerie.text || ' '}
+                </p>
+              </div>
+            </div>
+            ))}
+          </div>
+
+          {/* Fin de contruccion */}
 
       {descriptions.length < MAX_DESCRIPTIONS && (
         <div className="container-align-left">
-          <button 
+          <button
             type="button"
             onClick={addNewDescriptionField}
             className="add-button"
