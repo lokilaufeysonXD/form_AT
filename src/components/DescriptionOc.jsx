@@ -40,10 +40,10 @@ function DescriptionOc() {
     setDescriptions([...descriptions, { id: newId, text: '', input: '' }]);
   };
 
-  // const addNewDescriptionFieldSerie = () => {
-  //   const newId = descriptionsSerie.length + 1;
-  //   setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
-  // };
+  const addNewDescriptionFieldSerie = () => {
+    const newId = descriptionsSerie.length + 1;
+    setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
+  };
 
   return (
     <div>
@@ -96,7 +96,8 @@ function DescriptionOc() {
             </div>
               <div className="container-align-left">
                 <p className="description-oc">
-                  {descSerie.id} {descSerie.text || ' hello world'}
+                  {descSerie.text ? `SERIE #: ${descSerie.text}` : ''}
+                  {/* {descSerie.id} {descSerie.text || ' hello world'} */}
                 </p>
               </div>
           </div>
@@ -110,7 +111,10 @@ function DescriptionOc() {
           <div className="container-align-left">
             <button
               type="button"
-              onClick={addNewDescriptionField}
+              onClick={() => {
+                      addNewDescriptionField();
+                      addNewDescriptionFieldSerie();
+                      }}
               className="add-button"
             >
               +
