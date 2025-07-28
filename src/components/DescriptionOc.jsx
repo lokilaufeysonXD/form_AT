@@ -40,10 +40,10 @@ function DescriptionOc() {
     setDescriptions([...descriptions, { id: newId, text: '', input: '' }]);
   };
 
-  const addNewDescriptionFieldSerie = () => {
-    const newId = descriptionsSerie.length + 1;
-    setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
-  };
+  // const addNewDescriptionFieldSerie = () => {
+  //   const newId = descriptionsSerie.length + 1;
+  //   setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
+  // };
 
   return (
     <div>
@@ -56,7 +56,7 @@ function DescriptionOc() {
               value={desc.input}
               onChange={(e) => handleInputChange(desc.id, e.target.value)}
               rows={4}
-              className="description-textarea"
+              className=""
             />
             <button
               type="button"
@@ -72,14 +72,16 @@ function DescriptionOc() {
           </div>
         </div>
       ))}
-       {/* en contruccion */}
+      {/* en contruccion */}
 
-          <div>
-            {descriptionsSerie.map((descSerie) => (
+
+      {/* <div > */}
+        {descriptionsSerie.map((descSerie) => (
+          <div key={descSerie.id}>
             <div className="container-align-left">
               <textarea
                 name={`description-${descSerie.id}`}
-                placeholder="hola mundo"
+                placeholder="agregue el numero de orden de producción"
                 value={descSerie.input}
                 onChange={(e) => handleInputChangeSerie(descSerie.id, e.target.value)}
                 rows={4}
@@ -88,32 +90,34 @@ function DescriptionOc() {
               <button
                 type="button"
                 onClick={() => handleButtonClickSerie(descSerie.id)}
-              > 
+              >
                 Enviar
               </button>
+            </div>
               <div className="container-align-left">
                 <p className="description-oc">
-                  {descSerie.id}- &nbsp;&nbsp; #PRODUCCION: {descSerie.text || ' '}
+                  {descSerie.id} {descSerie.text || ' hello world'}
                 </p>
               </div>
-            </div>
-            ))}
           </div>
+        ))}
+        {/* </div>   */}
 
-          {/* Fin de contruccion */}
 
-      {descriptions.length < MAX_DESCRIPTIONS && (
-        <div className="container-align-left">
-          <button
-            type="button"
-            onClick={addNewDescriptionField}
-            className="add-button"
-          >
-            +
-          </button>
-        </div>
-      )}
-    </div>
+        {/* Fin de contruccion */}
+
+        {descriptions.length < MAX_DESCRIPTIONS && (
+          <div className="container-align-left">
+            <button
+              type="button"
+              onClick={addNewDescriptionField}
+              className="add-button"
+            >
+              +
+            </button>
+          </div>
+        )}
+      </div>
   );
 }
 
