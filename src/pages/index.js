@@ -60,12 +60,12 @@ export default function Home() {
           </div>
           <div className="firm-container">
             <div className="container-align-left">
-              <p>RECIBE CONFORME: _____________________________________________________________</p> 
+              <p>RECIBE CONFORME: </p> <button className="button-lain" id="recibe" ></button>
               <p className="no-print"></p>
             </div>
             <br />
             <div className="container-align-left">
-              <p>ENTREGA: ______________________________________________________________________</p>
+              <p>ENTREGA:</p> <button className="button-lain" id="entrega"></button>
               <p className="no-print"></p>
             </div>
           </div>
