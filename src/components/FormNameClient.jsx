@@ -24,11 +24,13 @@ function FormNameClient() {
         onChange={handleSelectChange}
         value={selectedOption}
       >
-        <option value="nombre del cliente">nombre del cliente</option>
+        <option value="nombre del cliente">nombre del cliente</option> 
         <option value="SHN">SHN</option>
-        <option value="Hidro Servicios">Hidro Servicios</option>
+        <option value="GRIIMSA">GRIIMSA</option>
+        <option value="Hidro Servicios">Hidro Servicios</option>  
         <option value="Hidro Barear">Hidro Barear</option>
         <option value="CALEFACION Y VENTILACION">Calefacion y Ventilacion</option>
+        <option value="DOMO DISPLAY">Domo Display</option>
       </select>      
       <p className='text-bold'>{selectedOption}</p>
     </form>
