@@ -31,6 +31,7 @@ function FormNameClient() {
         <option value="Hidro Barear">Hidro Barear</option>
         <option value="CALEFACION Y VENTILACION">Calefacion y Ventilacion</option>
         <option value="DOMO DISPLAY">Domo Display</option>
+        <option value="SISTEMAS ESPECIALIZADOS DE BOMBEO">SISTEMAS ESPECIALIZADOS DE BOMBEO</option>
       </select>      
       <p className='text-bold'>{selectedOption}</p>
     </form>
