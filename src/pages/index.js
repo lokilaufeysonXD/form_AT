@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </header>
       <div className="header-divider">
-        <button className="dividing-line" aria-hidden="true"></button>
+        {/* <button className="dividing-line" aria-hidden="true"></button> */}
         <hr className="hr-dividing-line" />
       </div>
       <main>
@@ -61,15 +61,13 @@ export default function Home() {
           <div className="firm-container">
             <div className="container-align-left">
               <p>RECIBE CONFORME: </p>
-                <p>_______________________________________________________</p> 
-                {/* <button className="button-lain" id="recibe" ></button> */}
+                <button className="button-lain" id="recibe" ></button>
               <p className="no-print"></p>
             </div>
             <br />
             <div className="container-align-left">
               <p>ENTREGA:</p> 
-                <p>_________________________________________________________________</p>
-                {/* <button className="button-lain" id="entrega"></button> */}
+                <button className="button-lain" id="entrega"></button>
               <p className="no-print"></p>
             </div>
           </div>
