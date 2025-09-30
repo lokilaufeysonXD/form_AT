@@ -19,6 +19,7 @@ function FormOc() {
         noValidate
       >
         <input 
+          id='form'
           type="text" 
           name="oc" 
           placeholder="Coloca la OC:" 
@@ -26,11 +27,23 @@ function FormOc() {
           onChange={(e) => setOcValue(e.target.value)}
           autoComplete="off"
         />
-        <button 
+        <button
+          id='primary'
+          style={ { marginRight: '5px', marginLeft: '5px' } }
           type="submit"
           onClick={handleSubmit} 
         >
           Enviar
+        </button>
+        <button 
+          id='danger'
+          onClick={() => {
+            setOcValue('');
+            setDisplayedOC('');
+          }}
+          type="submit" 
+        >
+          Eliminar
         </button>
       </form>
       <div className="oc-display">

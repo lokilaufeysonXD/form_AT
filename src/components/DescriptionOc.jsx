@@ -55,6 +55,18 @@ function DescriptionOc() {
     setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
   };
 
+  const removeLastPair = () => {
+    if (descriptions.length > 1) {
+      setDescriptions(descriptions.slice(0, -1));
+      setDescriptionsSerie(descriptionsSerie.slice(0, -1));
+    }
+  };
+
+  const resetAll = () => {
+    setDescriptions([{ id: 1, text: '', input: '' }]);
+    setDescriptionsSerie([{ id: 1, text: '', input: '' }]);
+  };
+
   return (
     <div>
       {descriptions.map((desc) => {
@@ -64,16 +76,31 @@ function DescriptionOc() {
           <div key={desc.id}>
             <div className="container-align-left">
               <textarea
+                id='form'
                 placeholder="Agregue la descripción"
                 value={desc.input}
                 onChange={(e) => handleInputChange(desc.id, e.target.value)}
                 rows={4}
               />
               <button
+                id='primary'
+                className='button-accion'
                 type="button"
                 onClick={() => handleButtonClick(desc.id)}
               >
                 Enviar
+              </button>
+              <button
+                id='danger'
+                onClick={() =>
+                  setDescriptions(descriptions.map(d =>
+                    d.id === desc.id ? { ...d, text: '', input: '' } : d
+                  ))
+                }
+                className='button-accion'
+                type="button"
+              >
+                Eliminar
               </button>
             </div>
             <div className="container-align-left">
@@ -85,6 +112,7 @@ function DescriptionOc() {
               <>
                 <div className="container-align-left">
                   <textarea
+                    id='form'
                     placeholder="agregue el numero de orden de producción"
                     value={serie.input}
                     onChange={(e) => handleInputChangeSerie(serie.id, e.target.value)}
@@ -92,10 +120,24 @@ function DescriptionOc() {
                     className="description-textarea"
                   />
                   <button
+                    id='primary'
+                    className='button-accion'
                     type="button"
                     onClick={() => handleButtonClickSerie(serie.id)}
                   >
                     Enviar
+                  </button>
+                  <button
+                    id='danger'
+                    onClick={() =>
+                      setDescriptionsSerie(descriptionsSerie.map(s =>
+                        s.id === serie.id ? { ...s, text: '', input: '' } : s
+                        ))
+                      }
+                    type="button"
+                    className='button-accion'
+                  >
+                    Eliminar
                   </button>
                 </div>
                 <div className="container-align-left">
@@ -108,17 +150,39 @@ function DescriptionOc() {
           </div>
         );
       })}
-      {descriptions.length < MAX_DESCRIPTIONS && (
-        <div className="container-align-left">
+      <div className="container-align-left">
+        <button
+          id='secondary'
+          type="button"
+          onClick={removeLastPair}
+          className="remove-button"
+          disabled={descriptions.length <= 1}
+        >
+          -
+        </button>
+        <span style={{ margin: '0 10px', marginTop: '10px' }}>
+          {descriptions.length} / {MAX_DESCRIPTIONS}
+        </span>
+        {descriptions.length < MAX_DESCRIPTIONS && (
           <button
+            id='dark'
             type="button"
             onClick={addNewPair}
             className="add-button"
           >
             +
           </button>
-        </div>
-      )}
+        )}
+        <button
+          style={{ marginLeft: '20px' }}
+          id='danger'
+          type="button"
+          onClick={resetAll}
+          className="button-accion"
+        >
+          Reset
+        </button>
+      </div>
     </div>
   );
 }
