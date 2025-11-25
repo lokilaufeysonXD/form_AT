@@ -19,22 +19,23 @@ function FormNameClient() {
 
   return (
     <form>
-      <select 
+      <select
         id='select'
-        name="select" 
+        name="select"
         onChange={handleSelectChange}
         value={selectedOption}
       >
-        <option value="nombre del cliente">nombre del cliente</option> 
+        <option value="nombre del cliente">nombre del cliente</option>
         <option value="SHN">SHN</option>
         <option value="GRIIMSA">GRIIMSA</option>
-        <option value="Hidro Servicios">Hidro Servicios</option>  
+        <option value="Hidro Servicios">Hidro Servicios</option>
         <option value="Hidro Barear">Hidro Barear</option>
         <option value="CALEFACION Y VENTILACION">Calefacion y Ventilacion</option>
         <option value="DOMO DISPLAY">Domo Display</option>
         <option value="SISTEMAS ESPECIALIZADOS DE BOMBEO">SISTEMAS ESPECIALIZADOS DE BOMBEO</option>
         <option value="Corporación SHN">Corporación SHN</option>
-      </select>      
+        <option value="Stel Ingenieria">Stel Ingenieria</option>
+      </select>
       <p className='text-bold'>{selectedOption}</p>
     </form>
   );
