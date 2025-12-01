@@ -48,16 +48,16 @@ export default function Home() {
             <h2 className="title">ACTA DE ENTREGA</h2>
           </div>
           <div className="container-align-left">
-            <FormNameClient />
+            <FormNameClient currentPage={1} />
           </div>
           <div className="container-align-left">
             <p>Se hace entrega del siguiente material:</p>
           </div>
           <div className="container-align-left">
-            <FormOc />
+            <FormOc currentPage={1} />
           </div>
           <div className="container-textarea">
-            <DescriptionOc />
+            <DescriptionOc currentPage={1} />
           </div>
           <div className="firm-container">
             <div className="container-align-left">

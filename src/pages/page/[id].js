@@ -50,16 +50,16 @@ export default function DynamicPage() {
                         <h2 className="title">ACTA DE ENTREGA</h2>
                     </div>
                     <div className="container-align-left">
-                        <FormNameClient />
+                        <FormNameClient currentPage={pageNumber} />
                     </div>
                     <div className="container-align-left">
                         <p>Se hace entrega del siguiente material:</p>
                     </div>
                     <div className="container-align-left">
-                        <FormOc />
+                        <FormOc currentPage={pageNumber} />
                     </div>
                     <div className="container-textarea">
-                        <DescriptionOc />
+                        <DescriptionOc currentPage={pageNumber} />
                     </div>
                     <div className="firm-container">
                         <div className="container-align-left">

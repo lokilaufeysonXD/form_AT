@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useFormsData } from '@/context/FormsDataContext';
 
-
-function DescriptionOc() {
+function DescriptionOc({ currentPage = 1 }) {
+    const { getPageData, updatePageData, isLoaded } = useFormsData();
     const [descriptions, setDescriptions] = useState([
         { id: 1, text: '', input: '' }
     ]);
@@ -12,16 +13,37 @@ function DescriptionOc() {
 
     const MAX_DESCRIPTIONS = 4; // Límite de textareas
 
+    // Cargar datos de la página actual
+    useEffect(() => {
+        if (isLoaded) {
+            const pageData = getPageData(currentPage);
+            setDescriptions(pageData.descriptionOc.descriptions);
+            setDescriptionsSerie(pageData.descriptionOc.descriptionsSerie);
+        }
+    }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
+
     const handleButtonClick = (id) => {
-        setDescriptions(descriptions.map(desc =>
+        const newDescriptions = descriptions.map(desc =>
             desc.id === id ? { ...desc, text: desc.input, input: '' } : desc
-        ));
+        );
+        setDescriptions(newDescriptions);
+        // Guardar al hacer clic en Enviar
+        updatePageData(currentPage, 'descriptionOc', {
+            descriptions: newDescriptions,
+            descriptionsSerie
+        });
     };
 
     const handleButtonClickSerie = (id) => {
-        setDescriptionsSerie(descriptionsSerie.map(descSerie =>
+        const newDescriptionsSerie = descriptionsSerie.map(descSerie =>
             descSerie.id === id ? { ...descSerie, text: descSerie.input, input: '' } : descSerie
-        ));
+        );
+        setDescriptionsSerie(newDescriptionsSerie);
+        // Guardar al hacer clic en Enviar
+        updatePageData(currentPage, 'descriptionOc', {
+            descriptions,
+            descriptionsSerie: newDescriptionsSerie
+        });
     };
 
     const handleInputChange = (id, value) => {
@@ -36,36 +58,50 @@ function DescriptionOc() {
         ));
     };
 
-    const addNewDescriptionField = () => {
-        const newId = descriptions.length + 1;
-        setDescriptions([...descriptions, { id: newId, text: '', input: '' }]);
-    };
-
-    const addNewDescriptionFieldSerie = () => {
-        const newId = descriptionsSerie.length + 1;
-        setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
-    };
-
     const addNewPair = () => {
         const newId = Math.max(
             descriptions[descriptions.length - 1].id,
             descriptionsSerie[descriptionsSerie.length - 1].id
         ) + 1;
 
-        setDescriptions([...descriptions, { id: newId, text: '', input: '' }]);
-        setDescriptionsSerie([...descriptionsSerie, { id: newId, text: '', input: '' }]);
+        const newDescriptions = [...descriptions, { id: newId, text: '', input: '' }];
+        const newDescriptionsSerie = [...descriptionsSerie, { id: newId, text: '', input: '' }];
+
+        setDescriptions(newDescriptions);
+        setDescriptionsSerie(newDescriptionsSerie);
+
+        updatePageData(currentPage, 'descriptionOc', {
+            descriptions: newDescriptions,
+            descriptionsSerie: newDescriptionsSerie
+        });
     };
 
     const removeLastPair = () => {
         if (descriptions.length > 1) {
-            setDescriptions(descriptions.slice(0, -1));
-            setDescriptionsSerie(descriptionsSerie.slice(0, -1));
+            const newDescriptions = descriptions.slice(0, -1);
+            const newDescriptionsSerie = descriptionsSerie.slice(0, -1);
+
+            setDescriptions(newDescriptions);
+            setDescriptionsSerie(newDescriptionsSerie);
+
+            updatePageData(currentPage, 'descriptionOc', {
+                descriptions: newDescriptions,
+                descriptionsSerie: newDescriptionsSerie
+            });
         }
     };
 
     const resetAll = () => {
-        setDescriptions([{ id: 1, text: '', input: '' }]);
-        setDescriptionsSerie([{ id: 1, text: '', input: '' }]);
+        const resetDescriptions = [{ id: 1, text: '', input: '' }];
+        const resetDescriptionsSerie = [{ id: 1, text: '', input: '' }];
+
+        setDescriptions(resetDescriptions);
+        setDescriptionsSerie(resetDescriptionsSerie);
+
+        updatePageData(currentPage, 'descriptionOc', {
+            descriptions: resetDescriptions,
+            descriptionsSerie: resetDescriptionsSerie
+        });
     };
 
     return (

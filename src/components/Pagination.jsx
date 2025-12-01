@@ -42,7 +42,11 @@ export default function Pagination({ currentPage }) {
                         href={href}
                         className={isActive ? styles.active : styles.pageButton}
                     >
-                        Página {i}
+                        {i === 1 ? (
+                            <span className="material-symbols-sharp" style={{ fontSize: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >home</span>
+                        ) : (
+                            `Pág ${i}`
+                        )}
                     </Link>
                     {i > 1 && totalPages > 1 && (
                         <button
