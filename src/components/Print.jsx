@@ -1,6 +1,6 @@
 
 
-const Print = () =>{
+const Print = () => {
 
     const onPrint = () => {
         window.print();

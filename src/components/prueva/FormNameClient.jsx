@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from '@/styles/prueva.module.css';
 
 function FormNameClient() {
   const [selectedOption, setSelectedOption] = useState('nombre del cliente');
@@ -18,15 +19,14 @@ function FormNameClient() {
   };
 
   return (
-    <form>
+    <form className={styles.formClient}>
       <select
-        className='selectClient'
-        id='select'
+        className={styles.selectClient}
         name="select"
         onChange={handleSelectChange}
         value={selectedOption}
       >
-        <option value="nombre del cliente">nombre del cliente</option>
+        <option value="nombre del cliente"> <p> nombre del cliente </p> </option>
         <option value="SHN">SHN</option>
         <option value="GRIIMSA">GRIIMSA</option>
         <option value="Hidro Servicios">Hidro Servicios</option>
@@ -37,7 +37,7 @@ function FormNameClient() {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
       </select>
-      <p className='text-bold'>{selectedOption}</p>
+      <p className={styles.titleSecondary}>{selectedOption}</p>
     </form>
   );
 }

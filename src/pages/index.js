@@ -5,17 +5,18 @@ import Print from "@/components/Print";
 import FormNameClient from "@/components/FormNameClient";
 import FormOc from "@/components/FormOc";
 import DescriptionOc from "@/components/DescriptionOc";
+import Pagination from "@/components/Pagination";
 
 export default function Home() {
-  
+
 
   return (
     <div>
       <header className="header">
         <div className="header-container">
           <div className="logo-container">
-            <Image 
-              src="/img/atecno.png" 
+            <Image
+              src="/img/atecno.png"
               alt="ATECNO Logo"
               width={300}
               height={120}
@@ -40,14 +41,14 @@ export default function Home() {
         <div>
           <div className="date-container">
             <p className="date-text">
-              <TodayDate  />
+              <TodayDate />
             </p>
           </div>
           <div>
             <h2 className="title">ACTA DE ENTREGA</h2>
           </div>
           <div className="container-align-left">
-            <FormNameClient/>
+            <FormNameClient />
           </div>
           <div className="container-align-left">
             <p>Se hace entrega del siguiente material:</p>
@@ -61,20 +62,21 @@ export default function Home() {
           <div className="firm-container">
             <div className="container-align-left">
               <p>RECIBE CONFORME: </p>
-                <button className="button-lain" id="recibe" ></button>
+              <button className="button-lain" id="recibe" ></button>
               <p className="no-print"></p>
             </div>
             <br />
             <div className="container-align-left">
-              <p>ENTREGA:</p> 
-                <button className="button-lain" id="entrega"></button>
+              <p>ENTREGA:</p>
+              <button className="button-lain" id="entrega"></button>
               <p className="no-print"></p>
             </div>
           </div>
-        </div>  
+        </div>
       </main>
       <br />
-        <Print  />
+      <Print />
+      <Pagination currentPage={1} />
     </div>
   );
 }

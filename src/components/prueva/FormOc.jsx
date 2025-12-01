@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from '@/styles/prueva.module.css';
 
 function FormOc() {
     const [ocValue, setOcValue] = useState('');
@@ -13,13 +14,13 @@ function FormOc() {
     };
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <form
                 onSubmit={handleSubmit}
                 noValidate
             >
                 <input
-                    id='form'
+                    className={styles.formOcInput}
                     type="text"
                     name="oc"
                     placeholder="Coloca la OC:"
@@ -28,7 +29,7 @@ function FormOc() {
                     autoComplete="off"
                 />
                 <button
-                    id='primary'
+                    className={styles.buttonPrimary}
                     style={{ marginRight: '5px', marginLeft: '5px' }}
                     type="submit"
                     onClick={handleSubmit}
@@ -36,7 +37,7 @@ function FormOc() {
                     Enviar
                 </button>
                 <button
-                    id='danger'
+                    className={styles.buttonDanger}
                     onClick={() => {
                         setOcValue('');
                         setDisplayedOC('');
@@ -46,8 +47,8 @@ function FormOc() {
                     Eliminar
                 </button>
             </form>
-            <div className="oc-display">
-                <p>OC: {displayedOC}</p>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <p className={styles.titleSecondary} style={{ marginTop: '10px', marginBottom: '5px' }}>OC: {displayedOC}</p>
             </div>
         </div>
     );
