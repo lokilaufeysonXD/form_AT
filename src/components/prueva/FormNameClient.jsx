@@ -1,36 +1,32 @@
-import { useState, useEffect } from 'react';
-import { useFormsData } from '@/context/FormsDataContext';
+import { useState } from 'react';
+import styles from '@/styles/prueva.module.css';
 
-function FormNameClient({ currentPage = 1 }) {
-  const { getPageData, updatePageData, isLoaded } = useFormsData();
+function FormNameClient() {
   const [selectedOption, setSelectedOption] = useState('nombre del cliente');
-
-  // Cargar datos de la página actual solo una vez cuando cambia la página
-  useEffect(() => {
-    if (isLoaded) {
-      const pageData = getPageData(currentPage);
-      setSelectedOption(pageData.formNameClient.selectedOption);
-    }
-  }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
+  const [ocValue, setOcValue] = useState('');
+  const [textareaValue, setTextareaValue] = useState('');
 
   const handleSelectChange = (e) => {
-    const newValue = e.target.value;
-    setSelectedOption(newValue);
-    updatePageData(currentPage, 'formNameClient', {
-      selectedOption: newValue
-    });
+    setSelectedOption(e.target.value);
+  };
+
+  const handleOcChange = (e) => {
+    setOcValue(e.target.value);
+  };
+
+  const handleTextareaChange = (e) => {
+    setTextareaValue(e.target.value);
   };
 
   return (
-    <form>
+    <form className={styles.formClient}>
       <select
-        className='selectClient'
-        id='select'
+        className={styles.selectClient}
         name="select"
         onChange={handleSelectChange}
         value={selectedOption}
       >
-        <option value="nombre del cliente">nombre del cliente</option>
+        <option value="nombre del cliente"> <p> nombre del cliente </p> </option>
         <option value="SHN">SHN</option>
         <option value="GRIIMSA">GRIIMSA</option>
         <option value="Hidro Servicios">Hidro Servicios</option>
@@ -41,7 +37,7 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
       </select>
-      <p className='text-bold'>{selectedOption}</p>
+      <p className={styles.titleSecondary}>{selectedOption}</p>
     </form>
   );
 }

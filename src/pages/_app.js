@@ -1,5 +1,14 @@
 import "@/styles/globals.css";
+//import "@/styles/responsive_proposal.css";
+import { PagesProvider } from "@/context/PagesContext";
+import { FormsDataProvider } from "@/context/FormsDataContext";
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <PagesProvider>
+      <FormsDataProvider>
+        <Component {...pageProps} />
+      </FormsDataProvider>
+    </PagesProvider>
+  );
 }
