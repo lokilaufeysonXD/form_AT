@@ -1,0 +1,191 @@
+/* estilos css de boostrap  */
+
+/* Estilo de botón tipo primary */
+#primary {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    user-select: none;
+    background-color: #0d6efd;
+    border: 1px solid #0d6efd;
+    padding: 0.375rem 0.75rem;
+    /* alto y ancho del botón */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    /* bordes redondeados */
+    transition: color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+#primary:hover {
+    background-color: #0b5ed7;
+    /* azul más oscuro al pasar el mouse */
+    border-color: #0a58ca;
+}
+
+/* Estilo de botón tipo danger */
+#danger {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    /* color del texto */
+    text-align: center;
+    user-select: none;
+    background-color: #dc3545;
+    /* rojo estilo Bootstrap */
+    border: 1px solid #dc3545;
+    padding: 0.375rem 0.75rem;
+    /* alto y ancho del botón */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    /* bordes redondeados */
+    transition: color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+#danger:hover {
+    background-color: #c82333;
+    /* rojo más oscuro al pasar el mouse */
+    border-color: #bd2130;
+}
+
+/* Estilo de select tipo form-select */
+#select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2rem 0.375rem 0.75rem;
+    /* espacio extra a la derecha para la flecha */
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: url('/img/flecha.png');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    /* posición de la flecha */
+    background-size: 0.65rem auto;
+    /* tamaño de la flecha */
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+    /* elimina estilo predeterminado del navegador */
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* CSS Equivalente completo de .form-control */
+#form {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    /* 0.25rem en versiones anteriores */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    appearance: none;
+    box-sizing: border-box;
+}
+
+#form:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+#form::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+#form:disabled {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+#form[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+/* Estilo de botón tipo secondary */
+#secondary {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    user-select: none;
+    background-color: #6c757d;
+    border: 1px solid #6c757d;
+    padding: 0.375rem 0.75rem;
+    /* alto y ancho del botón */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    /* bordes redondeados */
+    transition: color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+#secondary:hover {
+    background-color: #5c636a;
+    /* azul más oscuro al pasar el mouse */
+    border-color: #565e64;
+}
+
+/* Estilo de botón tipo dark */
+#dark {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    user-select: none;
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 0.375rem 0.75rem;
+    /* alto y ancho del botón */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    /* bordes redondeados */
+    transition: color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+#dark:hover {
+    background-color: #1a1e21;
+    /* azul más oscuro al pasar el mouse */
+    border-color: #191c1f;
+}

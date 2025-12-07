@@ -1,15 +1,232 @@
-/* @import "tailwindcss"; */
+.container * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-
-/* reset css */
 body {
   margin: 0;
   padding: 0;
 }
 
+/* en el original hay que quitar esta regla para que quede en el body 
+y el avercion de movil con una cuerry quitarla o reducirla  ya que no se ve bien */
+
+.container {
+  /* background-color: #F5F5F5; */
+  margin: 0;
+  padding: 4% 10% 0 10%;
+}
+
+.container {
+  display: grid;
+  min-height: 100vh;
+  grid-template:
+    "header" auto
+    "article" 1fr
+    "footer" auto;
+  ;
+
+  header {
+    grid-area: header;
+  }
+
+  article {
+    grid-area: article;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+}
+
+header {
+  /* background-color: #e74d4d; */
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(10px, 2vw, 50px);
+}
+
+.article {
+  background-color: #bedd35;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 10px;
+}
+
+footer {
+  background-color: #47dfb9;
+}
+
+.titlePrimaryUnderline {
+  margin-right: 10%;
+  font-family: 'Roboto, sans-serif';
+  text-decoration: underline;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.hrDividingLine {
+  margin: 2px auto;
+  border: none;
+  height: 2px;
+  width: 80%;
+  background-color: #000;
+}
+
+/* clases para tamaño de pantalla de PC */
+.textAlign {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 853px) {
+  .container {
+    background-color: red;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .container {
+    background-color: #bedd35;
+    padding: 0;
+  }
+
+  .container {
+    display: grid;
+    min-height: 100vh;
+    grid-template:
+      "header" auto
+      "article" 1fr
+      "footer" auto;
+    ;
+
+    .header {
+      grid-area: header;
+    }
+
+    .article {
+      grid-area: article;
+    }
+
+    .footer {
+      grid-area: footer;
+    }
+  }
+
+  /* .textAlign {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  } */
+
+  .container header {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .ImageLogo {
+    width: 150px;
+    height: 60px;
+  }
+
+  .titlePrimaryUnderline {
+    margin-right: 0%;
+    font-size: 0.8rem;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @import "tailwindcss"; */
+
+
+/* reset css */
+/* body {
+  margin: 0;
+  padding: 0;
+} */
+
 /* estilos para la mediaquery de impresión  */
 @media print {
-  img {
+  /* img {
     margin: 0 !important;
     padding: 0 !important;
     width: 50%;
@@ -26,26 +243,26 @@ body {
 
   textarea {
     display: none;
-  }
+  } */
 
-  button {
+  /* de alguna manera esto esta rompiendo el modo de imprecion en algunas resoluciones cuando se comenta */
+  /* button {
     display: none !important;
-    /* de alguna manera esto esta rompiendo el modo de imprecion en algunas resoluciones cuando se comenta */
-  }
+  } */
 
-  main {
+  /* Ocupa toda la altura */
+  /* padding-bottom: 150px; */
+  /* main {
     position: relative;
     min-height: 75vh;
-    /* Ocupa toda la altura */
-    /* padding-bottom: 150px; */
-  }
+  } */
 
-  p {
+  /* p {
     font-size: 15px !important;
     font-family: 'Roboto, sans-serif';
-  }
+  } */
 
-  h2 {
+  /* h2 {
     font-size: 15px !important;
     font-family: 'Arial, sans-serif';
   }
@@ -83,59 +300,59 @@ body {
     padding: 0 !important;
   }
 
-  .header-container {
+  /* padding: 20px; */
+  /* .header-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    /* padding: 20px; */
     font-family: Arial, sans-serif;
     text-align: center;
     position: relative;
-  }
+  } */
 
-  .header-text h1 {
+  /* .header-text h1 {
     padding-top: 9% !important;
     padding-right: 10% !important;
     font-family: 'Roboto, sans-serif';
-    text-decoration: underline;
+     text-decoration: underline;
     font-weight: bold;
     white-space: nowrap;
     font-size: 15px;
-  }
+  } */
 
-  .header-text p {
+  /* .header-text p {
     font-size: 15px !important;
     padding-left: 1% !important;
     margin: 5px 0;
     font-size: 20px;
-  }
+  } */
 
-  .firm-container {
+  /* padding: 20px 0; */
+  /* .firm-container {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* padding: 20px 0; */
-  }
+  } */
 
-  .date-text {
+  /* .date-text {
     margin-top: -4px !important;
-  }
+  } */
 
-  .container-align-left p {
+  /* .container-align-left p {
     margin-top: -10px !important;
-  }
+  } */
 
-  .no-print {
+  /* .no-print {
     display: none;
-  }
+  } */
 
-  .header {
+  /* .header {
     padding-top: 37px !important;
     padding-bottom: 70px !important;
-  }
+  } */
 
 }
 
@@ -144,7 +361,7 @@ body {
 
 /* Estilos para el encabezado */
 
-p {
+/* p {
   margin: 5px 0;
   font-family: 'Roboto, sans-serif';
   font-size: 25px;
@@ -240,7 +457,7 @@ textarea {
   display: grid;
   place-items: center;
   width: 100%;
-}
+} */
 
 /* .dividing-line {
   height: 6px;
@@ -253,13 +470,13 @@ textarea {
   appearance: none;
 } */
 
-.header {
+/* padding-bottom: 8%; */
+/* .header {
   padding-top: 37px;
-  /* padding-bottom: 8%; */
   padding-bottom: 98px;
-}
+} */
 
-.logo-container {
+/* .logo-container {
   padding-left: 95px;
 }
 
@@ -302,7 +519,7 @@ textarea {
 .header-text p {
   font-family: 'Roboto, sans-serif';
   position: relative;
-}
+} */
 
 #print-button {
   position: fixed;
@@ -325,7 +542,7 @@ textarea {
 }
 
 
-.hr-dividing-line {
+/* .hr-dividing-line {
   margin-top: -10px;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -336,7 +553,7 @@ textarea {
   visibility: visible;
   opacity: 1;
 }
-
+    
 .container-align-lef button {
   margin-right: 100%;
   color: rebeccapurple;
@@ -344,197 +561,4 @@ textarea {
 
 .button-accion {
   margin-right: 5px;
-}
-
-
-/* estilos css de boostrap  */
-
-/* Estilo de botón tipo primary */
-#primary {
-  display: inline-block;
-  font-weight: 400;
-  color: #fff;
-  text-align: center;
-  user-select: none;
-  background-color: #0d6efd;
-  border: 1px solid #0d6efd;
-  padding: 0.375rem 0.75rem;
-  /* alto y ancho del botón */
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  /* bordes redondeados */
-  transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  cursor: pointer;
-}
-
-/* Efecto hover */
-#primary:hover {
-  background-color: #0b5ed7;
-  /* azul más oscuro al pasar el mouse */
-  border-color: #0a58ca;
-}
-
-/* Estilo de botón tipo danger */
-#danger {
-  display: inline-block;
-  font-weight: 400;
-  color: #fff;
-  /* color del texto */
-  text-align: center;
-  user-select: none;
-  background-color: #dc3545;
-  /* rojo estilo Bootstrap */
-  border: 1px solid #dc3545;
-  padding: 0.375rem 0.75rem;
-  /* alto y ancho del botón */
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  /* bordes redondeados */
-  transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  cursor: pointer;
-}
-
-/* Efecto hover */
-#danger:hover {
-  background-color: #c82333;
-  /* rojo más oscuro al pasar el mouse */
-  border-color: #bd2130;
-}
-
-/* Estilo de select tipo form-select */
-#select {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 2rem 0.375rem 0.75rem;
-  /* espacio extra a la derecha para la flecha */
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-image: url('/img/flecha.png');
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  /* posición de la flecha */
-  background-size: 0.65rem auto;
-  /* tamaño de la flecha */
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  appearance: none;
-  /* elimina estilo predeterminado del navegador */
-  cursor: pointer;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-#select:focus {
-  border-color: #86b7fe;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-/* CSS Equivalente completo de .form-control */
-#form {
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.375rem;
-  /* 0.25rem en versiones anteriores */
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  appearance: none;
-  box-sizing: border-box;
-}
-
-#form:focus {
-  color: #212529;
-  background-color: #fff;
-  border-color: #86b7fe;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-#form::placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
-#form:disabled {
-  background-color: #e9ecef;
-  opacity: 1;
-  cursor: not-allowed;
-}
-
-#form[readonly] {
-  background-color: #e9ecef;
-  opacity: 1;
-}
-
-/* Estilo de botón tipo secondary */
-#secondary {
-  display: inline-block;
-  font-weight: 400;
-  color: #fff;
-  text-align: center;
-  user-select: none;
-  background-color: #6c757d;
-  border: 1px solid #6c757d;
-  padding: 0.375rem 0.75rem;
-  /* alto y ancho del botón */
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  /* bordes redondeados */
-  transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  cursor: pointer;
-}
-
-/* Efecto hover */
-#secondary:hover {
-  background-color: #5c636a;
-  /* azul más oscuro al pasar el mouse */
-  border-color: #565e64;
-}
-
-/* Estilo de botón tipo dark */
-#dark {
-  display: inline-block;
-  font-weight: 400;
-  color: #fff;
-  text-align: center;
-  user-select: none;
-  background-color: #212529;
-  border: 1px solid #212529;
-  padding: 0.375rem 0.75rem;
-  /* alto y ancho del botón */
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  /* bordes redondeados */
-  transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-  cursor: pointer;
-}
-
-/* Efecto hover */
-#dark:hover {
-  background-color: #1a1e21;
-  /* azul más oscuro al pasar el mouse */
-  border-color: #191c1f;
-}
+} */
