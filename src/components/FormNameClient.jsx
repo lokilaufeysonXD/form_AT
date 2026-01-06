@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormsData } from '@/context/FormsDataContext';
+import styles from "@/styles/UiComponents.module.css";
 
 function FormNameClient({ currentPage = 1 }) {
   const { getPageData, updatePageData, isLoaded } = useFormsData();
@@ -22,9 +23,9 @@ function FormNameClient({ currentPage = 1 }) {
   };
 
   return (
-    <form>
+    <form className='adaptiveLayoutForm'>
       <select
-        className='selectClient'
+        className={styles.selectClient}
         id='select'
         name="select"
         onChange={handleSelectChange}
@@ -41,7 +42,7 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
       </select>
-      <p className='text-bold'>{selectedOption}</p>
+      <p style={{ fontWeight: 'bold' }}>{selectedOption}</p>
     </form>
   );
 }

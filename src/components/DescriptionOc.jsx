@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormsData } from '@/context/FormsDataContext';
+import styles from '@/styles/UiComponents.module.css';
 
 function DescriptionOc({ currentPage = 1 }) {
     const { getPageData, updatePageData, isLoaded } = useFormsData();
@@ -111,60 +112,73 @@ function DescriptionOc({ currentPage = 1 }) {
 
                 return (
                     <div key={desc.id}>
-                        <div className="container-align-left">
+                        <div className="container-align">
                             <textarea
+                                style={{ flex: 1 }}
+                                className={styles.formOcInput}
                                 id='form'
                                 placeholder="Agregue la descripción"
                                 value={desc.input}
                                 onChange={(e) => handleInputChange(desc.id, e.target.value)}
                                 rows={4}
                             />
-                            <button
-                                id='primary'
-                                className='button-accion'
-                                type="button"
-                                onClick={() => handleButtonClick(desc.id)}
-                            >
-                                Enviar
-                            </button>
-                            <button
-                                id='danger'
-                                onClick={() =>
-                                    setDescriptions(descriptions.map(d =>
-                                        d.id === desc.id ? { ...d, text: '', input: '' } : d
-                                    ))
-                                }
-                                className='button-accion'
-                                type="button"
-                            >
-                                Eliminar
-                            </button>
+                            <div style={{ display: 'flex', gap: '5px' }}>
+                                <button
+                                    className={styles.buttonPrimary}
+                                    id='primary'
+                                    // className='button-accion'
+                                    type="button"
+                                    onClick={() => handleButtonClick(desc.id)}
+                                >
+                                    Enviar
+                                </button>
+                                <button
+                                    className={styles.buttonDanger}
+                                    id='danger'
+                                    onClick={() =>
+                                        setDescriptions(descriptions.map(d =>
+                                            d.id === desc.id ? { ...d, text: '', input: '' } : d
+                                        ))
+                                    }
+                                    // className='button-accion'
+                                    type="button"
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
                         </div>
-                        <div className="container-align-left">
+                        <div style={{ margin: '20px 20px' }}>
                             <p className="description-oc">
                                 {desc.id}- &nbsp;&nbsp; MOD: {desc.text || ' '}
                             </p>
                         </div>
+
+
+
                         {serie && (
                             <>
-                                <div className="container-align-left">
+                                <div className="container-align">
                                     <textarea
+                                        style={{ flex: 1, height: '40px' }}
+                                        className={styles.formOcInput}
                                         id='form'
                                         placeholder="agregue el numero de orden de producción"
                                         value={serie.input}
                                         onChange={(e) => handleInputChangeSerie(serie.id, e.target.value)}
                                         rows={4}
-                                        className="description-textarea"
+                                    // className="description-textarea"
                                     />
                                     <button
+                                        className={styles.buttonPrimary}
                                         id='primary'
-                                        className='button-accion'
+                                        // className='button-accion'
                                         type="button"
                                         onClick={() => handleButtonClickSerie(serie.id)}
                                     >
                                         Enviar
                                     </button>
                                     <button
+                                        className={styles.buttonDanger}
                                         id='danger'
                                         onClick={() =>
                                             setDescriptionsSerie(descriptionsSerie.map(s =>
@@ -172,12 +186,12 @@ function DescriptionOc({ currentPage = 1 }) {
                                             ))
                                         }
                                         type="button"
-                                        className='button-accion'
+                                    // className='button-accion'
                                     >
                                         Eliminar
                                     </button>
                                 </div>
-                                <div className="container-align-left">
+                                <div style={{ margin: '20px 20px' }}>
                                     <p className="description-oc">
                                         {serie.text ? `SERIE #: ${serie.text}` : ''}
                                     </p>
@@ -187,12 +201,13 @@ function DescriptionOc({ currentPage = 1 }) {
                     </div>
                 );
             })}
-            <div className="container-align-left">
+            <div style={{ margin: '20px 0px 20px 0px' }} className='adaptiveLayoutInputForm'>
                 <button
+                    className={styles.buttonSecondary}
                     id='secondary'
                     type="button"
                     onClick={removeLastPair}
-                    className="remove-button"
+                    // className="remove-button"
                     disabled={descriptions.length <= 1}
                 >
                     -
@@ -202,20 +217,22 @@ function DescriptionOc({ currentPage = 1 }) {
                 </span>
                 {descriptions.length < MAX_DESCRIPTIONS && (
                     <button
+                        className={styles.buttonDark}
                         id='dark'
                         type="button"
                         onClick={addNewPair}
-                        className="add-button"
+                    // className="add-button"
                     >
                         +
                     </button>
                 )}
                 <button
+                    className={styles.buttonDanger}
                     style={{ marginLeft: '20px' }}
                     id='danger'
                     type="button"
                     onClick={resetAll}
-                    className="button-accion"
+                // className="button-accion"
                 >
                     Reset
                 </button>

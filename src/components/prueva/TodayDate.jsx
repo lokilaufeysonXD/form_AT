@@ -18,7 +18,7 @@ const TodayDate = () => {
   }, []);
 
   return (
-    <p style={{ fontWeight: "700" }}>Cancún, Quintana Roo {dateString}</p>
+    <>Cancún, Quintana Roo {dateString}</>
   );
 };
 

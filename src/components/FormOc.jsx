@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormsData } from '@/context/FormsDataContext';
+import styles from '@/styles/UiComponents.module.css';
 
 function FormOc({ currentPage = 1 }) {
     const { getPageData, updatePageData, isLoaded } = useFormsData();
@@ -48,6 +49,7 @@ function FormOc({ currentPage = 1 }) {
                 noValidate
             >
                 <input
+                    className={styles.formOcInput}
                     id='form'
                     type="text"
                     name="oc"
@@ -57,6 +59,7 @@ function FormOc({ currentPage = 1 }) {
                     autoComplete="off"
                 />
                 <button
+                    className={styles.buttonPrimary}
                     id='primary'
                     style={{ marginRight: '5px', marginLeft: '5px' }}
                     type="submit"
@@ -65,6 +68,7 @@ function FormOc({ currentPage = 1 }) {
                     Enviar
                 </button>
                 <button
+                    className={styles.buttonDanger}
                     id='danger'
                     onClick={handleDelete}
                     type="button"
@@ -73,7 +77,7 @@ function FormOc({ currentPage = 1 }) {
                 </button>
             </form>
             <div className="oc-display">
-                <p>OC: {displayedOC}</p>
+                <p style={{ fontWeight: '700', textDecoration: 'underline', marginTop: '5px' }}>OC: {displayedOC}</p>
             </div>
         </div>
     );
