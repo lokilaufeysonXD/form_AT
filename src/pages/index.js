@@ -23,7 +23,7 @@ export default function Home() {
           <p>RFC: ATE031119PEA</p>
           <hr className="hrDividingLine" />
         </div>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }} className="adaptiveLayoutTodayDate">
           <TodayDate />
         </div>
         <h1 style={{ textAlign: "center" }} className="titlePrimaryUnderline">ACTA DE ENTREGA</h1>

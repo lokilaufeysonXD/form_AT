@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/adaptiveTablet.css";
 //import "@/styles/responsive_proposal.css";
 import { PagesProvider } from "@/context/PagesContext";
 import { FormsDataProvider } from "@/context/FormsDataContext";
