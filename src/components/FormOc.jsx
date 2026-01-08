@@ -44,38 +44,40 @@ function FormOc({ currentPage = 1 }) {
 
     return (
         <div>
-            <form
-                onSubmit={handleSubmit}
-                noValidate
-            >
-                <input
-                    className={styles.formOcInput}
-                    id='form'
-                    type="text"
-                    name="oc"
-                    placeholder="Coloca la OC:"
-                    value={ocValue}
-                    onChange={handleOcChange}
-                    autoComplete="off"
-                />
-                <button
-                    className={styles.buttonPrimary}
-                    id='primary'
-                    style={{ marginRight: '5px', marginLeft: '5px' }}
-                    type="submit"
-                    onClick={handleSubmit}
+            <div className="adaptiveLayoutFormOC">
+                <form
+                    onSubmit={handleSubmit}
+                    noValidate
                 >
-                    Enviar
-                </button>
-                <button
-                    className={styles.buttonDanger}
-                    id='danger'
-                    onClick={handleDelete}
-                    type="button"
-                >
-                    Eliminar
-                </button>
-            </form>
+                    <input
+                        className={styles.formOcInput}
+                        id='form'
+                        type="text"
+                        name="oc"
+                        placeholder="Coloca la OC:"
+                        value={ocValue}
+                        onChange={handleOcChange}
+                        autoComplete="off"
+                    />
+                    <button
+                        className={styles.buttonPrimary}
+                        id='primary'
+                        style={{ marginRight: '5px', marginLeft: '5px' }}
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+                        Enviar
+                    </button>
+                    <button
+                        className={styles.buttonDanger}
+                        id='danger'
+                        onClick={handleDelete}
+                        type="button"
+                    >
+                        Eliminar
+                    </button>
+                </form>
+            </div>
             <div className="oc-display">
                 <p style={{ fontWeight: '700', textDecoration: 'underline', marginTop: '5px' }}>OC: {displayedOC}</p>
             </div>

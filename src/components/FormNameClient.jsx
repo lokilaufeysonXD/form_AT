@@ -42,7 +42,7 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
       </select>
-      <p style={{ fontWeight: 'bold' }}>{selectedOption}</p>
+      <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>
   );
 }

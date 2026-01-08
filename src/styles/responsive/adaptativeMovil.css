@@ -1,0 +1,210 @@
+@media screen and (max-width: 490px) {
+
+    header {
+        padding-top: 0px !important;
+    }
+
+    .container * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        /* background-color: #bedd35; */
+        padding: 0;
+    }
+
+    .container {
+        display: grid;
+        min-height: 100vh;
+        grid-template:
+            "header" auto
+            "article" 1fr
+            "footer" auto;
+        ;
+
+        .header {
+            grid-area: header;
+        }
+
+        .article {
+            grid-area: article;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+    }
+
+    .container header {
+        /* background-color: aqua; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    .ImageLogo {
+        width: 150px;
+        height: 60px;
+        margin-left: 0px !important;
+    }
+
+    .titlePrimaryUnderline {
+        margin-right: 0%;
+        font-size: 0.8rem;
+    }
+
+    .article {
+        margin: 5px 10px;
+    }
+
+    .article p {
+        font-size: 0.5rem;
+    }
+
+    h1 {
+        margin-right: 0px !important;
+    }
+
+    .hrDividingLine {
+        margin: 2px auto;
+        border: none;
+        height: 2px;
+        width: 80%;
+        background-color: #000;
+    }
+
+    .adaptiveLayoutTodayDate {
+        display: flex !important;
+        justify-content: center !important;
+        padding-bottom: 15px;
+    }
+
+    .adaptiveLayoutTodayDate p {
+        font-weight: normal !important;
+    }
+
+    select#select.UiComponents_selectClient__pZ2RW {
+        width: 44%;
+        font-size: 0.6rem;
+    }
+
+    form.adaptiveLayoutForm {
+        row-gap: 7px !important;
+    }
+
+    .adaptiveLayoutNameClient {
+        font-size: 1rem !important;
+    }
+
+    .adaptiveLayoutMaterial {
+        padding-top: 0px !important;
+    }
+
+    p.adaptiveLayoutMaterial {
+        font-size: 1rem !important;
+        margin: 10px 0px 5px 0px;
+        font-weight: bold;
+    }
+
+    .adaptiveLayoutFormOC {
+        display: flex;
+        justify-content: center;
+    }
+
+    input#form.UiComponents_formOcInput__JO1Ut {
+        font-size: 0.6rem;
+    }
+
+    button#primary.UiComponents_buttonPrimary___f_N5 {
+        font-size: 0.6rem;
+    }
+
+    button#danger.UiComponents_buttonDanger__1rMme {
+        font-size: 0.6rem;
+    }
+
+    .oc-display {
+        display: flex;
+        justify-content: center;
+    }
+
+    .oc-display p {
+        font-size: 1rem;
+        margin: 10px 0px 5px 0px;
+        font-weight: bold;
+    }
+
+    .container-align {
+        display: flex;
+        align-items: self-start;
+        justify-content: center;
+        margin-top: 0px !important;
+    }
+
+    .adaptiveLayoutDescriptionOcButtons {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    textarea#form.UiComponents_formOcInput__JO1Ut {
+        font-size: 0.6rem;
+        max-width: 54%;
+    }
+
+    .container-align textarea {
+        height: 62px !important;
+    }
+
+    div:has(.description-oc) {
+        margin: 10px 0px 5px 0px !important;
+    }
+
+    .description-oc {
+        font-weight: bold;
+        font-size: 1rem !important;
+    }
+
+    button#secondary.UiComponents_buttonSecondary__TT1bi {
+        font-size: 0.6rem;
+    }
+
+    button#dark.UiComponents_buttonDark__oZ8z_ {
+        font-size: 0.6rem;
+    }
+
+    .adaptiveLayoutButtonsDanger {
+        margin-left: 5px !important;
+    }
+
+    /* span {
+    margin: 5px 10px !important;
+  } */
+
+    .adaptiveLayoutFooter {
+        margin: auto;
+        max-width: 80% !important;
+        flex-direction: column !important;
+        gap: 8px;
+    }
+
+    .button-lain {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .adaptiveLayoutSignature {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .adaptiveLayoutSpanDescriptionOc {
+        margin: 5px 10px !important;
+    }
+}

@@ -27,26 +27,26 @@ export default function Home() {
           <TodayDate />
         </div>
         <h1 style={{ textAlign: "center" }} className="titlePrimaryUnderline">ACTA DE ENTREGA</h1>
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "20px" }} className="adaptiveLayoutMaterial">
           <FormNameClient />
         </div>
         <p style={{ paddingTop: "20px" }} className="adaptiveLayoutMaterial">Se hace entrega del siguiente material:</p>
-        <div style={{ paddingTop: "20px" }}>
+        <div style={{ paddingTop: "20px" }} className="adaptiveLayoutMaterial">
           <FormOc />
         </div>
-        <div style={{ paddingTop: "20px" }}>
+        <div style={{ paddingTop: "20px" }} className="adaptiveLayoutMaterial">
           <DescriptionOc />
         </div>
       </article>
       <footer>
-        <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }}>
-          <p>RECIBE CONFORME: </p>
+        <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }} className="adaptiveLayoutFooter">
+          <p className="adaptiveLayoutSignature">RECIBE CONFORME: </p>
           <button className="button-lain" style={{ flex: 1 }} id="recibe" ></button>
           <p className="no-print"></p>
         </div>
         <br />
-        <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }}>
-          <p>ENTREGA:</p>
+        <div style={{ display: "flex", flexDirection: "row", marginTop: "20px" }} className="adaptiveLayoutFooter">
+          <p className="adaptiveLayoutSignature">ENTREGA:</p>
           <button className="button-lain" style={{ flex: 1 }} id="entrega"></button>
           <p className="no-print"></p>
         </div>

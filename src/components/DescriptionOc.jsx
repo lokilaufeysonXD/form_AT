@@ -122,7 +122,7 @@ function DescriptionOc({ currentPage = 1 }) {
                                 onChange={(e) => handleInputChange(desc.id, e.target.value)}
                                 rows={4}
                             />
-                            <div style={{ display: 'flex', gap: '5px' }}>
+                            <div style={{ display: 'flex', gap: '5px' }} className="adaptiveLayoutDescriptionOcButtons">
                                 <button
                                     className={styles.buttonPrimary}
                                     id='primary'
@@ -147,7 +147,7 @@ function DescriptionOc({ currentPage = 1 }) {
                                 </button>
                             </div>
                         </div>
-                        <div style={{ margin: '20px 20px' }}>
+                        <div style={{ margin: '20px 20px' }} className="adaptiveLayoutMaterial">
                             <p className="description-oc">
                                 {desc.id}- &nbsp;&nbsp; MOD: {desc.text || ' '}
                             </p>
@@ -168,28 +168,30 @@ function DescriptionOc({ currentPage = 1 }) {
                                         rows={4}
                                     // className="description-textarea"
                                     />
-                                    <button
-                                        className={styles.buttonPrimary}
-                                        id='primary'
+                                    <div style={{ display: 'flex', gap: '5px' }} className="adaptiveLayoutDescriptionOcButtons">
+                                        <button
+                                            className={styles.buttonPrimary}
+                                            id='primary'
+                                            // className='button-accion'
+                                            type="button"
+                                            onClick={() => handleButtonClickSerie(serie.id)}
+                                        >
+                                            Enviar
+                                        </button>
+                                        <button
+                                            className={styles.buttonDanger}
+                                            id='danger'
+                                            onClick={() =>
+                                                setDescriptionsSerie(descriptionsSerie.map(s =>
+                                                    s.id === serie.id ? { ...s, text: '', input: '' } : s
+                                                ))
+                                            }
+                                            type="button"
                                         // className='button-accion'
-                                        type="button"
-                                        onClick={() => handleButtonClickSerie(serie.id)}
-                                    >
-                                        Enviar
-                                    </button>
-                                    <button
-                                        className={styles.buttonDanger}
-                                        id='danger'
-                                        onClick={() =>
-                                            setDescriptionsSerie(descriptionsSerie.map(s =>
-                                                s.id === serie.id ? { ...s, text: '', input: '' } : s
-                                            ))
-                                        }
-                                        type="button"
-                                    // className='button-accion'
-                                    >
-                                        Eliminar
-                                    </button>
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </div>
                                 </div>
                                 <div style={{ margin: '20px 20px' }}>
                                     <p className="description-oc">
@@ -212,7 +214,7 @@ function DescriptionOc({ currentPage = 1 }) {
                 >
                     -
                 </button>
-                <span style={{ margin: '0 10px', marginTop: '10px' }}>
+                <span style={{ margin: '0 10px', marginTop: '10px' }} className="adaptiveLayoutSpanDescriptionOc">
                     {descriptions.length} / {MAX_DESCRIPTIONS}
                 </span>
                 {descriptions.length < MAX_DESCRIPTIONS && (
@@ -227,7 +229,7 @@ function DescriptionOc({ currentPage = 1 }) {
                     </button>
                 )}
                 <button
-                    className={styles.buttonDanger}
+                    className={styles.buttonDanger + ' adaptiveLayoutButtonsDanger'}
                     style={{ marginLeft: '20px' }}
                     id='danger'
                     type="button"
