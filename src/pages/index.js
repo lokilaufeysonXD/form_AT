@@ -11,7 +11,7 @@ export default function Home() {
 
 
   return (
-    <div className="container">
+    <div className="container printA4">
       <header >
         <Image src="/img/atecno.png" width={300} height={120} alt="logo_atecno" className="ImageLogo" />
         <h1 className="titlePrimaryUnderline textAlign" style={{ marginRight: "10%" }}><strong>ACCI TECNOLOGY S.A. DE CV</strong></h1>

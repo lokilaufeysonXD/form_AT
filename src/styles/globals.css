@@ -1,3 +1,8 @@
+@page {
+  size: A4;
+  margin: 0mm;
+}
+
 .container * {
   box-sizing: border-box;
   margin: 0;
@@ -98,306 +103,6 @@ p {
   outline: none;
 }
 
-
-
-
-
-
-
-
-/* estilos para la mediaquery de impresión  */
-@media print {
-  /* img {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 50%;
-    height: 50%;
-  }
-
-  select {
-    display: none !important;
-  }
-
-  input {
-    display: none !important;
-  }
-
-  textarea {
-    display: none;
-  } */
-
-  /* de alguna manera esto esta rompiendo el modo de imprecion en algunas resoluciones cuando se comenta */
-  /* button {
-    display: none !important;
-  } */
-
-  /* Ocupa toda la altura */
-  /* padding-bottom: 150px; */
-  /* main {
-    position: relative;
-    min-height: 75vh;
-  } */
-
-  /* p {
-    font-size: 15px !important;
-    font-family: 'Roboto, sans-serif';
-  } */
-
-  /* h2 {
-    font-size: 15px !important;
-    font-family: 'Arial, sans-serif';
-  }
-
-  span {
-    display: none !important;
-  }
-
-  .description-oc {
-    margin-bottom: auto !important;
-  }
-
-  .header-divider {
-    display: flex;
-    display: block !important;
-    place-items: center !important;
-    width: 100% !important;
-  }
-
-  .hr-dividing-line {
-    margin-top: -10px !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    background-color: black !important;
-    border: 0 !important;
-    height: 2px !important;
-    width: 75% !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-
-  .logo-container {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* padding: 20px; */
-  /* .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    position: relative;
-  } */
-
-  /* .header-text h1 {
-    padding-top: 9% !important;
-    padding-right: 10% !important;
-    font-family: 'Roboto, sans-serif';
-     text-decoration: underline;
-    font-weight: bold;
-    white-space: nowrap;
-    font-size: 15px;
-  } */
-
-  /* .header-text p {
-    font-size: 15px !important;
-    padding-left: 1% !important;
-    margin: 5px 0;
-    font-size: 20px;
-  } */
-
-  /* padding: 20px 0; */
-  /* .firm-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  } */
-
-  /* .date-text {
-    margin-top: -4px !important;
-  } */
-
-  /* .container-align-left p {
-    margin-top: -10px !important;
-  } */
-
-  /* .no-print {
-    display: none;
-  } */
-
-  /* .header {
-    padding-top: 37px !important;
-    padding-bottom: 70px !important;
-  } */
-
-}
-
-
-
-
-/* Estilos para el encabezado */
-
-/* p {
-  margin: 5px 0;
-  font-family: 'Roboto, sans-serif';
-  font-size: 25px;
-}
-
-h2 {
-  margin: 5px 0;
-  font-family: 'Arial, sans-serif';
-  font-size: 25px;
-  text-decoration: underline;
-}
-
-textarea {
-  margin-right: 5px;
-  width: 73%;
-  height: 100px;
-  padding: 10px;
-  font-family: 'Roboto, sans-serif';
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.button-lain {
-  background: none;
-  border: none;
-  border-bottom: 1px solid black;
-  padding: 5px;
-  font-size: 16px;
-  outline: none;
-}
-
-#recibe {
-  display: block !important;
-  width: 58%;
-}
-
-#entrega {
-  display: block !important;
-  width: 69%;
-}
-
-.firm-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.description-oc {
-  margin-left: 5%;
-  max-width: 83%;
-}
-
-.container-align-left {
-  display: flex;
-  justify-content: start;
-  margin-top: 20px;
-  margin-left: 10%;
-  font-family: 'Roboto, sans-serif';
-}
-
-.description-textarea {
-  height: 40px;
-}
-  
-.oc-display p {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.date-container p {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  font-weight: bold;
-  margin-right: 10%;
-}
-
-.title {
-  font-family: 'Roboto, sans-serif';
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.header-divider {
-  display: grid;
-  place-items: center;
-  width: 100%;
-} */
-
-/* .dividing-line {
-  height: 6px;
-  width: 75%;
-  background: black;
-  border: none;
-  outline: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  appearance: none;
-} */
-
-/* padding-bottom: 8%; */
-/* .header {
-  padding-top: 37px;
-  padding-bottom: 98px;
-} */
-
-/* .logo-container {
-  padding-left: 95px;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  position: relative;
-}
-
-.header-text {
-  position: absolute;
-  left: 52%;
-  transform: translateX(-50%);
-  width: 67%;
-  text-align: center;
-}
-
-.header-text h1 {
-  padding-bottom: 5px;
-  padding-top: 10%;
-  margin: 0;
-  font-family: 'Roboto, sans-serif';
-  text-decoration: underline;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.header-text h1 strong {
-  margin-left: 55%;
-}
-
-.header-info {
-  text-align: center;
-}
-
-.header-text p {
-  font-family: 'Roboto, sans-serif';
-  position: relative;
-} */
-
 #print-button {
   position: fixed;
   bottom: 20px;
@@ -407,35 +112,54 @@ textarea {
   cursor: pointer;
   background-image: url('/img/printer.png');
   width: 64px;
-  /* Ancho del contenedor */
   height: 64px;
-  /* Alto del contenedor */
   background-size: cover;
-  /* Ajusta la imagen al contenedor */
   background-position: center;
-  /* Centra la imagen */
   background-repeat: no-repeat;
-  /* Evita que se repita */
 }
 
 
-/* .hr-dividing-line {
-  margin-top: -10px;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-  background-color: black;
-  border: 0;
-  height: 6px;
-  width: 75%;
-  visibility: visible;
-  opacity: 1;
-}
-    
-.container-align-lef button {
-  margin-right: 100%;
-  color: rebeccapurple;
-}
 
-.button-accion {
-  margin-right: 5px;
-} */
+
+
+
+
+
+/* estilos para la mediaquery de impresión  */
+@media print {
+
+  .printA4 {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+
+  select,
+  input,
+  textarea {
+    display: none !important;
+  }
+
+  [class*="buttonPrimary"],
+  [class*="buttonSecondary"],
+  [class*="buttonDark"],
+  [class*="buttonDanger"] {
+    display: none !important;
+  }
+
+  .adaptiveLayoutInputForm {
+    display: none !important;
+  }
+
+}
