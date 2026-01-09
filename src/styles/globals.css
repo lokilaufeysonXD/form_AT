@@ -1,6 +1,9 @@
 @page {
   size: A4;
-  margin: 0mm;
+  margin-top: 15mm;
+  margin-bottom: 0mm;
+  margin-left: 20mm;
+  margin-right: 20mm;
 }
 
 .container * {
@@ -118,48 +121,6 @@ p {
   background-repeat: no-repeat;
 }
 
-
-
-
-
-
-
-
-/* estilos para la mediaquery de impresión  */
-@media print {
-
-  .printA4 {
-    width: 210mm;
-    min-height: 297mm;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .no-print {
-    display: none !important;
-  }
-
-
-  select,
-  input,
-  textarea {
-    display: none !important;
-  }
-
-  [class*="buttonPrimary"],
-  [class*="buttonSecondary"],
-  [class*="buttonDark"],
-  [class*="buttonDanger"] {
-    display: none !important;
-  }
-
-  .adaptiveLayoutInputForm {
-    display: none !important;
-  }
-
+.adaptiveLayoutPrayerTodayDate {
+  margin-right: 7%;
 }

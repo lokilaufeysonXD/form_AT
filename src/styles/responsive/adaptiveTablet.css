@@ -35,4 +35,8 @@
         display: flex;
         justify-content: center;
     }
+
+    .adaptiveLayoutPrayerTodayDate {
+        margin-right: 7%;
+    }
 }

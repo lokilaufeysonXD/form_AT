@@ -81,7 +81,6 @@
     .adaptiveLayoutTodayDate {
         display: flex !important;
         justify-content: center !important;
-        padding-bottom: 15px;
     }
 
     .adaptiveLayoutTodayDate p {

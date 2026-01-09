@@ -26,7 +26,7 @@ export default function Home() {
         <div style={{ display: "flex", justifyContent: "flex-end" }} className="adaptiveLayoutTodayDate">
           <TodayDate />
         </div>
-        <h1 style={{ textAlign: "center" }} className="titlePrimaryUnderline">ACTA DE ENTREGA</h1>
+        <h1 style={{ textAlign: "center", marginTop: "5%" }} className="titlePrimaryUnderline">ACTA DE ENTREGA</h1>
         <div style={{ marginTop: "20px" }} className="adaptiveLayoutMaterial">
           <FormNameClient />
         </div>
