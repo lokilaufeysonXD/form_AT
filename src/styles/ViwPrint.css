@@ -1,0 +1,60 @@
+/* estilos para la mediaquery de impresión  */
+@media print {
+
+    .printA4 {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+
+    select,
+    input,
+    textarea {
+        display: none !important;
+    }
+
+    [class*="buttonPrimary"],
+    [class*="buttonSecondary"],
+    [class*="buttonDark"],
+    [class*="buttonDanger"] {
+        display: none !important;
+    }
+
+    .adaptiveLayoutInputForm {
+        display: none !important;
+    }
+
+    #print-button {
+        display: none !important;
+    }
+
+    /* estilos para mejorar la vista de impresión */
+
+    p {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .hrDividingLine {
+        height: 2px;
+    }
+
+    .adaptiveLayoutPrayerTodayDate {
+        margin-right: 7%;
+    }
+
+}

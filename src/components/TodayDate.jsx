@@ -18,7 +18,7 @@ const TodayDate = () => {
   }, []);
 
   return (
-    <>Cancún, Quintana Roo {dateString}</>
+    <p style={{ fontWeight: "700" }} className='adaptiveLayoutPrayerTodayDate'>Cancún, Quintana Roo {dateString}</p>
   );
 };
 

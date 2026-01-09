@@ -1,25 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useFormsData } from '@/context/FormsDataContext';
+import styles from "@/styles/UiComponents.module.css";
 
-function FormNameClient() {
+function FormNameClient({ currentPage = 1 }) {
+  const { getPageData, updatePageData, isLoaded } = useFormsData();
   const [selectedOption, setSelectedOption] = useState('nombre del cliente');
-  const [ocValue, setOcValue] = useState('');
-  const [textareaValue, setTextareaValue] = useState('');
+
+  // Cargar datos de la página actual solo una vez cuando cambia la página
+  useEffect(() => {
+    if (isLoaded) {
+      const pageData = getPageData(currentPage);
+      setSelectedOption(pageData.formNameClient.selectedOption);
+    }
+  }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
 
   const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
-  const handleOcChange = (e) => {
-    setOcValue(e.target.value);
-  };
-
-  const handleTextareaChange = (e) => {
-    setTextareaValue(e.target.value);
+    const newValue = e.target.value;
+    setSelectedOption(newValue);
+    updatePageData(currentPage, 'formNameClient', {
+      selectedOption: newValue
+    });
   };
 
   return (
-    <form>
+    <form className='adaptiveLayoutForm'>
       <select
+        className={styles.selectClient}
         id='select'
         name="select"
         onChange={handleSelectChange}
@@ -36,7 +42,7 @@ function FormNameClient() {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
       </select>
-      <p className='text-bold'>{selectedOption}</p>
+      <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>
   );
 }

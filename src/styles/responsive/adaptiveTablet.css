@@ -1,0 +1,42 @@
+@media screen and (max-width: 853px) {
+    .container {
+        /* background-color: red; */
+        padding: 0;
+
+        header {
+            padding-top: 13px;
+        }
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .ImageLogo {
+        margin-left: 25px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    form.adaptiveLayoutForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+    }
+
+    .adaptiveLayoutMaterial {
+        text-align: center;
+    }
+
+    .adaptiveLayoutInputForm {
+        display: flex;
+        justify-content: center;
+    }
+
+    .adaptiveLayoutPrayerTodayDate {
+        margin-right: 7%;
+    }
+}
