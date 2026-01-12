@@ -12,7 +12,7 @@ function FormNameClient({ currentPage = 1 }) {
       const pageData = getPageData(currentPage);
       setSelectedOption(pageData.formNameClient.selectedOption);
     }
-  }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
+  }, [currentPage, isLoaded, getPageData]);
 
   const handleSelectChange = (e) => {
     const newValue = e.target.value;
@@ -41,6 +41,7 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="SISTEMAS ESPECIALIZADOS DE BOMBEO">SISTEMAS ESPECIALIZADOS DE BOMBEO</option>
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
+        <option value="Ingenieria y Proyecto Integral">Ingenieria y Proyecto Integral </option>
       </select>
       <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>

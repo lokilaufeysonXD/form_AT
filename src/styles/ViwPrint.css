@@ -57,4 +57,25 @@
         margin-right: 7%;
     }
 
+    /* Ocultar el contenido normal de la aplicación al imprimir */
+    #__next>div:not(.print-all-container) {
+        display: none !important;
+    }
+
+    /* Asegurarse que el contenedor de imprimir todo sea visible */
+    .print-all-container {
+        display: block !important;
+    }
+
+    .print-page-break:not(:last-child) {
+        page-break-after: always;
+        break-after: always;
+        margin-bottom: 0;
+    }
+
+}
+
+/* Por defecto, ocultar el componente de imprimir todo en pantalla */
+.print-all-container {
+    display: none;
 }

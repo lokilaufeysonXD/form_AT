@@ -21,7 +21,7 @@ function DescriptionOc({ currentPage = 1 }) {
             setDescriptions(pageData.descriptionOc.descriptions);
             setDescriptionsSerie(pageData.descriptionOc.descriptionsSerie);
         }
-    }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
+    }, [currentPage, isLoaded, getPageData]);
 
     const handleButtonClick = (id) => {
         const newDescriptions = descriptions.map(desc =>

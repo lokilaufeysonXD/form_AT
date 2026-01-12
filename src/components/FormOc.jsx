@@ -14,7 +14,7 @@ function FormOc({ currentPage = 1 }) {
             setOcValue(pageData.formOc.ocValue);
             setDisplayedOC(pageData.formOc.displayedOC);
         }
-    }, [currentPage, isLoaded]); // Removido getPageData de las dependencias
+    }, [currentPage, isLoaded, getPageData]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
