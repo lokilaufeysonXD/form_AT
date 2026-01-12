@@ -6,11 +6,14 @@ import "@/styles/ViwPrint.css";
 import { PagesProvider } from "@/context/PagesContext";
 import { FormsDataProvider } from "@/context/FormsDataContext";
 
+import PrintAllPages from "@/components/PrintAllPages";
+
 export default function App({ Component, pageProps }) {
   return (
     <PagesProvider>
       <FormsDataProvider>
         <Component {...pageProps} />
+        <PrintAllPages />
       </FormsDataProvider>
     </PagesProvider>
   );
