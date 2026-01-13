@@ -6,11 +6,23 @@
   margin-right: 20mm;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+esto lo hice para el poanel de control es posible que
+ rompa algo extra pero no he visto que asi que lo dejo y dejo este comentario   */
+
 .container * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+/* /////////////////////////////xxx ///////////////////////////// */
 
 body {
   margin: 0;
@@ -123,4 +135,8 @@ p {
 
 .adaptiveLayoutPrayerTodayDate {
   margin-right: 7%;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 40;
 }

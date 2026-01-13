@@ -1,0 +1,290 @@
+.layout {
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    box-shadow: 7px 0px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.ContainerLogo {
+    padding: 20px 24px 20px 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.SpanLogo {
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+    border-radius: 12px;
+    padding: 8px 8px;
+    color: white;
+    font-size: 37px;
+}
+
+.H1LogoControlPanel {
+    letter-spacing: -1px;
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ContainerButtonsNavigation {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.main {
+    background-color: #e5e5e5;
+    padding: 0% 10%;
+}
+
+.panelControlContainerMainTitle {
+    padding: 32px 32px 0px 32px;
+}
+
+.panelControlContainerMainTitle h1 {
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0;
+}
+
+.panelControlContainerMainTitle p {
+    color: #64748B;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.stats,
+.fastAccess,
+.recentPanel {
+    padding: 32px 32px 0px 32px;
+}
+
+.stats,
+.containerFastAccessCards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.recentPanel {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mainOrdenesPendientesIcon {
+    color: #D97706;
+}
+
+.mainEtiquetasGeneradasIcon {
+    color: #2563EB;
+}
+
+.mainDocumentosIcon {
+    color: #059669;
+}
+
+.mainOrdenesCompletadasIcon {
+    color: #9333EA;
+}
+
+.fastAccessTitle,
+.recentPanel h2 {
+    margin: 0 0 16px 0;
+    color: #1E293B;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.fastAccessCardOrdenesProduccion {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+}
+
+.fastAccessCard h2 {
+    font-size: 18px;
+    color: white;
+    margin: 0px;
+    text-decoration: none;
+}
+
+.fastAccessCard p {
+    font-size: 14px;
+    color: white;
+    margin: 0px;
+    opacity: 80%;
+}
+
+.iconControlPanelCardOrdenesProduccion,
+.iconControlPanelCardEtiquetas,
+.iconControlPanelCardPlanos,
+.iconControlPanelCardManuales,
+.iconControlPanelCardDocumentos {
+    padding: 12px;
+    color: white;
+    background-color: #FFFFFF33;
+    border-radius: 12px;
+}
+
+.iconFlagControlPanelCardOrdenesProduccion,
+.iconFlagControlPanelCardEtiquetas,
+.iconFlagControlPanelCardPlanos,
+.iconFlagControlPanelCardManuales,
+.iconFlagControlPanelCardDocumentos {
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.fastAccessCardEtiquetas {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+}
+
+.fastAccessCardPlanos {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #334155 0%, #1E293B 100%);
+}
+
+.fastAccessCardManuales {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #059669 0%, #047857 100%);
+}
+
+.fastAccessCardDocumentos {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #9333EA 0%, #7E22CE 100%);
+}
+
+
+
+/* /////////////////////////////botones del panel de controll/////////////////// */
+
+.buttonControlPanelNavigation {
+    font-weight: bold;
+    font-family: system-ui;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #374151;
+    gap: 12px;
+}
+
+.buttonControlPanelNavigation:hover {
+    background: #F3F4F6;
+    color: #1D4ED8;
+}
+
+.buttonControlPanelNavigation.active {
+    background: #E0E7FF;
+    color: #1D4ED8;
+}
+
+.iconControlPanelCard {
+    background-color: #F1F5F9;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 60%;
+    margin-left: 20%;
+}
+
+
+/* ///////////////////////////// cart de el panel de control/////////////////// */
+
+.statControlPanelCard {
+    flex: 1;
+    min-width: 292px;
+    max-width: 292px;
+    height: 140px;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.statControlPanelCard {
+    display: flex;
+    flex-direction: row;
+    column-gap: 42px;
+    align-items: center;
+    justify-content: center;
+}
+
+.statControlPanelCard h2 {
+    font-size: 14px;
+    color: #64748B;
+    margin: 0px;
+}
+
+.statControlPanelCard h1 {
+    font-family: sans-serif;
+    color: #0F172A;
+    margin: 8px 0px;
+    font-size: 30px;
+}
+
+.statControlPanelCard p {
+    font-size: 14px;
+    color: #94A3B8;
+    margin: 0px;
+}
+
+
+.fastAccessCard {
+    flex: 1;
+    min-width: 394px;
+    max-width: 394px;
+    height: 96px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.recentPanelCard {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 600px;
+    max-width: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
