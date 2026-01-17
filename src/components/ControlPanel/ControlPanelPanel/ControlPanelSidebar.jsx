@@ -42,19 +42,19 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
                             <p style={{ fontSize: "20px" }}>Produccion</p>
                         </div>
                         <a href="" className={styles.buttonControlPanelNavigation}>
-                            <span class="material-symbols-outlined">sell</span>
+                            <span className="material-symbols-outlined">sell</span>
                             <p style={{ fontSize: "20px" }}>Etiquetas</p>
                         </a>
                         <a href="" className={styles.buttonControlPanelNavigation}>
-                            <span class="material-symbols-outlined">docs</span>
+                            <span className="material-symbols-outlined">docs</span>
                             <p style={{ fontSize: "20px" }}>Planos</p>
                         </a>
                         <a href="" className={styles.buttonControlPanelNavigation}>
-                            <span class="material-symbols-outlined">menu_book</span>
+                            <span className="material-symbols-outlined">menu_book</span>
                             <p style={{ fontSize: "20px" }}>Manuales</p>
                         </a>
                         <a href="" className={styles.buttonControlPanelNavigation}>
-                            <span class="material-symbols-outlined">folder_open</span>
+                            <span className="material-symbols-outlined">folder_open</span>
                             <p style={{ fontSize: "20px" }}>Documentos</p>
                         </a>
                     </>

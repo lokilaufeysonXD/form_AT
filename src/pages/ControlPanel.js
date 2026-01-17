@@ -1,3 +1,5 @@
+
+
 import styles from "@/styles/ControlPanel.module.css";
 import { useState, useEffect } from "react";
 import ControlPanelSidebar from "@/components/ControlPanel/ControlPanelPanel/ControlPanelSidebar";
