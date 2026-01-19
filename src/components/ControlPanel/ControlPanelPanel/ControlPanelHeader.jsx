@@ -3,7 +3,7 @@ import styles from "@/styles/ControlPanel.module.css";
 function ControlPanelHeader() {
     return (
         <div className={styles.panelControlContainerMainTitle}>
-            <h1>Panel de Control</h1>
+            <h1 style={{ color: "#0F172A" }}>Panel de Control</h1>
             <p>gestion integral de produccion y documentacion</p>
         </div>
     );

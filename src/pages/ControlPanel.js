@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import ControlPanelSidebar from "@/components/ControlPanel/ControlPanelPanel/ControlPanelSidebar";
 import ControlPanelPagePanel from "@/components/ControlPanel/ControlPanelPagePanel";
 import ControlPanelPageProduccion from "@/components/ControlPanel/ControlPanelPageProduccion";
+import ControlPanelPageEtiquetas from "@/components/ControlPanel/ControlPanelPageEtiquetas";
 
 export default function ControlPanel() {
 
@@ -50,6 +51,7 @@ export default function ControlPanel() {
                     <>
                         {activeView === "panel" && <ControlPanelPagePanel />}
                         {activeView === "produccion" && <ControlPanelPageProduccion />}
+                        {activeView === "etiquetas" && <ControlPanelPageEtiquetas />}
                     </>
                 )}
             </main>

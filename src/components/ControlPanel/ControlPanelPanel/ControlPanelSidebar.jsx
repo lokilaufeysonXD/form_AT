@@ -41,22 +41,38 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
                             <span className="material-symbols-outlined">package_2</span>
                             <p style={{ fontSize: "20px" }}>Produccion</p>
                         </div>
-                        <a href="" className={styles.buttonControlPanelNavigation}>
+                        <div
+                            className={`${styles.buttonControlPanelNavigation} ${activeView === "etiquetas" ? styles.active : ""}`}
+                            onClick={() => onNavigate("etiquetas")}
+                            style={{ cursor: "pointer" }}
+                        >
                             <span className="material-symbols-outlined">sell</span>
                             <p style={{ fontSize: "20px" }}>Etiquetas</p>
-                        </a>
-                        <a href="" className={styles.buttonControlPanelNavigation}>
+                        </div>
+                        <div
+                            className={`${styles.buttonControlPanelNavigation} ${activeView === "planos" ? styles.active : ""}`}
+                            onClick={() => onNavigate("planos")}
+                            style={{ cursor: "pointer" }}
+                        >
                             <span className="material-symbols-outlined">docs</span>
                             <p style={{ fontSize: "20px" }}>Planos</p>
-                        </a>
-                        <a href="" className={styles.buttonControlPanelNavigation}>
+                        </div>
+                        <div
+                            className={`${styles.buttonControlPanelNavigation} ${activeView === "manuales" ? styles.active : ""}`}
+                            onClick={() => onNavigate("manuales")}
+                            style={{ cursor: "pointer" }}
+                        >
                             <span className="material-symbols-outlined">menu_book</span>
                             <p style={{ fontSize: "20px" }}>Manuales</p>
-                        </a>
-                        <a href="" className={styles.buttonControlPanelNavigation}>
+                        </div>
+                        <div
+                            className={`${styles.buttonControlPanelNavigation} ${activeView === "documentos" ? styles.active : ""}`}
+                            onClick={() => onNavigate("documentos")}
+                            style={{ cursor: "pointer" }}
+                        >
                             <span className="material-symbols-outlined">folder_open</span>
                             <p style={{ fontSize: "20px" }}>Documentos</p>
-                        </a>
+                        </div>
                     </>
                 )}
             </div>

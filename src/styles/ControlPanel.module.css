@@ -51,7 +51,8 @@
     padding: 0% 10%;
 }
 
-.panelControlContainerMainTitle {
+.panelControlContainerMainTitle,
+.panelControlPageEtiquetasContainerMainTitle {
     padding: 32px 32px 0px 32px;
 }
 
@@ -76,7 +77,8 @@
 .fastAccess,
 .recentPanel,
 .panelControlPageProduccionFilters,
-.panelControlPageProduccionContent {
+.panelControlPageProduccionContent,
+.panelControlPageEtiquetasContentCartContainer {
     padding: 32px 32px 0px 32px;
 }
 
@@ -511,12 +513,14 @@
 }
 
 .panelControlPageProduccionContentCart {
+    max-width: 25rem;
+    min-width: 25rem;
     flex: 1;
     padding: 20px 20px 20px 20px;
     background-color: white;
     box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
     border-radius: 12px;
-    width: 100%;
+    /* width: 100%; */
     /* height: 68px; */
     height: auto;
     margin-bottom: 20px;
@@ -803,13 +807,151 @@
 .panelControlPageProduccionContentCartFooter {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 20px;
     border-top: 1px solid #E5E7EB;
     padding-top: 10px;
 }
 
-.panelControlPageProduccionContent {
+.panelControlPageProduccionContent,
+.panelControlPageEtiquetasContentCartContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+/* botones de las card de produccion (select prioridad) */
+
+.ButomObtionPrioridad {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+}
+
+.ButomObtionPrioridadBaja {
+    background-color: #0596696e;
+    color: green !important;
+}
+
+.ButomObtionPrioridadMedia {
+    background-color: #E0E7FF;
+    color: blue !important;
+}
+
+.ButomObtionPrioridadAlta {
+    background-color: #d9770638;
+    color: orange !important;
+}
+
+.ButomObtionPrioridadUrgente {
+    background-color: #ffe5e0;
+    color: red !important;
+}
+
+/* botones de las card de produccion (select estado) */
+
+.ButomObtionEstado {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionEstadoEnProceso {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+.ButomObtionEstadoCancelada {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionEstadoPendiente {
+    background-color: #d9770638;
+    color: orange !important;
+    border: 1px solid #ff8c004a;
+}
+
+.ButomObtionEstadoCompletada {
+    background-color: #0596696e;
+    color: green !important;
+    border: 1px solid #00ff004a;
+}
+
+/* Botones de la card etiquetas (metodo de envio)*/
+
+.ButomObtionEnvio {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionEnvioUrgente {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionEnvioExpress {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+.ButomObtionEnvioEstandar {
+    background-color: #a8aaafd6;
+    color: black !important;
+    border: 1px solid #21252945;
+}
+
+
+/* final */
+
+.ButomObtionUrgente {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionUrgenteSi {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionUrgenteNo {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+.panelControlPageProduccionContentCartNote {
+    margin-bottom: 14px !important;
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+}
+
+.panelControlPageProduccionContentCartFooter button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.panelControlPageProduccionContentCartFooter button:hover {
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    border: none;
+    cursor: pointer;
 }
