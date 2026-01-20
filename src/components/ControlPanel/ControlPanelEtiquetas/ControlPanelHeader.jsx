@@ -2,7 +2,7 @@ import styles from "@/styles/ControlPanel.module.css";
 import uiStyles from '@/styles/UiComponents.module.css';
 import { useState } from "react";
 import Modal from "react-modal"; // Asegúrate de tener instalado react-modal o importar tu componente Modal
-import ControlPanelModalsAddOrdenProduccion from "../ControlPanelModals/ControlPanelModalsAddOrdenProduccion";
+import ControlPanelModalsAddEtiquetas from "../ControlPanelModals/ControlPAnelModalsAddEtiquetas";
 
 function ControlPanelHeader() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,9 +58,9 @@ function ControlPanelHeader() {
                 </div>
             </div>
             {/* hacer el modal de las etiquetas */}
-            {/* {isModalOpen && (
-                <ControlPanelModalsAddOrdenProduccion onClose={handleModalClose} formData={formData} setFormData={setFormData} />
-            )} */}
+            {isModalOpen && (
+                <ControlPanelModalsAddEtiquetas onClose={handleModalClose} formData={formData} setFormData={setFormData} />
+            )}
         </>
     );
 }
