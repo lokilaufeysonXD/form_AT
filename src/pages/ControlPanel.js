@@ -1,11 +1,12 @@
-
-
 import styles from "@/styles/ControlPanel.module.css";
 import { useState, useEffect } from "react";
 import ControlPanelSidebar from "@/components/ControlPanel/ControlPanelPanel/ControlPanelSidebar";
 import ControlPanelPagePanel from "@/components/ControlPanel/ControlPanelPagePanel";
 import ControlPanelPageProduccion from "@/components/ControlPanel/ControlPanelPageProduccion";
 import ControlPanelPageEtiquetas from "@/components/ControlPanel/ControlPanelPageEtiquetas";
+import ControlPanelPagePlanos from "@/components/ControlPanel/ControlPanelPagePlanos";
+// import ControlPanelPageDocumentos from "@/components/ControlPanel/ControlPanelPageDocumentos";
+// import ControlPanelPageManuales from "@/components/ControlPanel/ControlPanelPageManuales";
 
 export default function ControlPanel() {
 
@@ -52,6 +53,7 @@ export default function ControlPanel() {
                         {activeView === "panel" && <ControlPanelPagePanel />}
                         {activeView === "produccion" && <ControlPanelPageProduccion />}
                         {activeView === "etiquetas" && <ControlPanelPageEtiquetas />}
+                        {activeView === "planos" && <ControlPanelPagePlanos />}
                     </>
                 )}
             </main>
