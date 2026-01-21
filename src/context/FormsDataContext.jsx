@@ -50,19 +50,21 @@ export function FormsDataProvider({ children }) {
 
     // Actualizar datos de una página específica
     const updatePageData = useCallback((pageNum, field, value) => {
-        setPagesData(prev => {
-            const newData = {
-                ...prev,
-                [pageNum]: {
-                    ...prev[pageNum],
-                    [field]: value
-                }
-            };
-            // Guardar en localStorage inmediatamente
-            localStorage.setItem('pagesFormsData', JSON.stringify(newData));
-            return newData;
-        });
+        setPagesData(prev => ({
+            ...prev,
+            [pageNum]: {
+                ...prev[pageNum],
+                [field]: value
+            }
+        }));
     }, []);
+
+    // Guardar en localStorage cuando cambien los datos
+    useEffect(() => {
+        if (isLoaded) {
+            localStorage.setItem('pagesFormsData', JSON.stringify(pagesData));
+        }
+    }, [pagesData, isLoaded]);
 
     // Limpiar datos de una página específica
     const clearPageData = useCallback((pageNum) => {
