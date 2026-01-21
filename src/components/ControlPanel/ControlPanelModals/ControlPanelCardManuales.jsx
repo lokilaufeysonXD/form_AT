@@ -1,6 +1,6 @@
 import styles from "@/styles/ControlPanel.module.css";
 
-function ControlPanelCardPlanos() {
+function ControlPanelCardManuales() {
     return (
         <div className={styles.panelControlPagePlanosContentCart}>
             <div style={{ display: "flex", alignItems: "center", marginBottom: "10px", gap: "10px", flexDirection: "row", justifyContent: "Flex-start" }}>
@@ -12,15 +12,15 @@ function ControlPanelCardPlanos() {
                             padding: '8px',
                             borderRadius: '12px',
                             backgroundColor: '#CBD5E1',
-                        }}>docs</span>
+                        }}>menu_book</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "10px", alignItems: "Flex-start" }}>
-                    <p style={{ fontSize: "14px", fontWeight: "bold", color: "black" }}>Manual Carcamo</p>
+                    <p style={{ fontSize: "14px", fontWeight: "bold", color: "black" }}>Manual de Jose</p>
                     <p style={{ fontSize: "14px" }}>V1.0</p>
                 </div>
                 <div style={{ marginLeft: "auto", marginBottom: "auto" }}>
-                    <p className={styles.ButomObtionPlanos + " " + styles.ButomObtionPlanosMecanico}>
-                        Mecánico
+                    <p className={styles.ButomObtionManuales + " " + styles.ButomObtionManualesOperacion}>
+                        Operacion
                     </p>
                 </div>
             </div>
@@ -34,11 +34,11 @@ function ControlPanelCardPlanos() {
                 <p style={{ fontSize: "14px" }}>27 nov 2025</p>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", marginLeft: "62px", justifyContent: "Flex-start" }}>
-                <p className={styles.ButomObtionEtiquetasPlanos}>
-                    Carcamo
+                <p className={styles.ButomObtionEtiquetasManuales}>
+                    Bomba
                 </p>
-                <p className={styles.ButomObtionEtiquetasPlanos}>
-                    Sin Variador
+                <p className={styles.ButomObtionEtiquetasManuales}>
+                    Variador
                 </p>
             </div>
             <div className={styles.panelControlPageProduccionContentCartFooter}>
@@ -62,4 +62,5 @@ function ControlPanelCardPlanos() {
     );
 }
 
-export default ControlPanelCardPlanos;
+export default ControlPanelCardManuales;
+

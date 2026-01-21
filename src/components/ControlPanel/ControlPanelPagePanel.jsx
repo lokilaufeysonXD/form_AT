@@ -4,12 +4,12 @@ import ControlPanelStats from "@/components/ControlPanel/ControlPanelPanel/Contr
 import ControlPanelFastAccess from "@/components/ControlPanel/ControlPanelPanel/ControlPanelFastAccess";
 import ControlPanelRecentPanel from "@/components/ControlPanel/ControlPanelPanel/ControlPanelRecentPanel";
 
-function ControlPanelPagePanel() {
+function ControlPanelPagePanel({ onChangeView }) {
     return (
         <>
             <ControlPanelHeader />
             <ControlPanelStats />
-            <ControlPanelFastAccess />
+            <ControlPanelFastAccess onChangeView={onChangeView} />
             <ControlPanelRecentPanel />
         </>
     );

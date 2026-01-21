@@ -295,6 +295,7 @@
     height: 96px;
     border-radius: 12px;
     box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
 }
 
 .recentPanelCard {
@@ -911,7 +912,7 @@
     border: 1px solid #00ff004a;
 }
 
-/* Botones de la card etiquetas (metodo de envio)*/
+/* Botones de la card etiquetas */
 
 .ButomObtionEnvio {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
@@ -1008,6 +1009,68 @@
 
 /* final */
 
+
+/* Botones de la card Manuales */
+
+.ButomObtionManuales {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+}
+
+.ButomObtionManualesOperacion {
+    background-color: #E0E7FF;
+    color: blue !important;
+}
+
+.ButomObtionManualesMantenimiento {
+    background-color: #d9770638;
+    color: orange !important;
+}
+
+.ButomObtionManualesInstalacion {
+    background-color: #0596696e;
+    color: green !important;
+}
+
+.ButomObtionManualesOtro {
+    background-color: #ffe5e0;
+    color: red !important;
+}
+
+.ButomObtionEtiquetasManuales {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+    background-color: #CBD5E1;
+    color: #0a0a0ab3 !important;
+}
+
+.ButomObtionVerManuales {
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); */
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 14px !important;
+    background-color: #CBD5E1;
+    color: #0a0a0ab3 !important;
+    cursor: pointer;
+}
+
+.ButomObtionVerManuales:hover {
+    background-color: #f1f6fc;
+    color: #0a0a0ab3 !important;
+}
+
+/* final */
+
 .panelControlPageProduccionContentCartNote {
     margin-bottom: 14px !important;
     border-radius: 12px;
@@ -1020,9 +1083,18 @@
     background-color: white;
     border: none;
     cursor: pointer;
+
 }
 
-.panelControlPageProduccionContentCartFooter button:hover {
+
+
+.panelControlPageProduccionContentCartFooterButtom button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.panelControlPageProduccionContentCartFooterButtom button:hover {
     border-radius: 12px;
     background-color: #F3F4F6;
     border: none;

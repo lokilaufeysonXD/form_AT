@@ -5,8 +5,8 @@ import ControlPanelPagePanel from "@/components/ControlPanel/ControlPanelPagePan
 import ControlPanelPageProduccion from "@/components/ControlPanel/ControlPanelPageProduccion";
 import ControlPanelPageEtiquetas from "@/components/ControlPanel/ControlPanelPageEtiquetas";
 import ControlPanelPagePlanos from "@/components/ControlPanel/ControlPanelPagePlanos";
-// import ControlPanelPageDocumentos from "@/components/ControlPanel/ControlPanelPageDocumentos";
-// import ControlPanelPageManuales from "@/components/ControlPanel/ControlPanelPageManuales";
+import ControlPanelPageManuales from "@/components/ControlPanel/ControlPanelPageManuales";
+import ControlPanelPageDocumentos from "@/components/ControlPanel/ControlPanelPageDocumentos";
 
 export default function ControlPanel() {
 
@@ -50,10 +50,12 @@ export default function ControlPanel() {
                     </div>
                 ) : (
                     <>
-                        {activeView === "panel" && <ControlPanelPagePanel />}
+                        {activeView === "panel" && <ControlPanelPagePanel onChangeView={setActiveView} />}
                         {activeView === "produccion" && <ControlPanelPageProduccion />}
                         {activeView === "etiquetas" && <ControlPanelPageEtiquetas />}
                         {activeView === "planos" && <ControlPanelPagePlanos />}
+                        {activeView === "manuales" && <ControlPanelPageManuales />}
+                        {activeView === "documentos" && <ControlPanelPageDocumentos />}
                     </>
                 )}
             </main>

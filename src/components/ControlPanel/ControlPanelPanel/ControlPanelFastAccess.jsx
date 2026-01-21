@@ -1,13 +1,16 @@
 import styles from "@/styles/ControlPanel.module.css";
 
-function ControlPanelFastAccess() {
+function ControlPanelFastAccess({ onChangeView }) {
+
+    console.log("onChangeView:", onChangeView);
+
     return (
         <section className={styles.fastAccess}>
             <div className={styles.fastAccessTitle}>
                 <h2>Acceso Rapido</h2>
             </div>
             <div className={styles.containerFastAccessCards}>
-                <a href="" className={styles.fastAccessCard + " " + styles.fastAccessCardOrdenesProduccion}>
+                <div className={styles.fastAccessCard + " " + styles.fastAccessCardOrdenesProduccion} onClick={() => onChangeView("produccion")} >
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconControlPanelCardOrdenesProduccion}`}>package_2</span>
                     </div>
@@ -18,8 +21,9 @@ function ControlPanelFastAccess() {
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconFlagControlPanelCardOrdenesProduccion}`}>chevron_right</span>
                     </div>
-                </a>
-                <a href="" className={styles.fastAccessCard + " " + styles.fastAccessCardEtiquetas}>
+                </div>
+
+                <div className={styles.fastAccessCard + " " + styles.fastAccessCardEtiquetas} onClick={() => onChangeView("etiquetas")}>
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconControlPanelCardEtiquetas}`}>sell</span>
                     </div>
@@ -30,8 +34,9 @@ function ControlPanelFastAccess() {
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconFlagControlPanelCardEtiquetas}`}>chevron_right</span>
                     </div>
-                </a>
-                <a href="" className={styles.fastAccessCard + " " + styles.fastAccessCardPlanos}>
+                </div>
+
+                <div className={styles.fastAccessCard + " " + styles.fastAccessCardPlanos} onClick={() => onChangeView("planos")}>
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconControlPanelCardPlanos}`}>docs</span>
                     </div>
@@ -42,8 +47,8 @@ function ControlPanelFastAccess() {
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconFlagControlPanelCardPlanos}`}>chevron_right</span>
                     </div>
-                </a>
-                <a href="" className={styles.fastAccessCard + " " + styles.fastAccessCardManuales}>
+                </div>
+                <div className={styles.fastAccessCard + " " + styles.fastAccessCardManuales} onClick={() => onChangeView("manuales")}>
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconControlPanelCardManuales}`}>menu_book</span>
                     </div>
@@ -54,8 +59,8 @@ function ControlPanelFastAccess() {
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconFlagControlPanelCardManuales}`}>chevron_right</span>
                     </div>
-                </a>
-                <a href="" className={styles.fastAccessCard + " " + styles.fastAccessCardDocumentos}>
+                </div>
+                <div className={styles.fastAccessCard + " " + styles.fastAccessCardDocumentos} onClick={() => onChangeView("documentos")}>
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconControlPanelCardDocumentos}`}>folder_open</span>
                     </div>
@@ -66,7 +71,7 @@ function ControlPanelFastAccess() {
                     <div>
                         <span className={`material-symbols-outlined ${styles.iconFlagControlPanelCardDocumentos}`}>chevron_right</span>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
     );
