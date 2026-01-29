@@ -1,5 +1,3 @@
-
-
 import styles from "@/styles/ControlPanel.module.css";
 import uiStyles from '@/styles/UiComponents.module.css';
 import Modal from "react-modal";
@@ -41,41 +39,41 @@ function ControlPanelModalsAddOrdenProduccion({ onClose }) {
             contentLabel="Nueva Orden de Produccion"
             closeTimeoutMS={300}
             className={{
-                base: styles.modalContent,
-                afterOpen: styles.modalContentAfterOpen,
-                beforeClose: styles.modalContentBeforeClose,
+                base: uiStyles.modalContent,
+                afterOpen: uiStyles.modalContentAfterOpen,
+                beforeClose: uiStyles.modalContentBeforeClose,
             }}
             overlayClassName={{
-                base: styles.modalOverlay,
-                afterOpen: styles.modalOverlayAfterOpen,
-                beforeClose: styles.modalOverlayBeforeClose,
+                base: uiStyles.modalOverlay,
+                afterOpen: uiStyles.modalOverlayAfterOpen,
+                beforeClose: uiStyles.modalOverlayBeforeClose,
             }}
             ariaHideApp={false}
         >
-            <div className={styles.modalHeader}>
+            <div className={uiStyles.modalHeader}>
                 <h1>Nueva Orden de Produccion</h1>
                 <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Numero de Orden*</label>
                     <input type="number" id="nombre" name="nombre" placeholder="ORD-001" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="descripcion">Producto*</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre del Producto" />
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Cantidad*</label>
                     <input type="number" id="nombre" name="nombre" placeholder="100" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Prioridad</label>
-                    <div className={styles.modalSelectContainer}>
+                    <div className={uiStyles.modalSelectContainer}>
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
                         <select
                             onMouseDown={handleMouseDown}
@@ -92,10 +90,10 @@ function ControlPanelModalsAddOrdenProduccion({ onClose }) {
                     </div>
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="estado">Estado</label>
-                    <div className={styles.modalSelectContainer}>
+                    <div className={uiStyles.modalSelectContainer}>
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
                         <select
                             onMouseDown={handleMouseDown}
@@ -111,18 +109,18 @@ function ControlPanelModalsAddOrdenProduccion({ onClose }) {
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
                     </div>
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="fecha_entrega">Fecha de Entrega</label>
                     <input type="date" id="fecha_entrega" name="fecha_entrega" />
                 </div>
             </div>
-            <div className={styles.modalTextArea}>
+            <div className={uiStyles.modalTextArea}>
                 <label htmlFor="asignado_a">Asignado a</label>
                 <input type="text" id="asignado_a" name="asignado_a" placeholder="Nombre del Responsable" />
                 <label htmlFor="notas">Notas</label>
                 <textarea id="notas" name="notas" placeholder="Observaciones Adicionales" />
             </div>
-            <div className={styles.modalFooter}>
+            <div className={uiStyles.modalFooter}>
                 <button type="button" onClick={onClose} className={uiStyles.buttonSecondary}
                     style={{
                         display: 'flex',
