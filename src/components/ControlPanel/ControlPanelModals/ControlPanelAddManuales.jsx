@@ -44,33 +44,33 @@ function ControlPanelModalsAddPlanos({ onClose }) {
             contentLabel="Nueva Orden de Produccion"
             closeTimeoutMS={300}
             className={{
-                base: styles.modalContent,
-                afterOpen: styles.modalContentAfterOpen,
-                beforeClose: styles.modalContentBeforeClose,
+                base: uiStyles.modalContent,
+                afterOpen: uiStyles.modalContentAfterOpen,
+                beforeClose: uiStyles.modalContentBeforeClose,
             }}
             overlayClassName={{
-                base: styles.modalOverlay,
-                afterOpen: styles.modalOverlayAfterOpen,
-                beforeClose: styles.modalOverlayBeforeClose,
+                base: uiStyles.modalOverlay,
+                afterOpen: uiStyles.modalOverlayAfterOpen,
+                beforeClose: uiStyles.modalOverlayBeforeClose,
             }}
             ariaHideApp={false}
         >
-            <div className={styles.modalHeader}>
+            <div className={uiStyles.modalHeader}>
                 <h1>Nuevo Plano Técnico</h1>
                 <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div className={styles.modalTextArea}>
+            <div className={uiStyles.modalTextArea}>
                 <label htmlFor="asignado_a">Titulo*</label>
                 <input type="text" id="asignado_a" name="asignado_a" placeholder="Nombre del Documento" />
                 <label htmlFor="notas">Descripción</label>
                 <textarea id="notas" name="notas" placeholder="Descripción del Contenido..." />
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Categoria</label>
-                    <div className={styles.modalSelectContainer}>
+                    <div className={uiStyles.modalSelectContainer}>
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
                         <select
                             onMouseDown={handleMouseDown}
@@ -86,27 +86,27 @@ function ControlPanelModalsAddPlanos({ onClose }) {
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
                     </div>
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="version">Version</label>
                     <input type="text" id="version" name="version" placeholder="v1.0" />
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Equipo / Maquinaria</label>
                     <input type="text" id="nombre" name="equipo" placeholder="Nombre del Equipo" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Etiquetas</label>
                     <input type="text" id="nombre" name="etiquetas" placeholder="tag1, tag2, tag3" />
                 </div>
             </div>
             <div style={{ display: "flex", gap: "10px", alignItems: "center", width: "100%", marginBottom: "20px" }}>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="asignado_a">Archivo</label>
                     <input type="text" placeholder="URL del archivo o sube uno nuevo" value={fileName} readOnly />
                 </div>
-                <div style={{ marginTop: "auto" }} className={styles.btnUpload}>
+                <div style={{ marginTop: "auto" }} className={uiStyles.btnUpload}>
                     <label htmlFor="file-input"
                         style={{
                             display: "flex",
@@ -129,7 +129,7 @@ function ControlPanelModalsAddPlanos({ onClose }) {
                     <input id="file-input" type="file" className={styles.input_file_hidden} onChange={(e) => setFileName(e.target.files[0]?.name || "")} />
                 </div>
             </div>
-            <div className={styles.modalFooter}>
+            <div className={uiStyles.modalFooter}>
                 <button type="button" onClick={onClose} className={uiStyles.buttonSecondary}
                     style={{
                         display: 'flex',

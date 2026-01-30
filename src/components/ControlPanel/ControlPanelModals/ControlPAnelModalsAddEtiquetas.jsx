@@ -39,73 +39,73 @@ function ControlPanelModalsAddEtiquetas({ onClose }) {
             contentLabel="Nueva Etiqueta de Envio"
             closeTimeoutMS={300}
             className={{
-                base: styles.modalContent,
-                afterOpen: styles.modalContentAfterOpen,
-                beforeClose: styles.modalContentBeforeClose,
+                base: uiStyles.modalContent,
+                afterOpen: uiStyles.modalContentAfterOpen,
+                beforeClose: uiStyles.modalContentBeforeClose,
             }}
             overlayClassName={{
-                base: styles.modalOverlay,
-                afterOpen: styles.modalOverlayAfterOpen,
-                beforeClose: styles.modalOverlayBeforeClose,
+                base: uiStyles.modalOverlay,
+                afterOpen: uiStyles.modalOverlayAfterOpen,
+                beforeClose: uiStyles.modalOverlayBeforeClose,
             }}
             ariaHideApp={false}
         >
-            <div className={styles.modalHeader}>
+            <div className={uiStyles.modalHeader}>
                 <h1>Nueva Etiqueta de Envio</h1>
                 <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Numero de Etiqueta*</label>
                     <input type="number" id="nombre" name="nombre" placeholder="ETI-001" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="descripcion">Referencia de Orden</label>
                     <input type="text" id="nombre" name="nombre" placeholder="ORD-001" />
                 </div>
             </div>
-            <div className={styles.modalTextArea}>
+            <div className={uiStyles.modalTextArea}>
                 <label htmlFor="asignado_a">Nombre del Destinatario*</label>
                 <input type="text" id="asignado_a" name="asignado_a" placeholder="Nombre Completo" />
                 <label htmlFor="notas">Direccion*</label>
                 <input type="text" id="asignado_a" name="asignado_a" placeholder="Calle, numero, colonia" />
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Ciudad*</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ciudad" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="descripcion">Codigo Postal</label>
                     <input type="text" id="nombre" name="nombre" placeholder="12345" />
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Pais</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Mexico" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="descripcion">Telefono</label>
                     <input type="text" id="nombre" name="nombre" placeholder="+ 52 1234567890" />
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Peso (Kg)</label>
                     <input type="text" id="nombre" name="nombre" placeholder="1.5" />
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="descripcion">Dimensiones (L x W x H)</label>
                     <input type="text" id="nombre" name="nombre" placeholder="12 x 12 x 12" />
                 </div>
             </div>
-            <div className={styles.modalBody}>
-                <div className={styles.modalBodyInput}>
+            <div className={uiStyles.modalBody}>
+                <div className={uiStyles.modalBodyInput}>
                     <label htmlFor="nombre">Metodo de Envio</label>
-                    <div className={styles.modalSelectContainer}>
+                    <div className={uiStyles.modalSelectContainer}>
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
                         <select
                             onMouseDown={handleMouseDown}
@@ -120,15 +120,15 @@ function ControlPanelModalsAddEtiquetas({ onClose }) {
                         <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
                     </div>
                 </div>
-                <div className={styles.modalBodyInput}>
+                <div className={uiStyles.modalBodyInput}>
                     {/* basio */}
                 </div>
             </div>
-            <div className={styles.modalTextArea}>
+            <div className={uiStyles.modalTextArea}>
                 <label htmlFor="notas">Notas</label>
                 <textarea id="notas" name="notas" placeholder="Instrucciones especiales de entrega..." />
             </div>
-            <div className={styles.modalFooter}>
+            <div className={uiStyles.modalFooter}>
                 <button type="button" onClick={onClose} className={uiStyles.buttonSecondary}
                     style={{
                         display: 'flex',
