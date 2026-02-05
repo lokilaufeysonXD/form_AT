@@ -1,0 +1,801 @@
+.layout {
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    box-shadow: 7px 0px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.ContainerLogo {
+    padding: 20px 24px 20px 24px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.SpanLogo {
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+    border-radius: 12px;
+    padding: 8px 8px;
+    color: white;
+    font-size: 37px;
+}
+
+.H1LogoControlPanel {
+    margin: auto;
+    letter-spacing: -1px;
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ContainerButtonsNavigation {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stats,
+.fastAccess,
+.recentPanel,
+.panelControlPageProduccionFilters,
+.panelControlPageProduccionContent,
+.panelControlPagePlanosContent,
+.panelControlPageEtiquetasContentCartContainer,
+.panelControlContainerMainTitle,
+.panelControlPageEtiquetasContainerMainTitle,
+.panelControlPageProduccionContainerMainTitle {
+    padding: 32px 32px 0px 32px;
+}
+
+.panelControlContainerMainTitle,
+.panelControlPageProduccionContentCart h1,
+.panelControlPagePlanosContentCart h1 {
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0;
+}
+
+.panelControlContainerMainTitle,
+.panelControlPageProduccionContentCart,
+.panelControlPagePlanosContentCart p {
+    color: #64748B;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+
+.stats,
+.containerFastAccessCards,
+.panelControlPageProduccionContainerFilters {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.recentPanel {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mainOrdenesPendientesIcon {
+    color: #D97706;
+}
+
+.mainEtiquetasGeneradasIcon {
+    color: #2563EB;
+}
+
+.mainDocumentosIcon {
+    color: #059669;
+}
+
+.mainOrdenesCompletadasIcon {
+    color: #9333EA;
+}
+
+.fastAccessTitle,
+.recentPanel h2 {
+    margin: 0 0 16px 0;
+    color: #1E293B;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.fastAccessCardOrdenesProduccion {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+}
+
+.fastAccessCard h2 {
+    font-size: 18px;
+    color: white;
+    margin: 0px;
+    text-decoration: none;
+}
+
+.fastAccessCard p {
+    font-size: 14px;
+    color: white;
+    margin: 0px;
+    opacity: 80%;
+}
+
+.fastAccessCard:hover {
+    transform: translateY(-3px);
+    transition: transform 0.35s ease;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.iconControlPanelCardOrdenesProduccion,
+.iconControlPanelCardEtiquetas,
+.iconControlPanelCardPlanos,
+.iconControlPanelCardManuales,
+.iconControlPanelCardDocumentos {
+    padding: 12px;
+    color: white;
+    background-color: #FFFFFF33;
+    border-radius: 12px;
+}
+
+.iconFlagControlPanelCardOrdenesProduccion,
+.iconFlagControlPanelCardEtiquetas,
+.iconFlagControlPanelCardPlanos,
+.iconFlagControlPanelCardManuales,
+.iconFlagControlPanelCardDocumentos {
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.fastAccessCard {
+    flex: 1;
+    display: flex;
+    height: 96px;
+    cursor: pointer;
+    min-width: 394px;
+    max-width: 394px;
+    align-items: center;
+    border-radius: 12px;
+    text-decoration: none;
+    justify-content: space-evenly;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.fastAccessCardEtiquetas {
+    background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+}
+
+.fastAccessCardPlanos {
+    background: linear-gradient(90deg, #334155 0%, #1E293B 100%);
+}
+
+.fastAccessCardManuales {
+    background: linear-gradient(90deg, #059669 0%, #047857 100%);
+}
+
+.fastAccessCardDocumentos {
+    background: linear-gradient(90deg, #9333EA 0%, #7E22CE 100%);
+}
+
+
+
+/* /////////////////////////////botones del SIDEBAR /////////////////// */
+
+.buttonControlPanelNavigation {
+    font-weight: bold;
+    font-family: system-ui;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #374151;
+    gap: 12px;
+}
+
+.buttonControlPanelNavigation:hover {
+    background: #F3F4F6;
+    color: #1D4ED8;
+}
+
+.buttonControlPanelNavigation.active {
+    background: #E0E7FF;
+    color: #1D4ED8;
+}
+
+.iconControlPanelCard {
+    background-color: #F1F5F9;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 60%;
+    margin-left: 20%;
+}
+
+
+/* ///////////////////////////// cart de el panel de control/////////////////// */
+
+.statControlPanelCard {
+    flex: 1;
+    display: flex;
+    height: 140px;
+    min-width: 292px;
+    max-width: 292px;
+    column-gap: 42px;
+    flex-direction: row;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.statControlPanelCard h2 {
+    font-size: 14px;
+    color: #64748B;
+    margin: 0px;
+}
+
+.statControlPanelCard h1 {
+    font-family: sans-serif;
+    color: #0F172A;
+    margin: 8px 0px;
+    font-size: 30px;
+}
+
+.statControlPanelCard p {
+    font-size: 14px;
+    color: #94A3B8;
+    margin: 0px;
+}
+
+.recentPanelCard {
+    flex: 1 1 calc(50% - 12px);
+    min-width: 600px;
+    max-width: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+/* ///////////////////////////// SKELETON LOADING /////////////////// */
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    animation: skeleton-loading 1.2s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e0e0e0;
+    }
+
+    100% {
+        background-color: #f0f0f0;
+    }
+}
+
+.skeletonTitle {
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.skeletonText {
+    height: 20px;
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.skeletonCard {
+    height: 140px;
+    flex: 1;
+    min-width: 290px;
+}
+
+.skeletonContainer {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skeletonRow {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skeletonSidebarItem {
+    height: 48px;
+    width: 100%;
+    margin-bottom: 4px;
+    border-radius: 6px;
+}
+
+.skeletonLogoIcon {
+    width: 53px;
+    height: 53px;
+    border-radius: 12px;
+}
+
+.skeletonLogoText {
+    width: 120px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* ///////////////////////////// pagina produccion /////////////////// */
+
+.panelControlPageProduccionContainerMainTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panelControlPageProduccionContainerMainTitle h1 {
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0;
+}
+
+.panelControlPageProduccionContainerMainTitle p {
+    color: #64748B;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.panelControlPageProduccionContainerFilters {
+    padding: 16px;
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+}
+
+.searchBox {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #e6e6e6;
+    padding: 12px 16px;
+    border-radius: 12px;
+}
+
+.searchBox input {
+    color: #94A3B8;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 15px;
+}
+
+.searchBox:hover {
+    border-color: #64696ebb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.searchBox:focus-within {
+    border-color: #2563EB;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.searchBox input:focus {
+    outline: none;
+}
+
+
+
+.filterSelect {
+    position: relative;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    min-width: 160px;
+    cursor: pointer;
+    background-color: white;
+    height: 48px;
+    /* Altura fija para centrar absolute */
+}
+
+/* Icono izquierdo (filtro) */
+.filterSelect span:first-of-type {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Icono derecho (flecha) */
+.filterSelect span:last-of-type {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.2s ease;
+}
+
+.filterSelect select {
+    width: 100%;
+    height: 100%;
+    padding: 0px 40px 0px 40px;
+    /* Padding lateral para respetar iconos */
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.filterSelect:hover {
+    border-color: #64696ebb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.filterSelect:focus-within {
+    border-color: #2563EB;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.filterSelect select:focus {
+    outline: none;
+}
+
+.filterSelect select:focus+span {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.filterSelect select option {
+    border-radius: 12px;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.panelControlPageProduccionContentCart {
+    max-width: 25rem;
+    min-width: 25rem;
+    flex: 1;
+    padding: 20px 20px 20px 20px;
+    background-color: white;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    /* width: 100%; */
+    /* height: 68px; */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.panelControlPagePlanosContentCart {
+    max-width: 35rem;
+    min-width: 34rem;
+    flex: 1;
+    padding: 20px 20px 20px 20px;
+    background-color: white;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    /* width: 100%; */
+    /* height: 68px; */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.panelControlPageProduccionContentCartFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 10px;
+}
+
+.panelControlPageProduccionContent,
+.panelControlPagePlanosContent,
+.panelControlPageEtiquetasContentCartContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* botones de las card de produccion (select prioridad) */
+
+.ButomObtionPrioridad {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+}
+
+.ButomObtionPrioridadBaja {
+    background-color: #0596696e;
+    color: green !important;
+}
+
+.ButomObtionPrioridadMedia {
+    background-color: #E0E7FF;
+    color: blue !important;
+}
+
+.ButomObtionPrioridadAlta {
+    background-color: #d9770638;
+    color: orange !important;
+}
+
+.ButomObtionPrioridadUrgente {
+    background-color: #ffe5e0;
+    color: red !important;
+}
+
+/* botones de las card de produccion (select estado) */
+
+.ButomObtionEstado {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionEstadoEnProceso {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+.ButomObtionEstadoCancelada {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionEstadoPendiente {
+    background-color: #d9770638;
+    color: orange !important;
+    border: 1px solid #ff8c004a;
+}
+
+.ButomObtionEstadoCompletada {
+    background-color: #0596696e;
+    color: green !important;
+    border: 1px solid #00ff004a;
+}
+
+/* Botones de la card etiquetas */
+
+.ButomObtionEnvio {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionEnvioUrgente {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionEnvioExpress {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+.ButomObtionEnvioEstandar {
+    background-color: #a8aaafd6;
+    color: black !important;
+    border: 1px solid #21252945;
+}
+
+
+/* final */
+
+
+.ButomObtionUrgente {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px !important;
+}
+
+.ButomObtionUrgenteSi {
+    background-color: #ffe5e0;
+    color: red !important;
+    border: 1px solid #ff00004a;
+}
+
+.ButomObtionUrgenteNo {
+    background-color: #E0E7FF;
+    color: blue !important;
+    border: 1px solid #0000ff4a;
+}
+
+/* Botones de la card planos (metodo de envio)*/
+
+.ButomObtionPlanos {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+}
+
+.ButomObtionPlanosMecanico {
+    background-color: #E0E7FF;
+    color: blue !important;
+}
+
+.ButomObtionPlanosElectrico {
+    background-color: #d9770638;
+    color: orange !important;
+}
+
+.ButomObtionPlanosEstructural {
+    background-color: #ffe5e0;
+    color: red !important;
+}
+
+.ButomObtionPlanosOtro {
+    background-color: #CBD5E1;
+    color: #1E293B !important;
+}
+
+.ButomObtionEtiquetasPlanos {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+    background-color: #CBD5E1;
+    color: #0a0a0ab3 !important;
+}
+
+
+/* final */
+
+
+/* Botones de la card Manuales */
+
+.ButomObtionManuales {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+}
+
+.ButomObtionManualesOperacion {
+    background-color: #E0E7FF;
+    color: blue !important;
+}
+
+.ButomObtionManualesMantenimiento {
+    background-color: #d9770638;
+    color: orange !important;
+}
+
+.ButomObtionManualesInstalacion {
+    background-color: #0596696e;
+    color: green !important;
+}
+
+.ButomObtionManualesOtro {
+    background-color: #ffe5e0;
+    color: red !important;
+}
+
+.ButomObtionEtiquetasManuales {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E7FF;
+    font-size: 14px !important;
+    background-color: #CBD5E1;
+    color: #0a0a0ab3 !important;
+}
+
+.ButomObtionVerManuales {
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); */
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1 !important;
+    font-size: 14px !important;
+    background-color: #CBD5E1;
+    color: #0a0a0ab3 !important;
+    cursor: pointer;
+}
+
+.ButomObtionVerManuales:hover {
+    background-color: #f1f6fc;
+    color: #0a0a0ab3 !important;
+}
+
+/* final */
+
+.panelControlPageProduccionContentCartNote {
+    margin-bottom: 14px !important;
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+}
+
+.panelControlPageProduccionContentCartFooter button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+
+}
+
+.panelControlPageProduccionContentCartFooterButtom button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.panelControlPageProduccionContentCartFooterButtom button:hover {
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    border: none;
+    cursor: pointer;
+}
+
+.input_file_hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    opacity: 0;
+}
