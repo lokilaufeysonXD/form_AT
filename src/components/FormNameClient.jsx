@@ -42,6 +42,15 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="Corporación SHN">Corporación SHN</option>
         <option value="Stel Ingenieria">Stel Ingenieria</option>
         <option value="Ingenieria y Proyecto Integral">Ingenieria y Proyecto Integral </option>
+        <option value="Emilia Perez">Emilia Perez</option>
+        <option value="HAMDEC SA DE CV">HAMDEC SA DE CV</option>
+        <option value="Miguel Julio">Miguel Julio</option>
+        <option value="Emilio Honorato">Emilio Honorato</option>
+        <option value="Pedro Uriarte">Pedro Uriarte</option>
+        <option value="corporación shn">Corporación SHN</option>
+        <option value="Grupo herni Instalaciones">GRUPO HERNI INSTALACIONES</option>
+        <option value="INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA">INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA</option>
+<option value="A I PROYECTOS MEP">A I PROYECTOS MEP</option>
       </select>
       <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>
