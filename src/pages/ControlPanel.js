@@ -7,6 +7,8 @@ import ControlPanelPageEtiquetas from "@/components/ControlPanel/ControlPanelPag
 import ControlPanelPagePlanos from "@/components/ControlPanel/ControlPanelPagePlanos";
 import ControlPanelPageManuales from "@/components/ControlPanel/ControlPanelPageManuales";
 import ControlPanelPageDocumentos from "@/components/ControlPanel/ControlPanelPageDocumentos";
+import ControlPanelPageActaDeEntrga from "@/components/ControlPanel/ControlPanelPageActaDeEntrga";
+
 
 export default function ControlPanel() {
 
@@ -51,6 +53,7 @@ export default function ControlPanel() {
                 ) : (
                     <>
                         {activeView === "panel" && <ControlPanelPagePanel onChangeView={setActiveView} />}
+                        {activeView === "actas de entrega" && <ControlPanelPageActaDeEntrga />}
                         {activeView === "produccion" && <ControlPanelPageProduccion />}
                         {activeView === "etiquetas" && <ControlPanelPageEtiquetas />}
                         {activeView === "planos" && <ControlPanelPagePlanos />}
