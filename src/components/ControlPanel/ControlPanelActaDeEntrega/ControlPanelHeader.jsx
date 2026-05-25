@@ -2,7 +2,7 @@ import styles from "@/styles/ControlPanel.module.css";
 import uiStyles from '@/styles/UiComponents.module.css';
 import { useState } from "react";
 import Modal from "react-modal"; // Asegúrate de tener instalado react-modal o importar tu componente Modal
-import ControlPanelModalsAddOrdenProduccion from "../ControlPanelModals/ControlPanelModalsAddOrdenProduccion";
+import ControlPanelModalsAddActaDeEntrega from "../ControlPanelModals/ControlPanelModalsAddActaDeEntrega";
 
 function ControlPanelHeader() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,13 +32,13 @@ function ControlPanelHeader() {
                     </button>
                     <button className={uiStyles.buttonPrimary} style={{ display: 'flex', gap: '10px' }} onClick={handleModalOpen}>
                         <span className="material-symbols-outlined">add</span>
-                        Nueva Orden
+                        Nueva Acta De Entrega
                     </button>
                 </div>
             </div>
 
             {isModalOpen && (
-                <ControlPanelModalsAddOrdenProduccion onClose={handleModalClose} formData={formData} setFormData={setFormData} />
+                <ControlPanelModalsAddActaDeEntrega onClose={handleModalClose} formData={formData} setFormData={setFormData} />
             )}
         </>
     );
