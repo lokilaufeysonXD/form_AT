@@ -1,0 +1,378 @@
+/* ==========================================
+   Tablas
+   ========================================== */
+
+/* ---- Encabezado de la tabla ---- */
+
+.tableHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tableHeaderInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tableHeaderIcon {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.tableHeaderIcon span {
+    color: white;
+    font-size: 20px;
+}
+
+.tableHeaderTitle {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #0F172A;
+}
+
+.tableHeaderSubtitle {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #94A3B8;
+}
+
+/* ---- Contenedor con scroll horizontal (para responsividad móvil) ---- */
+
+.tableScrollContainer {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar personalizado para navegadores Webkit */
+.tableScrollContainer::-webkit-scrollbar {
+    height: 6px;
+}
+
+.tableScrollContainer::-webkit-scrollbar-track {
+    background: #F1F5F9;
+    border-radius: 3px;
+}
+
+.tableScrollContainer::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 3px;
+}
+
+.tableScrollContainer::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* ---- Tabla principal ---- */
+
+.table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---- Encabezados de columna ---- */
+
+.table thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #F8FAFC;
+    border-bottom: 2px solid #E2E8F0;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    transition: background 0.2s ease;
+}
+
+.table thead th:hover {
+    background: #F1F5F9;
+}
+
+.thContent {
+    display: flex;
+    align-items: center;
+}
+
+/* ---- Iconos de ordenamiento ---- */
+
+.sortIconInactive {
+    font-size: 16px;
+    color: #CBD5E1;
+    margin-left: 4px;
+}
+
+.sortIconActive {
+    font-size: 16px;
+    color: #2563EB;
+    margin-left: 4px;
+}
+
+/* ---- Filas del cuerpo ---- */
+
+.tableRow {
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.tableRowEven {
+    background: #FFFFFF;
+}
+
+.tableRowOdd {
+    background: #FAFBFC;
+}
+
+.tableRow:hover {
+    background: #F8FAFC;
+}
+
+/* ---- Celdas ---- */
+
+.tableCell {
+    padding: 14px 16px;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 14px;
+}
+
+.tableCellDate {
+    composes: tableCell;
+    white-space: nowrap;
+}
+
+.tableCellDescription {
+    composes: tableCell;
+    color: #475569;
+    line-height: 1.5;
+    max-width: 320px;
+}
+
+/* ---- Badge numérico (#) ---- */
+
+.idBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #F1F5F9;
+    color: #64748B;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.tableRow:hover .idBadge {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    color: #FFFFFF;
+}
+
+/* ---- Badges de estado de fecha ---- */
+
+.dateBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.dateBadge span {
+    font-size: 15px;
+}
+
+.dateBadgeNormal {
+    composes: dateBadge;
+    background: #F0FDF4;
+    color: #16A34A;
+    border: 1px solid #BBF7D0;
+}
+
+.dateBadgeSoon {
+    composes: dateBadge;
+    background: #FEF3C7;
+    color: #D97706;
+    border: 1px solid #FDE68A;
+}
+
+.dateBadgeOverdue {
+    composes: dateBadge;
+    background: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #FECACA;
+}
+
+/* ---- Avatar del cliente ---- */
+
+.clientContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.clientAvatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
+    color: #4F46E5;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.clientName {
+    color: #1E293B;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* ---- Badge de orden de producción ---- */
+
+.orderBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #334155;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: 'Inter', monospace;
+    letter-spacing: 0.02em;
+}
+
+.orderBadgeIcon {
+    font-size: 15px;
+    color: #94A3B8;
+}
+
+/* ---- Pie de tabla (leyenda) ---- */
+
+.tableFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.legendContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legendDotNormal {
+    composes: legendDot;
+    background: #16A34A;
+}
+
+.legendDotSoon {
+    composes: legendDot;
+    background: #D97706;
+}
+
+.legendDotOverdue {
+    composes: legendDot;
+    background: #DC2626;
+}
+
+.legendLabel {
+    font-size: 12px;
+    color: #94A3B8;
+    font-family: 'Inter', sans-serif;
+}
+
+.scrollHint {
+    margin: 0;
+    font-size: 12px;
+    color: #CBD5E1;
+    font-family: 'Inter', sans-serif;
+}
+
+/* -------- botones de edicion ------  */
+
+.editButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #10B981;
+    border: 1px solid #E2E8F0;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editButton:hover {
+    background: #F1F5F9;
+    color: #2563EB;
+}
+
+.deleteButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #DC2626;
+    border: 1px solid #E2E8F0;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+    background: #F1F5F9;
+    color: #2563EB;
+}

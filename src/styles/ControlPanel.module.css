@@ -376,7 +376,8 @@
     margin: 0;
 }
 
-.panelControlPageProduccionContainerFilters {
+.panelControlPageProduccionContainerFilters,
+.panelControlPageActaDeEntregaContainerTable {
     padding: 16px;
     background-color: white;
     border-radius: 12px;
