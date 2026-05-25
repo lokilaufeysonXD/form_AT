@@ -47,39 +47,49 @@ function ControlPanelContent() {
     const [error, setError] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: "id", direction: "asc" });
 
+    // Función para obtener datos de la API
+    const fetchDeliveries = async () => {
+        try {
+            setIsLoading(true);
+            // Consulta al endpoint local de la API
+            const response = await fetch("http://127.0.0.1:8000/api/acta");
+
+            if (!response.ok) {
+                throw new Error("Error al obtener los registros del servidor");
+            }
+
+            const result = await response.json();
+
+            // Mapear los datos de la API estructurada al formato en inglés usado por el componente
+            const mappedData = result.map((item) => ({
+                id: item.id,
+                deliveryDate: item.fecha_entrega,
+                clientName: item.cliente ? item.cliente.nombre_cliente : "Sin cliente",
+                description: item.material ? item.material.descripcion_texto : "Sin descripción",
+                productionOrderNumber: item.material ? item.material.numero_orden_produccion : "S/N",
+            }));
+
+            setData(mappedData);
+            setError(null);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     // 2. Efecto para obtener los datos al montar el componente
     useEffect(() => {
-        const fetchDeliveries = async () => {
-            try {
-                setIsLoading(true);
-                // Consulta al endpoint local de la API
-                const response = await fetch("http://127.0.0.1:8000/api/acta");
-
-                if (!response.ok) {
-                    throw new Error("Error al obtener los registros del servidor");
-                }
-
-                const result = await response.json();
-
-                // Mapear los datos de la API estructurada al formato en inglés usado por el componente
-                const mappedData = result.map((item) => ({
-                    id: item.id,
-                    deliveryDate: item.fecha_entrega,
-                    clientName: item.cliente ? item.cliente.nombre_cliente : "Sin cliente",
-                    description: item.material ? item.material.descripcion_texto : "Sin descripción",
-                    productionOrderNumber: item.material ? item.material.numero_orden_produccion : "S/N",
-                }));
-
-                setData(mappedData);
-                setError(null);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         fetchDeliveries();
+    }, []);
+
+    // 3. Escuchar evento de creación de acta para refrescar la tabla
+    useEffect(() => {
+        const handler = () => {
+            fetchDeliveries();
+        };
+        window.addEventListener('actaCreated', handler);
+        return () => window.removeEventListener('actaCreated', handler);
     }, []);
 
     /**

@@ -1,7 +1,7 @@
 import styles from "@/styles/ControlPanel.module.css";
 import uiStyles from '@/styles/UiComponents.module.css';
 import Modal from "react-modal";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 
 
@@ -33,14 +33,35 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
     // Estado del formulario inicializado con la fecha actual del día de hoy
     const [formData, setFormData] = useState({
         fecha_entrega: getTodayDateString(),
-        cliente: '',
+        id_cliente: '',
         numero_orden_compra: ''
     });
     // Estado para controlar la visibilidad del número de orden de producción
     const [showProductionOrder, setShowProductionOrder] = useState(true);
-    
+
     // Lista dinámica de conceptos (cada uno tiene una descripción y orden de producción opcional)
     const [items, setItems] = useState([{ description: '', productionOrder: '' }]);
+
+    // Lista de clientes obtenidos de la API
+    const [clients, setClients] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Obtener la lista de clientes al montar el modal
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/cliente");
+                if (response.ok) {
+                    const result = await response.json();
+                    setClients(result);
+                }
+            } catch (err) {
+                // Manejo de error silencioso según las directrices de producción
+            }
+        };
+
+        fetchClients();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -68,16 +89,77 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Recopila los datos generales junto con el listado dinámico de conceptos
-        const dataToSave = {
-            ...formData,
-            showProductionOrder,
-            items
-        };
-        console.log("Guardando:", dataToSave);
-        if (onClose) onClose();
+    const handleSubmit = async (e) => {
+        e && e.preventDefault();
+        if (isSubmitting) return; // prevenir doble envío
+        setIsSubmitting(true);
+
+        // Validar campos requeridos generales
+        if (!formData.fecha_entrega || !formData.id_cliente || !formData.numero_orden_compra) {
+            alert("Por favor completa todos los campos obligatorios.");
+            setIsSubmitting(false);
+            return;
+        }
+
+        // Se requiere al menos un concepto de material ingresado
+        if (items.length === 0 || !items[0].description) {
+            alert("Por favor ingresa al menos una descripción al acta.");
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            // 1. Guardar primero la descripción en la API
+            const descriptionPayload = {
+                descripcion_texto: items[0].description,
+                numero_orden_produccion: showProductionOrder ? items[0].productionOrder : null,
+            };
+
+
+            const descriptionResponse = await fetch("http://127.0.0.1:8000/api/descripcion", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(descriptionPayload)
+            });
+
+            if (!descriptionResponse.ok) {
+                throw new Error("No se pudo registrar la descripción en el servidor");
+            }
+
+            const savedDescription = await descriptionResponse.json();
+            const createdDescriptionId = savedDescription.id;
+
+            // 2. Guardar el Acta de Entrega vinculando el ID de la descripción recién creada
+            const deliveryPayload = {
+                fecha_entrega: formData.fecha_entrega,
+                id_cliente: Number(formData.id_cliente),
+                numero_orden_compra: formData.numero_orden_compra,
+                id_orden_produccion: createdDescriptionId
+            };
+
+            console.log('Payload enviado a /api/acta:', JSON.stringify(deliveryPayload, null, 2));
+            const deliveryResponse = await fetch("http://127.0.0.1:8000/api/acta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(deliveryPayload)
+            });
+
+            if (!deliveryResponse.ok) {
+                throw new Error("No se pudo registrar el acta de entrega en el servidor");
+            }
+
+            // Cerrar el modal tras el registro exitoso
+            if (onClose) onClose();
+            window.dispatchEvent(new Event('actaCreated'));
+        } catch (err) {
+            alert(`Hubo un error al guardar: ${err.message}`);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -104,43 +186,55 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
                     <span className="material-symbols-outlined">close</span>
                 </button>
             </div>
-            
+
             {/* Contenedor principal con scroll vertical para no desbordar el modal en pantallas pequeñas */}
             <div style={{ maxHeight: 'calc(80vh - 140px)', overflowY: 'auto', paddingBottom: '16px' }}>
-                
+
                 {/* Datos generales del Acta */}
                 <div className={uiStyles.modalBody}>
                     <div className={uiStyles.modalBodyInput}>
                         <label htmlFor="fecha_entrega">Fecha de Entrega</label>
-                        <input 
-                            type="date" 
-                            id="fecha_entrega" 
-                            name="fecha_entrega" 
+                        <input
+                            type="date"
+                            id="fecha_entrega"
+                            name="fecha_entrega"
                             value={formData.fecha_entrega}
                             onChange={handleChange}
                         />
                     </div>
+
                     <div className={uiStyles.modalBodyInput}>
-                        <label htmlFor="cliente">Cliente*</label>
-                        <input 
-                            type="text" 
-                            id="cliente" 
-                            name="cliente" 
-                            placeholder="Nombre del Cliente" 
-                            value={formData.cliente}
-                            onChange={handleChange}
-                        />
+                        <label htmlFor="id_cliente">Cliente*</label>
+                        <div className={uiStyles.modalSelectContainer}>
+                            <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
+                            <select
+                                id="id_cliente"
+                                name="id_cliente"
+                                value={formData.id_cliente}
+                                onChange={handleChange}
+                                style={{ color: "#94A3B8" }}
+                            >
+                                <option value="">Selecciona un cliente</option>
+                                {clients.map((client) => (
+                                    <option key={client.id} value={client.id}>
+                                        {client.nombre_cliente}
+                                    </option>
+                                ))}
+                            </select>
+                            <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
+                        </div>
                     </div>
+
                 </div>
 
                 <div className={uiStyles.modalBody} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginBottom: '20px' }}>
                     <div className={uiStyles.modalBodyInput} style={{ width: '100%' }}>
                         <label htmlFor="numero_orden_compra">Numero de Orden de compra*</label>
-                        <input 
-                            type="text" 
-                            id="numero_orden_compra" 
-                            name="numero_orden_compra" 
-                            placeholder="ACT-001" 
+                        <input
+                            type="text"
+                            id="numero_orden_compra"
+                            name="numero_orden_compra"
+                            placeholder="ACT-001"
                             value={formData.numero_orden_compra}
                             onChange={handleChange}
                         />
@@ -322,9 +416,15 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
                     <span className="material-symbols-outlined">close</span>
                     Cancelar
                 </button>
-                <button type="submit" className={uiStyles.buttonPrimary} style={{ display: 'flex', gap: '10px' }}>
+                <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className={uiStyles.buttonPrimary}
+                    disabled={isSubmitting}
+                    style={{ display: 'flex', gap: '10px', opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                >
                     <span className="material-symbols-outlined">save</span>
-                    Crear Orden
+                    {isSubmitting ? 'Guardando...' : 'Crear Acta De Entrega'}
                 </button>
             </div>
         </Modal>
