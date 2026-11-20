@@ -61,6 +61,11 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
         };
 
         fetchClients();
+
+        window.addEventListener('clienteCreated', fetchClients);
+        return () => {
+            window.removeEventListener('clienteCreated', fetchClients);
+        };
     }, []);
 
     const handleChange = (e) => {
@@ -109,34 +114,11 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
         }
 
         try {
-            // 1. Guardar primero la descripción en la API
-            const descriptionPayload = {
-                descripcion_texto: items[0].description,
-                numero_orden_produccion: showProductionOrder ? items[0].productionOrder : null,
-            };
-
-
-            const descriptionResponse = await fetch("http://127.0.0.1:8000/api/descripcion", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(descriptionPayload)
-            });
-
-            if (!descriptionResponse.ok) {
-                throw new Error("No se pudo registrar la descripción en el servidor");
-            }
-
-            const savedDescription = await descriptionResponse.json();
-            const createdDescriptionId = savedDescription.id;
-
-            // 2. Guardar el Acta de Entrega vinculando el ID de la descripción recién creada
+            // 1. Guardar primero el Acta de Entrega en la API
             const deliveryPayload = {
                 fecha_entrega: formData.fecha_entrega,
                 id_cliente: Number(formData.id_cliente),
-                numero_orden_compra: formData.numero_orden_compra,
-                id_orden_produccion: createdDescriptionId
+                numero_orden_compra: formData.numero_orden_compra
             };
 
             console.log('Payload enviado a /api/acta:', JSON.stringify(deliveryPayload, null, 2));
@@ -151,6 +133,38 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
             if (!deliveryResponse.ok) {
                 throw new Error("No se pudo registrar el acta de entrega en el servidor");
             }
+
+            const savedDelivery = await deliveryResponse.json();
+            console.log('Respuesta completa de /api/acta:', JSON.stringify(savedDelivery, null, 2));
+            const createdDeliveryId = savedDelivery.id;
+
+            // 2. Guardar todas las descripciones asociadas en la API
+            const saveDescriptionsPromises = items
+                .filter(item => item.description.trim() !== '')
+                .map(async (item) => {
+                    const descriptionPayload = {
+                        descripcion_texto: item.description,
+                        numero_orden_produccion: (showProductionOrder && item.productionOrder) ? item.productionOrder : "0",
+                        id_acta_entrega: createdDeliveryId
+                    };
+                    console.log('Payload enviado a /api/descripcion:', JSON.stringify(descriptionPayload, null, 2));
+
+                    const response = await fetch("http://127.0.0.1:8000/api/descripcion", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(descriptionPayload)
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text().catch(() => 'Sin respuesta del servidor');
+                        console.error('Error del servidor /api/descripcion (texto):', errorText);
+                        throw new Error(`Error ${response.status}: ${errorText.substring(0, 300)}`);
+                    }
+                });
+
+            await Promise.all(saveDescriptionsPromises);
 
             // Cerrar el modal tras el registro exitoso
             if (onClose) onClose();

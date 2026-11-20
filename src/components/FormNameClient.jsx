@@ -49,8 +49,14 @@ function FormNameClient({ currentPage = 1 }) {
         <option value="Pedro Uriarte">Pedro Uriarte</option>
         <option value="corporación shn">Corporación SHN</option>
         <option value="Grupo herni Instalaciones">GRUPO HERNI INSTALACIONES</option>
+        <option value="LUIS RODRIGO TOVAR MATEO">LUIS RODRIGO TOVAR MATEO</option>
+        <option value="Desarrollo Cojimar">DESARROLLO COJIMAR</option>
         <option value="INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA">INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA</option>
-<option value="A I PROYECTOS MEP">A I PROYECTOS MEP</option>
+        <option value="GON GOOL AIRE ACONDICIONADO">GON GOOL AIRE ACONDICIONADO</option>
+        <option value="A I PROYECTOS MEP">A I PROYECTOS MEP</option>
+        <option value="JOSE ZEPEDA XOLALPA">JOSE ZEPEDA XOLALPA</option>
+        <option value="SERVICIO TECNICO ESPECIALIZADO EN AIRE ACONDICIONADO">SERVICIO TECNICO ESPECIALIZADO EN AIRE ACONDICIONADO</option>
+        <option value="TATIANA GARCIA OLARTE">TATIANA GARCIA OLARTE</option>
       </select>
       <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>

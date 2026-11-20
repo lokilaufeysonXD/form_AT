@@ -65,8 +65,8 @@ function ControlPanelContent() {
                 id: item.id,
                 deliveryDate: item.fecha_entrega,
                 clientName: item.cliente ? item.cliente.nombre_cliente : "Sin cliente",
-                description: item.material ? item.material.descripcion_texto : "Sin descripción",
-                productionOrderNumber: item.material ? item.material.numero_orden_produccion : "S/N",
+                // Guardamos el array completo de materiales para mostrar todos los ítems
+                materials: Array.isArray(item.material) ? item.material : [],
             }));
 
             setData(mappedData);
@@ -145,7 +145,6 @@ function ControlPanelContent() {
         { key: "deliveryDate", label: "Fecha de Entrega", width: "180px" },
         { key: "clientName", label: "Nombre del Cliente", width: "240px" },
         { key: "description", label: "Descripción", width: "auto" },
-        { key: "productionOrderNumber", label: "N° Orden de Producción", width: "220px" },
         { key: "actions", label: "Acciones", width: "120px" },
     ];
 
@@ -240,19 +239,24 @@ function ControlPanelContent() {
                                                     </div>
                                                 </td>
 
-                                                {/* Columna Descripción */}
+                                                {/* Columna Descripción: chips combinados de texto + N° orden de producción */}
                                                 <td className={tableStyles.tableCellDescription}>
-                                                    {row.description || "Sin descripción"}
-                                                </td>
-
-                                                {/* Columna Orden de Producción con badge */}
-                                                <td className={tableStyles.tableCell}>
-                                                    <span className={tableStyles.orderBadge}>
-                                                        <span className={`material-symbols-outlined ${tableStyles.orderBadgeIcon}`}>
-                                                            tag
-                                                        </span>
-                                                        {row.productionOrderNumber || "S/N"}
-                                                    </span>
+                                                    {(row.materials || []).length > 0 ? (
+                                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                                            {(row.materials || []).map((mat, i) => (
+                                                                <span key={i} className={tableStyles.materialChip}>
+                                                                    {mat.descripcion_texto || "Sin descripción"}
+                                                                    {mat.numero_orden_produccion && mat.numero_orden_produccion !== '0' && (
+                                                                        <span className={tableStyles.materialChipOrder}>
+                                                                            # {mat.numero_orden_produccion}
+                                                                        </span>
+                                                                    )}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    ) : (
+                                                        <span className={tableStyles.materialChip}>Sin descripción</span>
+                                                    )}
                                                 </td>
 
                                                 {/* colomna para los botones de edicion */}
