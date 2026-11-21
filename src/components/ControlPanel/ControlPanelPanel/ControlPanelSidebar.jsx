@@ -42,7 +42,7 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
                             style={{ cursor: "pointer" }}
                         >
                             <span className="material-symbols-outlined">developer_guide</span>
-                            <p style={{ fontSize: "20px" }}>Actas de entrega</p>
+                            <p style={{ fontSize: "20px" }}>Act de entrega</p>
                         </div>
 
                         {/* Produccion */}

@@ -1,6 +1,22 @@
 import styles from "@/styles/ControlPanel.module.css";
 import tableStyles from "@/styles/ActaDeEntregaTable.module.css";
-import { useState, useMemo, useEffect } from "react";
+import pageStyles from "@/styles/Pagination.module.css";
+import { useState, useMemo, useEffect, useCallback } from "react";
+
+/**
+ * Devuelve el ancho actual de la ventana y se actualiza en cada resize
+ */
+function useWindowWidth() {
+    const [width, setWidth] = useState(() =>
+        typeof window !== 'undefined' ? window.innerWidth : 9999
+    );
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return width;
+}
 
 /**
  * Formatea una fecha ISO a formato legible en español (ej: "28 May 2026")
@@ -45,14 +61,20 @@ function ControlPanelContent() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [sortConfig, setSortConfig] = useState({ key: "id", direction: "asc" });
+    const [sortConfig, setSortConfig] = useState({ key: "id", direction: "desc" });
 
-    // Función para obtener datos de la API
-    const fetchDeliveries = async () => {
+    // Estados de paginación
+    const [page, setPage] = useState(1);
+    const [meta, setMeta] = useState({ current_page: 1, last_page: 1, total: 0 });
+
+    // Ancho de ventana para mostrar el hint de scroll solo en pantallas pequeñas
+    const windowWidth = useWindowWidth();
+
+    // Función para obtener datos de la API con soporte de paginación
+    const fetchDeliveries = async (currentPage = 1) => {
         try {
             setIsLoading(true);
-            // Consulta al endpoint local de la API
-            const response = await fetch("http://127.0.0.1:8000/api/acta");
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/acta?page=${currentPage}`);
 
             if (!response.ok) {
                 throw new Error("Error al obtener los registros del servidor");
@@ -60,8 +82,20 @@ function ControlPanelContent() {
 
             const result = await response.json();
 
+            // Soporta respuesta paginada (result.data) o array directo
+            const items = Array.isArray(result) ? result : (result.data ?? []);
+
+            // Guardar metadata de paginación si existe
+            if (result.current_page) {
+                setMeta({
+                    current_page: result.current_page,
+                    last_page: result.last_page,
+                    total: result.total,
+                });
+            }
+
             // Mapear los datos de la API estructurada al formato en inglés usado por el componente
-            const mappedData = result.map((item) => ({
+            const mappedData = items.map((item) => ({
                 id: item.id,
                 deliveryDate: item.fecha_entrega,
                 clientName: item.cliente ? item.cliente.nombre_cliente : "Sin cliente",
@@ -78,19 +112,19 @@ function ControlPanelContent() {
         }
     };
 
-    // 2. Efecto para obtener los datos al montar el componente
+    // 2. Recargar cuando cambia la página
     useEffect(() => {
-        fetchDeliveries();
-    }, []);
+        fetchDeliveries(page);
+    }, [page]);
 
     // 3. Escuchar evento de creación de acta para refrescar la tabla
     useEffect(() => {
         const handler = () => {
-            fetchDeliveries();
+            fetchDeliveries(page);
         };
         window.addEventListener('actaCreated', handler);
         return () => window.removeEventListener('actaCreated', handler);
-    }, []);
+    }, [page]);
 
     /**
      * Ordena los datos de la tabla según la columna y dirección seleccionada.
@@ -297,11 +331,34 @@ function ControlPanelContent() {
                                 </tbody>
                             </table>
                         </div>
-                        {/* Pie de tabla */}
-                        <div className={tableStyles.tableFooter}>
-                            <p className={tableStyles.scrollHint}>
-                                Desliza horizontalmente para ver más columnas →
-                            </p>
+                        {/* Pie de tabla con paginación */}
+                        <div className={tableStyles.tableFooter} style={{ justifyContent: windowWidth >= 1453 ? 'flex-end' : 'space-between' }}>
+                            {windowWidth < 1453 && (
+                                <p className={tableStyles.scrollHint}>
+                                    Desliza horizontalmente para ver más columnas →
+                                </p>
+                            )}
+                            {meta.last_page > 1 && (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <button
+                                        onClick={() => setPage(p => Math.max(1, p - 1))}
+                                        disabled={page === 1}
+                                        className={pageStyles.pageButton}
+                                    >
+                                        ‹
+                                    </button>
+                                    <span style={{ color: '#94A3B8', fontSize: '13px' }}>
+                                        Página {meta.current_page} de {meta.last_page}
+                                    </span>
+                                    <button
+                                        onClick={() => setPage(p => Math.min(meta.last_page, p + 1))}
+                                        disabled={page === meta.last_page}
+                                        className={pageStyles.pageButton}
+                                    >
+                                        ›
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </>
                 )}

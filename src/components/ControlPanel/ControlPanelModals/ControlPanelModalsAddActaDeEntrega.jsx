@@ -50,7 +50,7 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:8000/api/cliente");
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cliente`);
                 if (response.ok) {
                     const result = await response.json();
                     setClients(result);
@@ -122,7 +122,7 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
             };
 
             console.log('Payload enviado a /api/acta:', JSON.stringify(deliveryPayload, null, 2));
-            const deliveryResponse = await fetch("http://127.0.0.1:8000/api/acta", {
+            const deliveryResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/acta`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -149,7 +149,7 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
                     };
                     console.log('Payload enviado a /api/descripcion:', JSON.stringify(descriptionPayload, null, 2));
 
-                    const response = await fetch("http://127.0.0.1:8000/api/descripcion", {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/descripcion`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
