@@ -181,7 +181,7 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
             isOpen={true}
             onRequestClose={onClose}
             contentLabel="Nueva Orden de Produccion"
-            closeTimeoutMS={300}
+            ariaHideApp={false}
             className={{
                 base: uiStyles.modalContent,
                 afterOpen: uiStyles.modalContentAfterOpen,
@@ -192,7 +192,6 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
                 afterOpen: uiStyles.modalOverlayAfterOpen,
                 beforeClose: uiStyles.modalOverlayBeforeClose,
             }}
-            ariaHideApp={false}
         >
             <div className={uiStyles.modalHeader}>
                 <h1 title="si el campo esta vacio le pone la fecha actual" >Nueva Acta De Entrega</h1>

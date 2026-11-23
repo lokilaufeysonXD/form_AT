@@ -1,7 +1,90 @@
 import styles from "@/styles/ControlPanel.module.css";
 import tableStyles from "@/styles/ActaDeEntregaTable.module.css";
 import pageStyles from "@/styles/Pagination.module.css";
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, Fragment } from "react";
+import SkeletonTable from "@/components/ControlPanel/ControlPanelSkeleton/SkeletonTable";
+
+
+
+
+const MONO_FONT =
+    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+const S = {
+    cell: { height: '52px', padding: '0 16px' },
+
+    descWrap: { display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 },
+    descText: {
+        fontSize: '13px',
+        fontWeight: '500',
+        color: '#334155',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        minWidth: 0,
+        maxWidth: '300px',
+        display: 'inline-block',
+    },
+    badgeUnits: {
+        fontSize: '11px',
+        fontWeight: '600',
+        backgroundColor: '#E0F2FE',
+        color: '#0284C7',
+        padding: '2px 8px',
+        borderRadius: '12px',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+    },
+    badgeMore: {
+        fontSize: '11px',
+        fontWeight: '600',
+        backgroundColor: '#F1F5F9',
+        color: '#64748B',
+        padding: '2px 8px',
+        borderRadius: '12px',
+        whiteSpace: 'nowrap',
+        flexShrink: 0,
+    },
+    chevronBase: {
+        fontSize: '18px',
+        width: '24px',
+        height: '24px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '50%',
+        flexShrink: 0,
+        marginLeft: 'auto',
+        transition: 'transform 0.2s, background-color 0.2s, color 0.2s',
+    },
+
+    detailCell: { padding: '0 16px 14px 16px' },
+    detailBox: {
+        marginTop: "3px",
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #E2E8F0',
+        borderRadius: '10px',
+        padding: '12px 16px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+    },
+    detailGroup: { display: 'flex', flexDirection: 'column', gap: '6px' },
+    detailGroupHeader: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' },
+    detailTitle: { fontSize: '12.5px', fontWeight: '600', color: '#1E293B', lineHeight: 1.4 },
+    detailSerials: { display: 'flex', flexWrap: 'wrap', gap: '6px' },
+    serialChip: {
+        fontFamily: MONO_FONT,
+        fontSize: '11px',
+        backgroundColor: '#EDE9FE',
+        color: '#6D28D9',
+        padding: '2px 8px',
+        borderRadius: '6px',
+        border: '1px solid #DDD6FE',
+    },
+};
+
+
 
 /**
  * Devuelve el ancho actual de la ventana y se actualiza en cada resize
@@ -56,12 +139,58 @@ const DATE_BADGE_CLASS = {
     normal: tableStyles.dateBadgeNormal,
 };
 
+/**
+ * Agrupa los materiales de un acta por su texto de descripción.
+ * Retorna un array con: { description, count, serials: [] }
+ */
+function groupMaterialsByDescription(materials = []) {
+    if (!materials || materials.length === 0) return [];
+
+    const map = new Map();
+
+    materials.forEach((mat) => {
+        const text = (mat.descripcion_texto || "Sin descripción").trim();
+        const serial = (mat.numero_orden_produccion && mat.numero_orden_produccion !== "0")
+            ? String(mat.numero_orden_produccion).trim()
+            : null;
+
+        if (!map.has(text)) {
+            map.set(text, {
+                description: text,
+                count: 0,
+                serials: []
+            });
+        }
+
+        const group = map.get(text);
+        group.count += 1;
+        if (serial) {
+            group.serials.push(serial);
+        }
+    });
+
+    return Array.from(map.values());
+}
+
 function ControlPanelContent() {
     // 1. Definición de estados para consumo de API
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: "id", direction: "desc" });
+    const [expandedRows, setExpandedRows] = useState(new Set());
+
+    const toggleRowExpand = (id) => {
+        setExpandedRows(prev => {
+            const next = new Set(prev);
+            if (next.has(id)) {
+                next.delete(id);
+            } else {
+                next.add(id);
+            }
+            return next;
+        });
+    };
 
     // Estados de paginación
     const [page, setPage] = useState(1);
@@ -150,7 +279,7 @@ function ControlPanelContent() {
             return 0;
         });
         return sorted;
-    }, [data, sortConfig]); // Se añade 'data' como dependencia
+    }, [data, sortConfig]);
 
     /** Alterna la dirección de ordenamiento o cambia la columna activa */
     const handleSort = (key) => {
@@ -171,6 +300,16 @@ function ControlPanelContent() {
                 }
             </span>
         );
+    };
+
+    const handleEditClick = (row) => {
+        // Lógica de edición
+        console.log("Editar acta:", row);
+    };
+
+    const handleDeleteClick = (id) => {
+        // Lógica de eliminación
+        console.log("Eliminar acta:", id);
     };
 
     // Definición de columnas de la tabla
@@ -201,11 +340,9 @@ function ControlPanelContent() {
                     </div>
                 </div>
 
-                {/* 3. Renderizado Condicional según estado de la API */}
+                {/* Skeleton de carga — imita la estructura de la tabla */}
                 {isLoading && (
-                    <div className={styles.loadingState}>
-                        <p style={{ color: '#94A3B8', fontSize: '20px' }}>Cargando información desde el servidor...</p>
-                    </div>
+                    <SkeletonTable />
                 )}
 
                 {error && (
@@ -238,86 +375,145 @@ function ControlPanelContent() {
                                 <tbody>
                                     {sortedData.map((row, index) => {
                                         const dateStatus = getDateStatus(row.deliveryDate);
+                                        const grouped = groupMaterialsByDescription(row.materials);
+                                        const isExpanded = expandedRows.has(row.id);
+                                        const firstGroup = grouped[0] || null;
+                                        const extraCount = grouped.length > 1 ? grouped.length - 1 : 0;
+                                        const hasExpandableContent =
+                                            grouped.length > 1 ||
+                                            grouped.some((g) => g.serials.length > 0 || g.count > 1);
+
+                                        const rowClass = `${tableStyles.tableRow} ${index % 2 === 0 ? tableStyles.tableRowEven : tableStyles.tableRowOdd}`;
 
                                         return (
-                                            <tr
-                                                key={row.id}
-                                                className={`${tableStyles.tableRow} ${index % 2 === 0 ? tableStyles.tableRowEven : tableStyles.tableRowOdd}`}
-                                            >
-                                                {/* Columna # con badge numérico */}
-                                                <td className={tableStyles.tableCell}>
-                                                    <span className={tableStyles.idBadge}>
-                                                        {row.id}
-                                                    </span>
-                                                </td>
+                                            <Fragment key={row.id}>
+                                                <tr
+                                                    className={rowClass}
+                                                    style={{
+                                                        height: '52px',
+                                                        cursor: hasExpandableContent ? 'pointer' : 'default',
+                                                    }}
+                                                    onClick={() => hasExpandableContent && toggleRowExpand(row.id)}
+                                                    onKeyDown={(e) => {
+                                                        if (hasExpandableContent && (e.key === 'Enter' || e.key === ' ')) {
+                                                            e.preventDefault();
+                                                            toggleRowExpand(row.id);
+                                                        }
+                                                    }}
+                                                    tabIndex={hasExpandableContent ? 0 : undefined}
+                                                    aria-expanded={hasExpandableContent ? isExpanded : undefined}
+                                                >
+                                                    {/* # */}
+                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                        <span className={tableStyles.idBadge}>{row.id}</span>
+                                                    </td>
 
-                                                {/* Columna Fecha con badge de estado */}
-                                                <td className={tableStyles.tableCellDate}>
-                                                    <span className={DATE_BADGE_CLASS[dateStatus]}>
-                                                        <span className="material-symbols-outlined">
-                                                            calendar_today
+                                                    {/* Fecha */}
+                                                    <td className={tableStyles.tableCellDate} style={S.cell}>
+                                                        <span className={DATE_BADGE_CLASS[dateStatus]}>
+                                                            <span className="material-symbols-outlined">calendar_today</span>
+                                                            {formatDate(row.deliveryDate)}
                                                         </span>
-                                                        {formatDate(row.deliveryDate)}
-                                                    </span>
-                                                </td>
+                                                    </td>
 
-                                                {/* Columna Cliente con avatar */}
-                                                <td className={tableStyles.tableCell}>
-                                                    <div className={tableStyles.clientContainer}>
-                                                        <span className={tableStyles.clientAvatar}>
-                                                            {row.clientName ? row.clientName.charAt(0) : "?"}
-                                                        </span>
-                                                        <span className={tableStyles.clientName}>
-                                                            {row.clientName || "Sin nombre"}
-                                                        </span>
-                                                    </div>
-                                                </td>
-
-                                                {/* Columna Descripción: chips combinados de texto + N° orden de producción */}
-                                                <td className={tableStyles.tableCellDescription}>
-                                                    {(row.materials || []).length > 0 ? (
-                                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                                                            {(row.materials || []).map((mat, i) => (
-                                                                <span key={i} className={tableStyles.materialChip}>
-                                                                    {mat.descripcion_texto || "Sin descripción"}
-                                                                    {mat.numero_orden_produccion && mat.numero_orden_produccion !== '0' && (
-                                                                        <span className={tableStyles.materialChipOrder}>
-                                                                            # {mat.numero_orden_produccion}
-                                                                        </span>
-                                                                    )}
-                                                                </span>
-                                                            ))}
+                                                    {/* Cliente */}
+                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                        <div className={tableStyles.clientContainer}>
+                                                            <span className={tableStyles.clientAvatar}>
+                                                                {row.clientName ? row.clientName.charAt(0) : "?"}
+                                                            </span>
+                                                            <span
+                                                                className={tableStyles.clientName}
+                                                                title={row.clientName}
+                                                                style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '170px' }}
+                                                            >
+                                                                {row.clientName || "Sin nombre"}
+                                                            </span>
                                                         </div>
-                                                    ) : (
-                                                        <span className={tableStyles.materialChip}>Sin descripción</span>
-                                                    )}
-                                                </td>
+                                                    </td>
 
-                                                {/* colomna para los botones de edicion */}
-                                                <td className={tableStyles.tableCell} >
-                                                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}>
-                                                        <button
-                                                            onClick={() => handleEditClick(row)}
-                                                            className={tableStyles.editButton}
-                                                            title="Editar"
+                                                    {/* Descripción: una sola línea */}
+                                                    <td className={tableStyles.tableCellDescription} style={{ ...S.cell, maxWidth: '460px' }}>
+                                                        {firstGroup ? (
+                                                            <div style={S.descWrap}>
+                                                                <span title={firstGroup.description} style={S.descText}>
+                                                                    {firstGroup.description}
+                                                                </span>
 
+                                                                {firstGroup.count > 1 && (
+                                                                    <span style={S.badgeUnits}>× {firstGroup.count} uds</span>
+                                                                )}
+
+                                                                {extraCount > 0 && (
+                                                                    <span style={S.badgeMore}>+{extraCount} más</span>
+                                                                )}
+
+                                                                {hasExpandableContent && (
+                                                                    <span
+                                                                        className="material-symbols-outlined"
+                                                                        style={{
+                                                                            ...S.chevronBase,
+                                                                            transform: isExpanded ? 'rotate(180deg)' : 'none',
+                                                                            backgroundColor: isExpanded ? '#E0F2FE' : 'transparent',
+                                                                            color: isExpanded ? '#0284C7' : '#64748B',
+                                                                        }}
+                                                                    >
+                                                                        expand_more
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <span className={tableStyles.materialChip}>Sin descripción</span>
+                                                        )}
+                                                    </td>
+
+                                                    {/* Acciones */}
+                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                        <div
+                                                            style={{ display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            onKeyDown={(e) => e.stopPropagation()}
                                                         >
-                                                            <span className="material-symbols-outlined">
-                                                                edit
-                                                            </span>
-                                                        </button>
-                                                        <button
-                                                            onClick={() => handleDeleteClick(row.id)}
-                                                            className={tableStyles.deleteButton}
-                                                            title="Eliminar"
-                                                        >
-                                                            <span className="material-symbols-outlined">
-                                                                delete
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                            <button onClick={() => handleEditClick(row)} className={tableStyles.editButton} title="Editar">
+                                                                <span className="material-symbols-outlined">edit</span>
+                                                            </button>
+                                                            <button onClick={() => handleDeleteClick(row.id)} className={tableStyles.deleteButton} title="Eliminar">
+                                                                <span className="material-symbols-outlined">delete</span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                {/* Fila de detalle a todo el ancho */}
+                                                {isExpanded && hasExpandableContent && (
+                                                    <tr className={rowClass}>
+                                                        <td colSpan={columns.length} style={S.detailCell}>
+                                                            <div style={S.detailBox}>
+                                                                {grouped.map((group, gIdx) => (
+                                                                    <div key={gIdx} style={S.detailGroup}>
+                                                                        <div style={S.detailGroupHeader}>
+                                                                            <span style={S.detailTitle}>{group.description}</span>
+                                                                            <span style={S.badgeUnits}>
+                                                                                {group.count === 1 ? '1 ud' : `× ${group.count} uds`}
+                                                                            </span>
+                                                                        </div>
+
+                                                                        {group.serials.length > 0 && (
+                                                                            <div style={S.detailSerials}>
+                                                                                {group.serials.map((serial, sIdx) => (
+                                                                                    <span key={sIdx} style={S.serialChip}>
+                                                                                        # {serial}
+                                                                                    </span>
+                                                                                ))}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </Fragment>
                                         );
                                     })}
 

@@ -8,6 +8,7 @@ import ControlPanelPagePlanos from "@/components/ControlPanel/ControlPanelPagePl
 import ControlPanelPageManuales from "@/components/ControlPanel/ControlPanelPageManuales";
 import ControlPanelPageDocumentos from "@/components/ControlPanel/ControlPanelPageDocumentos";
 import ControlPanelPageActaDeEntrga from "@/components/ControlPanel/ControlPanelPageActaDeEntrga";
+import SkeletonLayout from "@/components/ControlPanel/ControlPanelSkeleton/SkeletonLayout";
 
 
 export default function ControlPanel() {
@@ -41,15 +42,7 @@ export default function ControlPanel() {
             <ControlPanelSidebar onNavigate={setActiveView} activeView={activeView} isLoading={isLoading} />
             <main className={styles.main}>
                 {isLoading ? (
-                    <div className={styles.skeletonContainer}>
-                        <div className={`${styles.skeleton} ${styles.skeletonTitle}`}></div>
-                        <div className={`${styles.skeleton} ${styles.skeletonText}`}></div>
-                        <div className={styles.skeletonRow}>
-                            <div className={`${styles.skeleton} ${styles.skeletonCard}`}></div>
-                            <div className={`${styles.skeleton} ${styles.skeletonCard}`}></div>
-                            <div className={`${styles.skeleton} ${styles.skeletonCard}`}></div>
-                        </div>
-                    </div>
+                    <SkeletonLayout />
                 ) : (
                     <>
                         {activeView === "panel" && <ControlPanelPagePanel onChangeView={setActiveView} />}

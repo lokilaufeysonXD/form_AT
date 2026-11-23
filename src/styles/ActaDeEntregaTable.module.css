@@ -136,6 +136,7 @@
 .tableRow {
     transition: background 0.2s ease;
     cursor: pointer;
+    height: 52px;
 }
 
 .tableRowEven {
@@ -143,7 +144,7 @@
 }
 
 .tableRowOdd {
-    background: #FAFBFC;
+    background: #fafbfc85;
 }
 
 .tableRow:hover {
