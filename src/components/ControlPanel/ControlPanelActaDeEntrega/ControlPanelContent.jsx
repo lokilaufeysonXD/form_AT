@@ -4,91 +4,9 @@ import pageStyles from "@/styles/Pagination.module.css";
 import { useState, useMemo, useEffect, useCallback, Fragment } from "react";
 import SkeletonTable from "@/components/ControlPanel/ControlPanelSkeleton/SkeletonTable";
 
-
-
-
-const MONO_FONT =
-    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
-
-const S = {
-    cell: { height: '52px', padding: '0 16px' },
-
-    descWrap: { display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 },
-    descText: {
-        fontSize: '13px',
-        fontWeight: '500',
-        color: '#334155',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        minWidth: 0,
-        maxWidth: '300px',
-        display: 'inline-block',
-    },
-    badgeUnits: {
-        fontSize: '11px',
-        fontWeight: '600',
-        backgroundColor: '#E0F2FE',
-        color: '#0284C7',
-        padding: '2px 8px',
-        borderRadius: '12px',
-        whiteSpace: 'nowrap',
-        flexShrink: 0,
-    },
-    badgeMore: {
-        fontSize: '11px',
-        fontWeight: '600',
-        backgroundColor: '#F1F5F9',
-        color: '#64748B',
-        padding: '2px 8px',
-        borderRadius: '12px',
-        whiteSpace: 'nowrap',
-        flexShrink: 0,
-    },
-    chevronBase: {
-        fontSize: '18px',
-        width: '24px',
-        height: '24px',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '50%',
-        flexShrink: 0,
-        marginLeft: 'auto',
-        transition: 'transform 0.2s, background-color 0.2s, color 0.2s',
-    },
-
-    detailCell: { padding: '0 16px 14px 16px' },
-    detailBox: {
-        marginTop: "3px",
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #E2E8F0',
-        borderRadius: '10px',
-        padding: '12px 16px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-    },
-    detailGroup: { display: 'flex', flexDirection: 'column', gap: '6px' },
-    detailGroupHeader: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' },
-    detailTitle: { fontSize: '12.5px', fontWeight: '600', color: '#1E293B', lineHeight: 1.4 },
-    detailSerials: { display: 'flex', flexWrap: 'wrap', gap: '6px' },
-    serialChip: {
-        fontFamily: MONO_FONT,
-        fontSize: '11px',
-        backgroundColor: '#EDE9FE',
-        color: '#6D28D9',
-        padding: '2px 8px',
-        borderRadius: '6px',
-        border: '1px solid #DDD6FE',
-    },
-};
-
-
-
 /**
- * Devuelve el ancho actual de la ventana y se actualiza en cada resize
- */
+* Devuelve el ancho actual de la ventana y se actualiza en cada resize
+*/
 function useWindowWidth() {
     const [width, setWidth] = useState(() =>
         typeof window !== 'undefined' ? window.innerWidth : 9999
@@ -404,12 +322,12 @@ function ControlPanelContent() {
                                                     aria-expanded={hasExpandableContent ? isExpanded : undefined}
                                                 >
                                                     {/* # */}
-                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                    <td className={`${tableStyles.tableCell} ${tableStyles.cellFixed}`}>
                                                         <span className={tableStyles.idBadge}>{row.id}</span>
                                                     </td>
 
                                                     {/* Fecha */}
-                                                    <td className={tableStyles.tableCellDate} style={S.cell}>
+                                                    <td className={`${tableStyles.tableCellDate} ${tableStyles.cellFixed}`}>
                                                         <span className={DATE_BADGE_CLASS[dateStatus]}>
                                                             <span className="material-symbols-outlined">calendar_today</span>
                                                             {formatDate(row.deliveryDate)}
@@ -417,7 +335,7 @@ function ControlPanelContent() {
                                                     </td>
 
                                                     {/* Cliente */}
-                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                    <td className={`${tableStyles.tableCell} ${tableStyles.cellFixed}`}>
                                                         <div className={tableStyles.clientContainer}>
                                                             <span className={tableStyles.clientAvatar}>
                                                                 {row.clientName ? row.clientName.charAt(0) : "?"}
@@ -433,30 +351,24 @@ function ControlPanelContent() {
                                                     </td>
 
                                                     {/* Descripción: una sola línea */}
-                                                    <td className={tableStyles.tableCellDescription} style={{ ...S.cell, maxWidth: '460px' }}>
+                                                    <td className={`${tableStyles.tableCellDescription} ${tableStyles.cellFixed}`} style={{ maxWidth: '460px' }}>
                                                         {firstGroup ? (
-                                                            <div style={S.descWrap}>
-                                                                <span title={firstGroup.description} style={S.descText}>
+                                                            <div className={tableStyles.descWrap}>
+                                                                <span title={firstGroup.description} className={tableStyles.descText}>
                                                                     {firstGroup.description}
                                                                 </span>
 
                                                                 {firstGroup.count > 1 && (
-                                                                    <span style={S.badgeUnits}>× {firstGroup.count} uds</span>
+                                                                    <span className={tableStyles.badgeUnits}>× {firstGroup.count} uds</span>
                                                                 )}
 
                                                                 {extraCount > 0 && (
-                                                                    <span style={S.badgeMore}>+{extraCount} más</span>
+                                                                    <span className={tableStyles.badgeMore}>+{extraCount} más</span>
                                                                 )}
 
                                                                 {hasExpandableContent && (
                                                                     <span
-                                                                        className="material-symbols-outlined"
-                                                                        style={{
-                                                                            ...S.chevronBase,
-                                                                            transform: isExpanded ? 'rotate(180deg)' : 'none',
-                                                                            backgroundColor: isExpanded ? '#E0F2FE' : 'transparent',
-                                                                            color: isExpanded ? '#0284C7' : '#64748B',
-                                                                        }}
+                                                                        className={`material-symbols-outlined ${tableStyles.chevron} ${isExpanded ? tableStyles.chevronExpanded : ''}`}
                                                                     >
                                                                         expand_more
                                                                     </span>
@@ -468,7 +380,7 @@ function ControlPanelContent() {
                                                     </td>
 
                                                     {/* Acciones */}
-                                                    <td className={tableStyles.tableCell} style={S.cell}>
+                                                    <td className={`${tableStyles.tableCell} ${tableStyles.cellFixed}`}>
                                                         <div
                                                             style={{ display: 'flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}
                                                             onClick={(e) => e.stopPropagation()}
@@ -487,21 +399,21 @@ function ControlPanelContent() {
                                                 {/* Fila de detalle a todo el ancho */}
                                                 {isExpanded && hasExpandableContent && (
                                                     <tr className={rowClass}>
-                                                        <td colSpan={columns.length} style={S.detailCell}>
-                                                            <div style={S.detailBox}>
+                                                        <td colSpan={columns.length} className={tableStyles.detailCell}>
+                                                            <div className={tableStyles.detailBox}>
                                                                 {grouped.map((group, gIdx) => (
-                                                                    <div key={gIdx} style={S.detailGroup}>
-                                                                        <div style={S.detailGroupHeader}>
-                                                                            <span style={S.detailTitle}>{group.description}</span>
-                                                                            <span style={S.badgeUnits}>
+                                                                    <div key={gIdx} className={tableStyles.detailGroup}>
+                                                                        <div className={tableStyles.detailGroupHeader}>
+                                                                            <span className={tableStyles.detailTitle}>{group.description}</span>
+                                                                            <span className={tableStyles.badgeUnits}>
                                                                                 {group.count === 1 ? '1 ud' : `× ${group.count} uds`}
                                                                             </span>
                                                                         </div>
 
                                                                         {group.serials.length > 0 && (
-                                                                            <div style={S.detailSerials}>
+                                                                            <div className={tableStyles.detailSerials}>
                                                                                 {group.serials.map((serial, sIdx) => (
-                                                                                    <span key={sIdx} style={S.serialChip}>
+                                                                                    <span key={sIdx} className={tableStyles.serialChip}>
                                                                                         # {serial}
                                                                                     </span>
                                                                                 ))}
