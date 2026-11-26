@@ -1,4 +1,5 @@
 import styles from "@/styles/ControlPanel.module.css";
+import skeletonStyles from "@/styles/Skeleton.module.css";
 
 function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
     return (
@@ -6,8 +7,8 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
             <div className={styles.ContainerLogo}>
                 {isLoading ? (
                     <>
-                        <div className={`${styles.skeleton} ${styles.skeletonLogoIcon}`}></div>
-                        <div className={`${styles.skeleton} ${styles.skeletonLogoText}`} style={{ margin: "auto" }}></div>
+                        <div className={`${skeletonStyles.skeleton} ${skeletonStyles.skeletonLogoIcon}`}></div>
+                        <div className={`${skeletonStyles.skeleton} ${skeletonStyles.skeletonLogoText}`} style={{ margin: "auto" }}></div>
                     </>
                 ) : (
                     <>
@@ -20,7 +21,7 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
                 {isLoading ? (
                     <>
                         {[1, 2, 3, 4, 5, 6].map((i) => (
-                            <div key={i} className={`${styles.skeleton} ${styles.skeletonSidebarItem}`}></div>
+                            <div key={i} className={`${skeletonStyles.skeleton} ${skeletonStyles.skeletonSidebarItem}`}></div>
                         ))}
                     </>
                 ) : (
@@ -42,7 +43,7 @@ function ControlPanelSidebar({ onNavigate, activeView, isLoading }) {
                             style={{ cursor: "pointer" }}
                         >
                             <span className="material-symbols-outlined">developer_guide</span>
-                            <p style={{ fontSize: "20px" }}>Actas de entrega</p>
+                            <p style={{ fontSize: "20px" }}>Act de entrega</p>
                         </div>
 
                         {/* Produccion */}

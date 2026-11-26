@@ -1,0 +1,68 @@
+/* ///////////////////////////// SKELETON LOADING LAYOUT /////////////////// */
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    animation: skeleton-loading 1.2s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e0e0e0;
+    }
+
+    100% {
+        background-color: #f0f0f0;
+    }
+}
+
+.skeletonTitle {
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.skeletonText {
+    height: 20px;
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.skeletonCard {
+    height: 140px;
+    flex: 1;
+    min-width: 290px;
+}
+
+.skeletonContainer {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skeletonRow {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skeletonSidebarItem {
+    height: 48px;
+    width: 100%;
+    margin-bottom: 4px;
+    border-radius: 6px;
+}
+
+.skeletonLogoIcon {
+    width: 53px;
+    height: 53px;
+    border-radius: 12px;
+}
+
+.skeletonLogoText {
+    width: 120px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* ///////////////////////////// SKELETON LOADING TABLE /////////////////// */

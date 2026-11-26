@@ -5,6 +5,7 @@ import styles from "@/styles/UiComponents.module.css";
 function FormNameClient({ currentPage = 1 }) {
   const { getPageData, updatePageData, isLoaded } = useFormsData();
   const [selectedOption, setSelectedOption] = useState('nombre del cliente');
+  const [clients, setClients] = useState([]);
 
   // Cargar datos de la página actual solo una vez cuando cambia la página
   useEffect(() => {
@@ -22,6 +23,29 @@ function FormNameClient({ currentPage = 1 }) {
     });
   };
 
+  // Obtener la lista de clientes al montar el componente
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cliente`);
+        if (response.ok) {
+          const result = await response.json();
+          // Asegura que siempre sea un array
+          setClients(Array.isArray(result) ? result : (result.data || []));
+        }
+      } catch (err) {
+        // Manejo de error silencioso según las directrices de producción
+      }
+    };
+
+    fetchClients();
+
+    window.addEventListener('clienteCreated', fetchClients);
+    return () => {
+      window.removeEventListener('clienteCreated', fetchClients);
+    };
+  }, []);
+
   return (
     <form className='adaptiveLayoutForm'>
       <select
@@ -32,31 +56,11 @@ function FormNameClient({ currentPage = 1 }) {
         value={selectedOption}
       >
         <option value="nombre del cliente">nombre del cliente</option>
-        <option value="SHN">SHN</option>
-        <option value="GRIIMSA">GRIIMSA</option>
-        <option value="Hidro Servicios">Hidro Servicios</option>
-        <option value="Hidro Barear">Hidro Barear</option>
-        <option value="CALEFACION Y VENTILACION">Calefacion y Ventilacion</option>
-        <option value="DOMO DISPLAY">Domo Display</option>
-        <option value="SISTEMAS ESPECIALIZADOS DE BOMBEO">SISTEMAS ESPECIALIZADOS DE BOMBEO</option>
-        <option value="Corporación SHN">Corporación SHN</option>
-        <option value="Stel Ingenieria">Stel Ingenieria</option>
-        <option value="Ingenieria y Proyecto Integral">Ingenieria y Proyecto Integral </option>
-        <option value="Emilia Perez">Emilia Perez</option>
-        <option value="HAMDEC SA DE CV">HAMDEC SA DE CV</option>
-        <option value="Miguel Julio">Miguel Julio</option>
-        <option value="Emilio Honorato">Emilio Honorato</option>
-        <option value="Pedro Uriarte">Pedro Uriarte</option>
-        <option value="corporación shn">Corporación SHN</option>
-        <option value="Grupo herni Instalaciones">GRUPO HERNI INSTALACIONES</option>
-        <option value="LUIS RODRIGO TOVAR MATEO">LUIS RODRIGO TOVAR MATEO</option>
-        <option value="Desarrollo Cojimar">DESARROLLO COJIMAR</option>
-        <option value="INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA">INNOVACIONES TECNOLOGICAS EN TRATAMIENTO DE AGUA</option>
-        <option value="GON GOOL AIRE ACONDICIONADO">GON GOOL AIRE ACONDICIONADO</option>
-        <option value="A I PROYECTOS MEP">A I PROYECTOS MEP</option>
-        <option value="JOSE ZEPEDA XOLALPA">JOSE ZEPEDA XOLALPA</option>
-        <option value="SERVICIO TECNICO ESPECIALIZADO EN AIRE ACONDICIONADO">SERVICIO TECNICO ESPECIALIZADO EN AIRE ACONDICIONADO</option>
-        <option value="TATIANA GARCIA OLARTE">TATIANA GARCIA OLARTE</option>
+        {clients.map((client) => (
+          <option key={client.id} value={client.name}>
+            {client.nombre_cliente}
+          </option>
+        ))}
       </select>
       <p style={{ fontWeight: 'bold' }} className='adaptiveLayoutNameClient'>{selectedOption}</p>
     </form>

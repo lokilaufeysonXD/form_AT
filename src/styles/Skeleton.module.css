@@ -1,0 +1,120 @@
+/* GENERAL TRANCICION DE SKELETON 
+ const shimmer = {
+    background: 'linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%)',
+    backgroundSize: '200% 100%',
+    animation: 'skeletonShimmer 1.4s infinite',
+};
+*/
+
+/* ///////////////////////////// SKELETON LOADING LAYOUT /////////////////// */
+.skeleton {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    animation: skeleton-loading 1.2s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #e0e0e0;
+    }
+
+    100% {
+        background-color: #f0f0f0;
+    }
+}
+
+.skeletonTitle {
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.skeletonText {
+    height: 20px;
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.skeletonCard {
+    height: 140px;
+    flex: 1;
+    min-width: 290px;
+}
+
+.skeletonContainer {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skeletonRow {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.skeletonSidebarItem {
+    height: 48px;
+    width: 100%;
+    margin-bottom: 4px;
+    border-radius: 6px;
+}
+
+.skeletonLogoIcon {
+    width: 53px;
+    height: 53px;
+    border-radius: 12px;
+}
+
+.skeletonLogoText {
+    width: 120px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* ///////////////////////////// SKELETON LOADING TABLE /////////////////// */
+
+.skeletonTable {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #F1F5F9;
+    align-items: center;
+}
+
+.skeletonTable:nth-child(even) {
+    background-color: #FAFBFC;
+}
+
+.skeletonColumnNumero {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.skeletonColumnFecha {
+    height: 26px;
+    width: 130px;
+    border-Radius: 6px;
+}
+
+.skeletonColumnClienteLogo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.skeletonColumnClientName {
+    height: 14px;
+    flex: 1;
+    border-radius: 6px;
+}
+
+.skeletonColumnAccion {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}

@@ -136,6 +136,7 @@
 .tableRow {
     transition: background 0.2s ease;
     cursor: pointer;
+    height: 52px;
 }
 
 .tableRowEven {
@@ -143,7 +144,7 @@
 }
 
 .tableRowOdd {
-    background: #FAFBFC;
+    background: #fafbfc85;
 }
 
 .tableRow:hover {
@@ -159,12 +160,16 @@
 }
 
 .tableCellDate {
-    composes: tableCell;
+    padding: 14px 16px;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 14px;
     white-space: nowrap;
 }
 
 .tableCellDescription {
-    composes: tableCell;
+    padding: 14px 16px;
+    border-bottom: 1px solid #F1F5F9;
+    font-size: 14px;
     color: #475569;
     line-height: 1.5;
     max-width: 320px;
@@ -208,21 +213,39 @@
 }
 
 .dateBadgeNormal {
-    composes: dateBadge;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
     background: #F0FDF4;
     color: #16A34A;
     border: 1px solid #BBF7D0;
 }
 
 .dateBadgeSoon {
-    composes: dateBadge;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
     background: #FEF3C7;
     color: #D97706;
     border: 1px solid #FDE68A;
 }
 
 .dateBadgeOverdue {
-    composes: dateBadge;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
     background: #FEE2E2;
     color: #DC2626;
     border: 1px solid #FECACA;
@@ -310,17 +333,26 @@
 }
 
 .legendDotNormal {
-    composes: legendDot;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
     background: #16A34A;
 }
 
 .legendDotSoon {
-    composes: legendDot;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
     background: #D97706;
 }
 
 .legendDotOverdue {
-    composes: legendDot;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
     background: #DC2626;
 }
 
@@ -405,4 +437,248 @@
     border-radius: 4px;
     flex-shrink: 0;
     /* que no se comprima el número de orden */
+}
+
+/* ==========================================
+   Estilos de Fila Compacta y Detalle Expandido
+   ========================================== */
+
+.cellFixed {
+    height: 52px;
+    padding: 0 16px;
+}
+
+.descWrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.descText {
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 300px;
+    display: inline-block;
+}
+
+.badgeUnits {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #E0F2FE;
+    color: #0284C7;
+    padding: 2px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.badgeMore {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #F1F5F9;
+    color: #64748B;
+    padding: 2px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.chevron {
+    font-size: 18px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: auto;
+    color: #64748B;
+    background-color: transparent;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.chevronExpanded {
+    transform: rotate(180deg);
+    background-color: #E0F2FE;
+    color: #0284C7;
+}
+
+.detailCell {
+    padding: 0 16px 14px 16px;
+}
+
+.detailBox {
+    margin-top: 3px;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detailGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.detailGroupHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.detailTitle {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+}
+
+.detailSerials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.serialChip {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 11px;
+    background-color: #EDE9FE;
+    color: #6D28D9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #DDD6FE;
+}
+
+/* ==========================================
+   Estilos de Fila Compacta y Detalle Expandido
+   ========================================== */
+
+.cellFixed {
+    height: 52px;
+    padding: 0 16px;
+}
+
+.descWrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.descText {
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 300px;
+    display: inline-block;
+}
+
+.badgeUnits {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #E0F2FE;
+    color: #0284C7;
+    padding: 2px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.badgeMore {
+    font-size: 11px;
+    font-weight: 600;
+    background-color: #F1F5F9;
+    color: #64748B;
+    padding: 2px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.chevron {
+    font-size: 18px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: auto;
+    color: #64748B;
+    background-color: transparent;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.chevronExpanded {
+    transform: rotate(180deg);
+    background-color: #E0F2FE;
+    color: #0284C7;
+}
+
+.detailCell {
+    padding: 0 16px 14px 16px;
+}
+
+.detailBox {
+    margin-top: 3px;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detailGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.detailGroupHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.detailTitle {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1E293B;
+    line-height: 1.4;
+}
+
+.detailSerials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.serialChip {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 11px;
+    background-color: #EDE9FE;
+    color: #6D28D9;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #DDD6FE;
 }

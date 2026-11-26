@@ -3,7 +3,7 @@ import uiStyles from '@/styles/UiComponents.module.css';
 import Modal from "react-modal";
 import { useState } from "react";
 
-function ControlPanelModalsAddCliente({ onClose }) {
+function ControlPanelModalsAddCliente({ isOpen = true, onClose }) {
     const [nombreCliente, setNombreCliente] = useState("");
     const [numeroCliente, setNumeroCliente] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +25,7 @@ function ControlPanelModalsAddCliente({ onClose }) {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/cliente", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cliente`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -40,9 +40,14 @@ function ControlPanelModalsAddCliente({ onClose }) {
                 throw new Error("No se pudo registrar el cliente en el servidor");
             }
 
+            const result = await response.json().catch(() => null);
+
+            alert("¡Cliente registrado exitosamente!");
+
+            // Notificar a toda la aplicación con los datos del cliente
+            window.dispatchEvent(new CustomEvent('clienteCreated', { detail: result }));
+
             if (onClose) onClose();
-            // Disparar un evento global para notificar la creación de un nuevo cliente
-            window.dispatchEvent(new Event('clienteCreated'));
         } catch (err) {
             alert(`Hubo un error al guardar el cliente: ${err.message}`);
         } finally {
@@ -52,10 +57,10 @@ function ControlPanelModalsAddCliente({ onClose }) {
 
     return (
         <Modal
-            isOpen={true}
+            isOpen={isOpen}
             onRequestClose={onClose}
             contentLabel="Nuevo Cliente"
-            closeTimeoutMS={300}
+            ariaHideApp={false}
             className={{
                 base: uiStyles.modalContent,
                 afterOpen: uiStyles.modalContentAfterOpen,
@@ -66,7 +71,6 @@ function ControlPanelModalsAddCliente({ onClose }) {
                 afterOpen: uiStyles.modalOverlayAfterOpen,
                 beforeClose: uiStyles.modalOverlayBeforeClose,
             }}
-            ariaHideApp={false}
         >
             <div className={uiStyles.modalHeader}>
                 <h1>Nuevo Cliente</h1>
@@ -119,7 +123,7 @@ function ControlPanelModalsAddCliente({ onClose }) {
                     Cancelar
                 </button>
                 <button
-                    type="submit"
+                    type="button"
                     onClick={handleSubmit}
                     className={uiStyles.buttonPrimary}
                     disabled={isSubmitting}
