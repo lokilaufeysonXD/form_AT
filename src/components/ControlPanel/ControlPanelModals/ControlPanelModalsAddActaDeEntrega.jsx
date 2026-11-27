@@ -1,7 +1,9 @@
 import styles from "@/styles/ControlPanel.module.css";
 import uiStyles from '@/styles/UiComponents.module.css';
 import Modal from "react-modal";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import PreviewActaDeEntrega from "./PreviewActaDeEntrega";
+import ControlPanelModalsAddCliente from "./ControlPanelModalsAddCliente";
 
 
 
@@ -45,6 +47,7 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
     // Lista de clientes obtenidos de la API
     const [clients, setClients] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isModalOpenAddCliente, setIsModalOpenAddCliente] = useState(false);
 
     // Obtener la lista de clientes al montar el modal
     useEffect(() => {
@@ -60,11 +63,19 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
             }
         };
 
+        const handleClienteCreated = (e) => {
+            fetchClients();
+            // Si el evento viene con el nuevo cliente registrado, lo seleccionamos de inmediato
+            if (e?.detail?.id) {
+                setFormData(prev => ({ ...prev, id_cliente: String(e.detail.id) }));
+            }
+        };
+
         fetchClients();
 
-        window.addEventListener('clienteCreated', fetchClients);
+        window.addEventListener('clienteCreated', handleClienteCreated);
         return () => {
-            window.removeEventListener('clienteCreated', fetchClients);
+            window.removeEventListener('clienteCreated', handleClienteCreated);
         };
     }, []);
 
@@ -176,271 +187,350 @@ function ControlPanelModalsAddActaDeEntrega({ onClose }) {
         }
     };
 
+    // Nombre del cliente seleccionado para mostrar en la vista previa
+    const selectedClientName = useMemo(() => {
+        if (!formData.id_cliente) return '';
+        const found = clients.find(c => String(c.id) === String(formData.id_cliente));
+        return found ? found.nombre_cliente : '';
+    }, [formData.id_cliente, clients]);
+
     return (
-        <Modal
-            isOpen={true}
-            onRequestClose={onClose}
-            contentLabel="Nueva Orden de Produccion"
-            ariaHideApp={false}
-            className={{
-                base: uiStyles.modalContent,
-                afterOpen: uiStyles.modalContentAfterOpen,
-                beforeClose: uiStyles.modalContentBeforeClose,
-            }}
-            overlayClassName={{
-                base: uiStyles.modalOverlay,
-                afterOpen: uiStyles.modalOverlayAfterOpen,
-                beforeClose: uiStyles.modalOverlayBeforeClose,
-            }}
-        >
-            <div className={uiStyles.modalHeader}>
-                <h1 title="si el campo esta vacio le pone la fecha actual" >Nueva Acta De Entrega</h1>
-                <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                    <span className="material-symbols-outlined">close</span>
-                </button>
-            </div>
-
-            {/* Contenedor principal con scroll vertical para no desbordar el modal en pantallas pequeñas */}
-            <div style={{ maxHeight: 'calc(80vh - 140px)', overflowY: 'auto', paddingBottom: '16px' }}>
-
-                {/* Datos generales del Acta */}
-                <div className={uiStyles.modalBody}>
-                    <div className={uiStyles.modalBodyInput}>
-                        <label htmlFor="fecha_entrega">Fecha de Entrega</label>
-                        <input
-                            type="date"
-                            id="fecha_entrega"
-                            name="fecha_entrega"
-                            value={formData.fecha_entrega}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className={uiStyles.modalBodyInput}>
-                        <label htmlFor="id_cliente">Cliente*</label>
-                        <div className={uiStyles.modalSelectContainer}>
-                            <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
-                            <select
-                                id="id_cliente"
-                                name="id_cliente"
-                                value={formData.id_cliente}
-                                onChange={handleChange}
-                                style={{ color: "#94A3B8" }}
-                            >
-                                <option value="">Selecciona un cliente</option>
-                                {clients.map((client) => (
-                                    <option key={client.id} value={client.id}>
-                                        {client.nombre_cliente}
-                                    </option>
-                                ))}
-                            </select>
-                            <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className={uiStyles.modalBody} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginBottom: '20px' }}>
-                    <div className={uiStyles.modalBodyInput} style={{ width: '100%' }}>
-                        <label htmlFor="numero_orden_compra">Numero de Orden de compra*</label>
-                        <input
-                            type="text"
-                            id="numero_orden_compra"
-                            name="numero_orden_compra"
-                            placeholder="ACT-001"
-                            value={formData.numero_orden_compra}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Switch elegante para alternar la visibilidad de la orden de producción */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '10px',
-                            cursor: 'pointer',
-                            userSelect: 'none',
-                            padding: '4px 0'
-                        }}
-                        onClick={() => setShowProductionOrder(!showProductionOrder)}
-                    >
-                        <span
-                            className="material-symbols-outlined"
-                            style={{
-                                color: showProductionOrder ? '#10B981' : '#94A3B8',
-                                fontSize: '32px',
-                                transition: 'color 0.2s ease, transform 0.1s ease'
-                            }}
-                        >
-                            {showProductionOrder ? 'toggle_on' : 'toggle_off'}
-                        </span>
-                        <span style={{ fontSize: '14px', fontWeight: '500', color: '#CBD5E1' }}>
-                            ¿Lleva número de orden de producción?
-                        </span>
-                    </div>
-                </div>
-
-                {/* Sección de Conceptos / Items Dinámicos */}
-                <div style={{ padding: '0 24px', display: 'flex', flexDirection: 'column', gap: '9px' }}>
-
-                    {items.map((item, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                border: '1px solid #334155',
-                                borderRadius: '10px',
-                                padding: '16px',
-                                backgroundColor: '#1E293B',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '12px',
-                                position: 'relative'
-                            }}
-                        >
-                            {/* Cabecera de la tarjeta del concepto con botón de remover */}
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span style={{ color: '#38BDF8', fontSize: '12px', fontWeight: '600' }}>
-                                    #{index + 1}
-                                </span>
-                                {items.length > 1 && (
-                                    <button
-                                        type="button"
-                                        onClick={() => handleRemoveItem(index)}
-                                        style={{
-                                            background: 'none',
-                                            border: 'none',
-                                            color: '#EF4444',
-                                            cursor: 'pointer',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            padding: '4px',
-                                            borderRadius: '6px',
-                                            transition: 'background-color 0.2s'
-                                        }}
-                                        title="Eliminar concepto"
-                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)'}
-                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                                    >
-                                        <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>delete</span>
-                                    </button>
-                                )}
-                            </div>
-
-                            {/* Entrada de la descripción del acta */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                <label htmlFor={`descripcion-${index}`} style={{ fontSize: '12px', fontWeight: '500', color: '#94A3B8' }}>
-                                    Descripción del Acta*
-                                </label>
-                                <textarea
-                                    id={`descripcion-${index}`}
-                                    value={item.description}
-                                    onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                                    placeholder="Descripción detallada del acta de entrega"
-                                    style={{
-                                        width: '100%',
-                                        minHeight: '60px',
-                                        padding: '10px',
-                                        backgroundColor: '#0F172A',
-                                        border: '1px solid #475569',
-                                        borderRadius: '6px',
-                                        color: '#F8FAFC',
-                                        fontFamily: 'inherit',
-                                        resize: 'vertical',
-                                        outline: 'none'
-                                    }}
-                                />
-                            </div>
-
-                            {/* Entrada opcional del número de orden de producción */}
-                            {showProductionOrder && (
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor={`op-${index}`} style={{ fontSize: '12px', fontWeight: '500', color: '#94A3B8' }}>
-                                        Número de Orden de producción*
-                                    </label>
-                                    <input
-                                        type="number"
-                                        id={`op-${index}`}
-                                        value={item.productionOrder}
-                                        onChange={(e) => handleItemChange(index, 'productionOrder', e.target.value)}
-                                        placeholder="0000.05243"
-                                        style={{
-                                            width: '100%',
-                                            padding: '10px',
-                                            backgroundColor: '#0F172A',
-                                            border: '1px solid #475569',
-                                            borderRadius: '6px',
-                                            color: '#F8FAFC',
-                                            outline: 'none'
-                                        }}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    ))}
-
-                    {/* Botón para añadir un concepto dinámico adicional */}
-                    <button
-                        type="button"
-                        onClick={handleAddItem}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '8px',
-                            width: '100%',
-                            padding: '10px',
-                            backgroundColor: 'transparent',
-                            border: '1px dashed #475569',
-                            borderRadius: '8px',
-                            color: '#38BDF8',
-                            fontWeight: '500',
-                            fontSize: '13px',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease',
-                            marginTop: '4px'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.05)';
-                            e.currentTarget.style.borderColor = '#38BDF8';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'transparent';
-                            e.currentTarget.style.borderColor = '#475569';
-                        }}
-                    >
-                        <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add_circle</span>
-                        Agregar concepto adicional
+        <>
+            <Modal
+                isOpen={true}
+                onRequestClose={onClose}
+                contentLabel="Nueva Orden de Produccion"
+                ariaHideApp={false}
+                className={{
+                    base: uiStyles.modalContentWide,
+                    afterOpen: uiStyles.modalContentAfterOpen,
+                    beforeClose: uiStyles.modalContentBeforeClose,
+                }}
+                overlayClassName={{
+                    base: uiStyles.modalOverlay,
+                    afterOpen: uiStyles.modalOverlayAfterOpen,
+                    beforeClose: uiStyles.modalOverlayBeforeClose,
+                }}
+            >
+                <div className={uiStyles.modalHeader}>
+                    <h1 title="si el campo esta vacio le pone la fecha actual">Nueva Acta De Entrega</h1>
+                    <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                        <span className="material-symbols-outlined">close</span>
                     </button>
                 </div>
 
-            </div>
-
-            <div className={uiStyles.modalFooter}>
-                <button type="button" onClick={onClose} className={uiStyles.buttonSecondary}
-                    style={{
+                {/* /////////////////////   Layout principal a dos columnas: Formulario a la izquierda y Vista Previa a la derecha */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(420px, 1fr) minmax(460px, 1.15fr)',
+                    gap: '24px',
+                    height: 'calc(85vh - 160px)',
+                    minHeight: '520px'
+                }}>
+                    {/* Columna Izquierda: Formulario con scroll vertical */}
+                    <div style={{
+                        overflowY: 'auto',
+                        paddingRight: '12px',
                         display: 'flex',
-                        gap: '10px',
-                        backgroundColor: '#F8FAFC',
-                        color: '#0F172A',
-                        border: '1px solid #94A3B8'
-                    }}
-                >
-                    <span className="material-symbols-outlined">close</span>
-                    Cancelar
-                </button>
-                <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className={uiStyles.buttonPrimary}
-                    disabled={isSubmitting}
-                    style={{ display: 'flex', gap: '10px', opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
-                >
-                    <span className="material-symbols-outlined">save</span>
-                    {isSubmitting ? 'Guardando...' : 'Crear Acta De Entrega'}
-                </button>
-            </div>
-        </Modal>
+                        flexDirection: 'column',
+                        gap: '16px'
+                    }}>
+                        {/* Datos generales del Acta */}
+                        <div className={uiStyles.modalBody} style={{ marginBottom: 0 }} >
+                            <div className={uiStyles.modalBodyInput} style={{ flex: '3', }}>
+                                <label htmlFor="fecha_entrega">Fecha de Entrega</label>
+                                <input
+                                    type="date"
+                                    id="fecha_entrega"
+                                    name="fecha_entrega"
+                                    value={formData.fecha_entrega}
+                                    onChange={handleChange}
+                                />
+                            </div>
+
+                            <div className={uiStyles.modalBodyInput} style={{ flex: '3' }}>
+                                <label htmlFor="id_cliente">Cliente*</label>
+                                <div className={uiStyles.modalSelectContainer}>
+                                    <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>filter_alt</span>
+                                    <select
+                                        id="id_cliente"
+                                        name="id_cliente"
+                                        value={formData.id_cliente}
+                                        onChange={handleChange}
+                                        style={{ color: formData.id_cliente ? "#0F172A" : "#94A3B8" }}
+                                    >
+                                        <option value="">Selecciona un cliente</option>
+                                        {clients.map((client) => (
+                                            <option key={client.id} value={client.id}>
+                                                {client.nombre_cliente}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span className="material-symbols-outlined" style={{ color: "#94A3B8", fontSize: "15px" }}>keyboard_arrow_right</span>
+                                </div>
+                            </div>
+
+                            {/* Botón rápido para abrir el modal de Nuevo Cliente */}
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '98%' }}>
+                                <button
+                                    type="button"
+                                    className={uiStyles.modalSelectContainer}
+                                    // className={uiStyles.buttonGreen}
+                                    onClick={() => setIsModalOpenAddCliente(true)}
+                                    title="Crear nuevo cliente"
+                                    style={{
+                                        height: '48px',
+                                        width: '48px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        borderRadius: '8px',
+                                        padding: 0,
+                                        cursor: 'pointer',
+                                        background: '#FFFFFF',
+                                        border: '1px solid #CBD5E1',
+                                        borderRadius: '6px',
+                                        fontSize: '13px',
+                                        fontWeight: '600',
+                                        color: '#334155',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.15s ease'
+                                    }}
+                                >
+                                    <span className="material-symbols-outlined" style={{ color: '#94A3B8', fontSize: '22px' }}>
+                                        person_add
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={uiStyles.modalBody} style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginBottom: 0 }}>
+                            <div className={uiStyles.modalBodyInput} style={{ width: '100%' }}>
+                                <label htmlFor="numero_orden_compra">Numero de Orden de compra*</label>
+                                <input
+                                    type="text"
+                                    id="numero_orden_compra"
+                                    name="numero_orden_compra"
+                                    placeholder="ACT-001"
+                                    value={formData.numero_orden_compra}
+                                    onChange={handleChange}
+                                />
+                            </div>
+
+                            {/* ////////////////////////////////////////////////////////////   Descripcion de la orden de produccionion  */}
+                            {/* Switch elegante para alternar la visibilidad de la orden de producción */}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    cursor: 'pointer',
+                                    userSelect: 'none',
+                                    padding: '4px 0'
+                                }}
+                                onClick={() => setShowProductionOrder(!showProductionOrder)}
+                            >
+                                <span
+                                    className="material-symbols-outlined"
+                                    style={{
+                                        color: showProductionOrder ? '#10B981' : '#94A3B8',
+                                        fontSize: '32px',
+                                        transition: 'color 0.2s ease, transform 0.1s ease'
+                                    }}
+                                >
+                                    {showProductionOrder ? 'toggle_on' : 'toggle_off'}
+                                </span>
+                                <span style={{ fontSize: '14px', fontWeight: '500', color: '#334155' }}>
+                                    ¿Lleva número de orden de producción?
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Sección de Conceptos / Items Dinámicos */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#0F172A' }}>
+                                    Descripcion ({items.length})
+                                </span>
+                            </div>
+
+                            {items.map((item, index) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        border: '1px solid #E2E8F0',
+                                        borderRadius: '10px',
+                                        padding: '14px',
+                                        backgroundColor: '#F8FAFC',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '10px',
+                                        position: 'relative'
+                                    }}
+                                >
+                                    {/* Cabecera de la tarjeta del concepto con botón de remover */}
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ color: '#0284C7', fontSize: '12px', fontWeight: '700' }}>
+                                            Concepto #{index + 1}
+                                        </span>
+                                        {items.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleRemoveItem(index)}
+                                                style={{
+                                                    background: 'none',
+                                                    border: 'none',
+                                                    color: '#EF4444',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    padding: '4px',
+                                                    borderRadius: '6px',
+                                                    transition: 'background-color 0.2s'
+                                                }}
+                                                title="Eliminar concepto"
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.1)'}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                            >
+                                                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>delete</span>
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Entrada de la descripción del acta */}
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <label htmlFor={`descripcion-${index}`} style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>
+                                            Descripción del Acta*
+                                        </label>
+                                        <textarea
+                                            id={`descripcion-${index}`}
+                                            value={item.description}
+                                            onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                                            placeholder="Descripción detallada del material o servicio..."
+                                            style={{
+                                                width: '100%',
+                                                minHeight: '55px',
+                                                padding: '8px 10px',
+                                                backgroundColor: '#FFFFFF',
+                                                border: '1px solid #CBD5E1',
+                                                borderRadius: '6px',
+                                                color: '#0F172A',
+                                                fontFamily: 'inherit',
+                                                fontSize: '13px',
+                                                resize: 'vertical',
+                                                outline: 'none'
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Entrada opcional del número de orden de producción */}
+                                    {showProductionOrder && (
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                            <label htmlFor={`op-${index}`} style={{ fontSize: '12px', fontWeight: '600', color: '#475569' }}>
+                                                Número de Orden de producción
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id={`op-${index}`}
+                                                value={item.productionOrder}
+                                                onChange={(e) => handleItemChange(index, 'productionOrder', e.target.value)}
+                                                placeholder="Ej. 0000.05243"
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '8px 10px',
+                                                    backgroundColor: '#FFFFFF',
+                                                    border: '1px solid #CBD5E1',
+                                                    borderRadius: '6px',
+                                                    color: '#0F172A',
+                                                    fontSize: '13px',
+                                                    outline: 'none'
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* Botón para añadir un concepto dinámico adicional */}
+                            <button
+                                type="button"
+                                onClick={handleAddItem}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '8px',
+                                    width: '100%',
+                                    padding: '9px',
+                                    backgroundColor: 'transparent',
+                                    border: '1px dashed #94A3B8',
+                                    borderRadius: '8px',
+                                    color: '#0284C7',
+                                    fontWeight: '600',
+                                    fontSize: '13px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s ease',
+                                    marginTop: '4px'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'rgba(2, 132, 199, 0.05)';
+                                    e.currentTarget.style.borderColor = '#0284C7';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = 'transparent';
+                                    e.currentTarget.style.borderColor = '#94A3B8';
+                                }}
+                            >
+                                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add_circle</span>
+                                Agregar concepto adicional
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* //////////// Columna Derecha: Vista previa en vivo del acta de entrega con botones de imprimir y descargar PDF */}
+
+                    <div style={{ height: '100%', minHeight: 0 }}>
+                        <PreviewActaDeEntrega
+                            formData={formData}
+                            clientName={selectedClientName}
+                            items={items}
+                            showProductionOrder={showProductionOrder}
+                        />
+                    </div>
+                </div>
+
+                <div className={uiStyles.modalFooter} style={{ marginTop: '16px', paddingTop: '16px' }}>
+                    <button type="button" onClick={onClose} className={uiStyles.buttonSecondary}
+                        style={{
+                            display: 'flex',
+                            gap: '10px',
+                            backgroundColor: '#F8FAFC',
+                            color: '#0F172A',
+                            border: '1px solid #94A3B8'
+                        }}
+                    >
+                        <span className="material-symbols-outlined">close</span>
+                        Cancelar
+                    </button>
+                    <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className={uiStyles.buttonPrimary}
+                        disabled={isSubmitting}
+                        style={{ display: 'flex', gap: '10px', opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                    >
+                        <span className="material-symbols-outlined">save</span>
+                        {isSubmitting ? 'Guardando...' : 'Crear Acta De Entrega'}
+                    </button>
+                </div>
+            </Modal >
+
+            {isModalOpenAddCliente && (
+                <ControlPanelModalsAddCliente
+                    onClose={() => setIsModalOpenAddCliente(false)}
+                />
+            )}
+        </>
     );
 }
 
